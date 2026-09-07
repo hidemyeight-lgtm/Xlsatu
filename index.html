@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XL SATU | Internet Rumah FTTH & FWA — Lebih Mudah Internetan di Rumah</title>
+<meta name="description" content="Agen Resmi XL SATU. Paket internet rumah FTTH & FWA, cek coverage, konsultasi, dan order langsung via WhatsApp.">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1E4D;
+    --navy-2:#081536;
+    --blue:#163DA6;
+    --blue-light:#2F5CE0;
+    --teal:#00A99B;
+    --teal-light:#4FD8C7;
+    --bg:#F5F8FC;
+    --ink:#10182B;
+    --ink-soft:#5B6478;
+    --white:#FFFFFF;
+    --line:#E3E9F3;
+    --wa:#25D366;
+    --radius:14px;
+    --shadow:0 10px 30px rgba(11,30,77,0.08);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{
+    font-family:'Poppins',sans-serif;
+    margin:0 0 12px;
+    line-height:1.2;
+    color:var(--navy);
+  }
+  p{margin:0 0 16px;color:var(--ink-soft);}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px;}
+  section{padding:64px 0;}
+  .eyebrow-none{} /* intentionally no all-caps eyebrow labels, per design rule */
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--white);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;max-width:1140px;margin:0 auto;
+  }
+  .logo{display:flex;align-items:center;}
+  .logo img{height:32px;width:auto;display:block;}
+  .navlinks{display:flex;gap:26px;align-items:center;}
+  .navlinks a{font-size:15px;font-weight:600;color:var(--navy);}
+  .navlinks a:hover{color:var(--blue);}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 22px;border-radius:999px;font-weight:600;font-size:15px;
+    cursor:pointer;border:none;transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--wa);color:var(--white);box-shadow:0 8px 20px rgba(37,211,102,.35);}
+  .btn-primary:hover{box-shadow:0 10px 24px rgba(37,211,102,.45);}
+  .btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--navy);}
+  .btn-outline:hover{background:var(--navy);color:var(--white);}
+  .btn-light{background:var(--white);color:var(--navy);}
+  .header-actions{display:flex;gap:12px;align-items:center;}
+  .header-actions .btn{padding:10px 18px;font-size:14px;}
+  @media(max-width:820px){ .navlinks{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(115deg, rgba(6,17,51,.94) 0%, rgba(11,30,77,.90) 42%, rgba(11,30,77,.55) 75%), url('hero-bg.jpg') right center/cover no-repeat;
+    color:var(--white);
+    padding:96px 0 84px;
+  }
+  .hero h1{color:var(--white);font-size:48px;max-width:620px;letter-spacing:-0.5px;}
+  .hero p.lead{color:#CBD6F0;font-size:18px;max-width:520px;}
+  .hero-badge-img{max-width:380px;width:100%;height:auto;display:block;margin:24px 0 32px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));}
+  @media(max-width:640px){ .hero-badge-img{max-width:300px;} }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+  @media(max-width:640px){ .hero h1{font-size:34px;} }
+  @media(max-width:780px){
+    .hero{
+      background:linear-gradient(180deg, rgba(6,13,38,.88) 0%, rgba(8,18,54,.86) 45%, rgba(8,18,54,.72) 100%), url('hero-bg.jpg') right center/cover no-repeat;
+      padding:56px 0 48px;
+    }
+  }
+
+  /* ---------- AWARDS / KREDIBILITAS ---------- */
+  .awards-section{background:var(--white);}
+  .awards-grid{display:flex;align-items:center;gap:48px;}
+  .awards-img{flex:0 0 300px;max-width:300px;}
+  .awards-img img{border-radius:18px;box-shadow:var(--shadow);width:100%;}
+  .awards-text{flex:1;min-width:260px;}
+  .awards-text ul{list-style:none;padding:0;margin:20px 0 0;}
+  .awards-text li{
+    display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);
+    font-size:15px;color:var(--ink);font-weight:600;
+  }
+  .awards-text li:last-child{border-bottom:none;}
+  .awards-text li .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--teal);margin-top:7px;flex-shrink:0;
+  }
+  .awards-note{font-size:12px;color:var(--ink-soft);margin-top:16px;}
+  @media(max-width:760px){
+    .awards-grid{flex-direction:column;text-align:center;}
+    .awards-text li{text-align:left;}
+  }
+
+  /* ---------- BANNER CAROUSEL ---------- */
+  .carousel-section{padding:0;margin-top:-46px;position:relative;z-index:5;}
+  .carousel{
+    max-width:1140px;margin:0 auto;padding:0 20px;
+  }
+  .carousel-track-wrap{
+    position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 46px rgba(11,30,77,.22);
+  }
+  .carousel-track{display:flex;transition:transform .5s cubic-bezier(.65,0,.35,1);}
+  .slide{
+    min-width:100%;
+    padding:38px 34px;
+    display:flex;align-items:center;gap:28px;
+    min-height:200px;
+    cursor:pointer;
+  }
+  .slide-1{background:linear-gradient(120deg,#0B1E4D,#163DA6 70%);}
+  .slide-2{background:linear-gradient(120deg,#00463F,#00A99B 75%);}
+  .slide-3{background:linear-gradient(120deg,#12275E,#2F5CE0 75%);}
+  .slide-text{color:var(--white);flex:1;}
+  .slide-text .tag{
+    display:inline-block;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:999px;
+    font-size:12.5px;font-weight:700;margin-bottom:12px;color:#fff;
+  }
+  .slide-text h3{color:var(--white);font-size:24px;margin-bottom:8px;}
+  .slide-text p{color:rgba(255,255,255,.88);margin-bottom:14px;max-width:480px;font-size:14.5px;}
+  .slide-cta{
+    background:var(--white);color:var(--navy);padding:10px 18px;border-radius:999px;
+    font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;
+  }
+  .slide-visual{width:120px;height:120px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  @media(max-width:720px){ .slide{flex-direction:column;text-align:center;padding:30px 22px;} .slide-visual{width:80px;height:80px;} }
+
+  .carousel-controls{
+    display:flex;align-items:center;justify-content:center;gap:18px;margin-top:16px;
+  }
+  .car-arrow{
+    width:38px;height:38px;border-radius:50%;background:var(--white);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--shadow);
+    font-size:16px;color:var(--navy);
+  }
+  .car-dots{display:flex;gap:8px;}
+  .car-dot{width:9px;height:9px;border-radius:50%;background:#C9D4EA;cursor:pointer;transition:background .2s;}
+  .car-dot.active{background:var(--blue);width:24px;border-radius:5px;}
+
+  /* ---------- SECTION HEADS ---------- */
+  .sec-head{max-width:640px;margin:0 auto 44px;text-align:center;}
+  .sec-head h2{font-size:32px;}
+  .sec-head p{font-size:16px;}
+  .center{text-align:center;}
+
+  /* ---------- PROBLEM/SOLUTION ---------- */
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media(max-width:760px){.compare-grid{grid-template-columns:1fr;}}
+  .compare-card{
+    background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);
+    border-top:4px solid var(--blue);
+  }
+  .compare-card.fwa{border-top-color:var(--teal);}
+  .compare-card h3{font-size:22px;display:flex;align-items:center;gap:10px;}
+  .chip{font-size:12px;padding:3px 10px;border-radius:999px;background:#EAF0FF;color:var(--blue);font-weight:700;}
+  .compare-card.fwa .chip{background:#E1F8F4;color:var(--teal);}
+  .compare-block{margin-top:18px;}
+  .compare-block h4{font-size:13.5px;color:var(--ink-soft);font-weight:700;margin-bottom:8px;}
+  .compare-block ul{margin:0 0 18px;padding-left:0;list-style:none;}
+  .compare-block li{
+    padding:8px 0 8px 26px;position:relative;font-size:14.5px;color:var(--ink);border-bottom:1px dashed var(--line);
+  }
+  .compare-block li:last-child{border-bottom:none;}
+  .compare-block li::before{
+    content:'';position:absolute;left:0;top:14px;width:8px;height:8px;border-radius:50%;background:var(--blue);
+  }
+  .compare-card.fwa .compare-block li::before{background:var(--teal);}
+  .fit-line{
+    margin-top:18px;background:var(--bg);border-radius:10px;padding:14px 16px;font-size:13.5px;color:var(--navy);font-weight:600;
+  }
+
+  /* ---------- PRICE CARDS ---------- */
+  .price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+  .price-card{
+    background:var(--white);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);
+    position:relative;display:flex;flex-direction:column;border:1px solid var(--line);
+  }
+  .price-card.popular{border:2px solid var(--blue);}
+  .popular-tag{
+    position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:var(--blue);color:#fff;font-size:11.5px;font-weight:700;padding:5px 14px;border-radius:999px;
+  }
+  .price-card .speed{font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;color:var(--navy);margin-bottom:4px;}
+  .price-card .speed-sub{font-size:12.5px;color:var(--ink-soft);margin-bottom:16px;}
+  .price-row{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--ink-soft);margin-bottom:4px;}
+  .price-row .val{font-weight:600;color:var(--ink);}
+  .bar-track{height:8px;background:#EEF2FA;border-radius:6px;overflow:hidden;margin:4px 0 12px;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--blue),var(--blue-light));}
+  .bar-fill.total{background:linear-gradient(90deg,var(--teal),var(--teal-light));}
+  .total-price{margin:10px 0 18px;}
+  .total-price .amount{font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:var(--navy);}
+  .total-price .per{font-size:13px;color:var(--ink-soft);}
+  .ppn-note{font-size:11.5px;color:var(--ink-soft);margin-top:-10px;margin-bottom:16px;}
+  .price-card .order-btn{margin-top:auto;}
+
+  .hemat-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  @media(max-width:760px){.hemat-grid{grid-template-columns:1fr;}}
+  .hemat-card{
+    background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid var(--line);
+  }
+  .hemat-card .save-tag{
+    display:inline-block;background:#FFF1E5;color:#C2530A;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;margin-bottom:14px;
+  }
+  .hemat-breakdown{background:var(--bg);border-radius:10px;padding:16px 18px;margin:16px 0;}
+  .hemat-breakdown .row{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;color:var(--ink-soft);border-bottom:1px solid var(--line);}
+  .hemat-breakdown .row:last-child{border-bottom:none;}
+  .hemat-breakdown .row .v{font-weight:700;color:var(--navy);}
+  .hemat-monthly{display:flex;align-items:baseline;gap:8px;margin-top:6px;}
+  .hemat-monthly .amount{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:var(--navy);}
+
+  /* ---------- VIDEO ---------- */
+  .video-wrap{
+    max-width:820px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(11,30,77,.18);
+    background:#000;
+  }
+  .video-wrap video{width:100%;display:block;}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px;margin:0 auto;}
+  .faq-item{background:var(--white);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+  .faq-q{
+    padding:18px 22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;
+    font-weight:600;font-size:15.5px;color:var(--navy);
+  }
+  .faq-q .icon{font-size:20px;color:var(--blue);transition:transform .25s;flex-shrink:0;margin-left:12px;}
+  .faq-item.open .faq-q .icon{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-a p{padding:0 22px 20px;margin:0;font-size:14.5px;}
+  .faq-item.open .faq-a{max-height:260px;}
+
+  /* ---------- ORDER / CONTACT ---------- */
+  .order-section{
+    background:linear-gradient(120deg,var(--navy),var(--navy-2));color:#fff;border-radius:24px;
+    padding:52px 44px;display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
+  }
+  .order-section h2{color:#fff;}
+  .order-section p{color:#C3CDE8;}
+  .order-cta-col{flex:1;min-width:260px;}
+  .order-steps{flex:1;min-width:260px;}
+  .order-steps ol{padding-left:20px;margin:0;color:#DCE4F7;}
+  .order-steps li{margin-bottom:10px;font-size:14.5px;}
+  .contact-pill{
+    display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+    padding:14px 18px;border-radius:14px;margin-top:16px;
+  }
+  .contact-pill .label{font-size:12px;color:#AEBBE0;}
+  .contact-pill .value{font-weight:700;font-size:16px;color:#fff;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy-2);color:#9AA8CC;padding:44px 0 28px;font-size:13px;}
+  .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;margin-bottom:28px;}
+  .footer-brand{max-width:340px;}
+  .footer-logo-chip{
+    display:inline-flex;align-items:center;background:#fff;padding:10px 16px;border-radius:12px;
+  }
+  .footer-logo-chip img{height:28px;width:auto;display:block;}
+  .license-box{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;
+    padding:16px 18px;font-size:12.5px;line-height:1.6;color:#B8C3E2;margin-top:16px;
+  }
+  .license-box strong{color:#fff;}
+  .footer-col h4{color:#fff;font-size:14px;margin-bottom:12px;font-family:'Poppins',sans-serif;}
+  .footer-col a{display:block;color:#9AA8CC;margin-bottom:8px;font-size:13.5px;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;text-align:center;color:#7C89AD;}
+
+  .float-wa{
+    position:fixed;bottom:22px;right:22px;z-index:60;background:transparent;
+    width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 24px rgba(37,211,102,.45);
+  }
+  .float-wa img{width:100%;height:100%;display:block;object-fit:contain;border-radius:50%;}
+  ::selection{background:var(--teal-light);}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="nav">
+    <div class="logo">
+      <img src="logo.png" alt="XL SATU">
+    </div>
+    <nav class="navlinks">
+      <a href="#solusi">FTTH vs FWA</a>
+      <a href="#ftth">Harga FTTH</a>
+      <a href="#fwa">Harga FWA</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-outline" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20cek%20coverage%20XL%20SATU%20di%20lokasi%20saya." target="_blank" rel="noopener">Cek Coverage</a>
+      <a class="btn btn-primary" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20konsultasi%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener">Konsultasi Gratis</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Lebih Mudah Internetan di Rumah</h1>
+    <p class="lead">Pasang internet rumah XL SATU — FTTH fiber stabil atau FWA tanpa kabel yang cepat dipasang. Cek dulu jangkauannya, gratis konsultasi lewat WhatsApp.</p>
+    <img class="hero-badge-img" src="hero-badges.png" alt="Opensignal Award Winner - The Most Reliable Broadband Network - The Best Video Streaming, Fixed Broadband Experience Awards April 2026">
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20cek%20coverage%20XL%20SATU%20di%20lokasi%20saya." target="_blank" rel="noopener">💬 Cek Coverage via WhatsApp</a>
+      <a class="btn btn-light" href="#ftth">Lihat Daftar Harga</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BANNER CAROUSEL ================= -->
+<section class="carousel-section">
+  <div class="carousel">
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carouselTrack">
+
+        <div class="slide slide-1" onclick="location.href='#promo'">
+          <div class="slide-text">
+            <span class="tag">Promo Bulan Ini</span>
+            <h3>Hemat sampai 9,8% dengan Paket 4 Bulan</h3>
+            <p>Bayar sekali untuk 4 bulan pemakaian FWA dan nikmati harga per bulan yang lebih murah dibanding paket bulanan biasa.</p>
+            <span class="slide-cta">Lihat Paket Hemat →</span>
+          </div>
+          <div class="slide-visual">
+            <svg viewBox="0 0 100 100" width="100" height="100"><circle cx="50" cy="50" r="46" fill="rgba(255,255,255,.12)"/><text x="50" y="58" font-size="30" text-anchor="middle" fill="#fff" font-family="Poppins">%</text></svg>
+          </div>
+        </div>
+
+        <div class="slide slide-2" onclick="location.href='#solusi'">
+          <div class="slide-text">
+            <span class="tag">Kenalan Dulu</span>
+            <h3>Apa itu FTTH?</h3>
+            <p>Fiber To The Home — internet rumah yang tersambung langsung lewat kabel fiber optik. Cocok untuk kamu yang butuh koneksi stabil untuk kerja, gaming, dan streaming banyak perangkat sekaligus.</p>
+            <span class="slide-cta">Pelajari FTTH →</span>
+          </div>
+          <div class="slide-visual">
+            <svg viewBox="0 0 100 100" width="100" height="100"><rect x="10" y="40" width="80" height="10" rx="5" fill="rgba(255,255,255,.5)"/><circle cx="15" cy="45" r="8" fill="#fff"/><circle cx="85" cy="45" r="8" fill="#fff"/></svg>
+          </div>
+        </div>
+
+        <div class="slide slide-3" onclick="location.href='#solusi'">
+          <div class="slide-text">
+            <span class="tag">Kenalan Dulu</span>
+            <h3>Apa itu FWA?</h3>
+            <p>Fixed Wireless Access — internet rumah tanpa kabel fiber, memakai sinyal wireless lewat router khusus. Solusi cepat pasang untuk area yang belum terjangkau kabel fiber.</p>
+            <span class="slide-cta">Pelajari FWA →</span>
+          </div>
+          <div class="slide-visual">
+            <svg viewBox="0 0 100 100" width="100" height="100"><path d="M50 80 a30 30 0 0 1 0 -60" stroke="rgba(255,255,255,.5)" stroke-width="6" fill="none"/><path d="M50 80 a18 18 0 0 1 0 -36" stroke="#fff" stroke-width="6" fill="none"/><circle cx="50" cy="80" r="6" fill="#fff"/></svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <div class="car-arrow" onclick="moveSlide(-1)">‹</div>
+      <div class="car-dots" id="carDots"></div>
+      <div class="car-arrow" onclick="moveSlide(1)">›</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AWARDS / KREDIBILITAS ================= -->
+<section class="awards-section">
+  <div class="wrap">
+    <div class="awards-grid">
+      <div class="awards-img">
+        <img src="award-5g.jpg" alt="XL Ultra 5G+ - Jaringan Nomor 1 di Indonesia, Ookla Speedtest Awards 2026">
+      </div>
+      <div class="awards-text">
+        <h2>Jaringan yang Diakui Secara Nasional</h2>
+        <p>XL SATU didukung jaringan XLSMART Ultra 5G+ yang mendapat penghargaan resmi berdasarkan hasil pengukuran independen Ookla Speedtest.</p>
+        <ul>
+          <li><span class="dot"></span> Jaringan #1 di Indonesia</li>
+          <li><span class="dot"></span> Best 5G Network 2026 — Ookla Speedtest Awards</li>
+          <li><span class="dot"></span> Best Mobile Network 2026 — Ookla Speedtest Awards</li>
+          <li><span class="dot"></span> Fastest 5G Network 2026 — Ookla Speedtest Awards</li>
+        </ul>
+        <p class="awards-note">*Berdasarkan data intelijen Ookla Speedtest, semester 1 2026. Semua hak dilindungi undang-undang.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEM / SOLUTION ================= -->
+<section id="solusi">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Masalah Internet di Rumah? Cari Tahu Solusi yang Tepat</h2>
+      <p>Sebelum pilih paket, kenali dulu apa itu FTTH dan FWA, supaya kamu ambil produk yang paling cocok dengan kondisi rumahmu.</p>
+    </div>
+    <div class="compare-grid">
+
+      <div class="compare-card">
+        <h3>FTTH <span class="chip">Fiber To The Home</span></h3>
+        <div class="compare-block">
+          <h4>Masalah yang sering dialami</h4>
+          <ul>
+            <li>WiFi lemot saat banyak device connect bareng</li>
+            <li>Streaming buffering & video call putus-putus</li>
+            <li>Kerja dari rumah butuh koneksi yang stabil</li>
+          </ul>
+        </div>
+        <div class="compare-block">
+          <h4>Solusi dari FTTH</h4>
+          <ul>
+            <li>Kabel fiber optik langsung ke rumah, minim gangguan</li>
+            <li>Kecepatan stabil, tidak terganggu cuaca</li>
+            <li>Kuota tanpa batas, cocok untuk banyak perangkat</li>
+          </ul>
+        </div>
+        <div class="fit-line">Paling cocok untuk: rumah dengan kabel fiber sudah tersedia, kebutuhan streaming/gaming/WFH intens.</div>
+      </div>
+
+      <div class="compare-card fwa">
+        <h3>FWA <span class="chip">Fixed Wireless Access</span></h3>
+        <div class="compare-block">
+          <h4>Masalah yang sering dialami</h4>
+          <ul>
+            <li>Area rumah belum terjangkau kabel fiber</li>
+            <li>Butuh internet cepat tanpa proses penarikan kabel</li>
+            <li>Ingin pasang internet dalam waktu singkat</li>
+          </ul>
+        </div>
+        <div class="compare-block">
+          <h4>Solusi dari FWA</h4>
+          <ul>
+            <li>Pakai sinyal wireless lewat router khusus, tanpa kabel fiber</li>
+            <li>Instalasi jauh lebih cepat & praktis</li>
+            <li>Tersedia paket hemat untuk pemakaian 4 bulan</li>
+          </ul>
+        </div>
+        <div class="fit-line">Paling cocok untuk: area belum ada kabel fiber, butuh pasang cepat, pemakaian standar harian.</div>
+      </div>
+
+    </div>
+    <p class="center" style="margin-top:28px;font-size:14px;">Masih bingung pilih yang mana? <a href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20konsultasi%2C%20lebih%20cocok%20FTTH%20atau%20FWA%20untuk%20rumah%20saya." target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">Konsultasi gratis via WhatsApp →</a></p>
+  </div>
+</section>
+
+<!-- ================= FTTH PRICE LIST ================= -->
+<section id="ftth" style="background:var(--white);">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Daftar Harga FTTH</h2>
+      <p>Harga di bawah adalah harga dasar bulanan. Total tagihan sudah kami hitungkan termasuk PPN 11% supaya tidak ada kejutan biaya.</p>
+    </div>
+    <div class="price-grid" id="promo">
+
+      <div class="price-card">
+        <div class="speed">100 Mbps</div>
+        <div class="speed-sub">Up to 250 Mbps</div>
+        <div class="price-row"><span>Harga dasar</span><span class="val">Rp229.000</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:90.1%"></div></div>
+        <div class="price-row"><span>+ PPN 11%</span><span class="val">Rp25.190</span></div>
+        <div class="bar-track"><div class="bar-fill total" style="width:100%"></div></div>
+        <div class="total-price"><span class="amount">Rp254.190</span><span class="per">/bulan</span></div>
+        <div class="ppn-note">Sudah termasuk PPN 11% — bebas biaya tersembunyi.</div>
+        <a class="btn btn-primary order-btn" style="width:100%;" onclick="orderWA('FTTH 100 Mbps (up to 250 Mbps)','Rp254.190/bulan')">Order via WhatsApp</a>
+      </div>
+
+      <div class="price-card popular">
+        <span class="popular-tag">Paling Diminati</span>
+        <div class="speed">150 Mbps</div>
+        <div class="speed-sub">Up to 350 Mbps</div>
+        <div class="price-row"><span>Harga dasar</span><span class="val">Rp279.000</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:90.1%"></div></div>
+        <div class="price-row"><span>+ PPN 11%</span><span class="val">Rp30.690</span></div>
+        <div class="bar-track"><div class="bar-fill total" style="width:100%"></div></div>
+        <div class="total-price"><span class="amount">Rp309.690</span><span class="per">/bulan</span></div>
+        <div class="ppn-note">Sudah termasuk PPN 11% — bebas biaya tersembunyi.</div>
+        <a class="btn btn-primary order-btn" style="width:100%;" onclick="orderWA('FTTH 150 Mbps (up to 350 Mbps)','Rp309.690/bulan')">Order via WhatsApp</a>
+      </div>
+
+      <div class="price-card">
+        <div class="speed">300 Mbps</div>
+        <div class="speed-sub">Up to 400 Mbps</div>
+        <div class="price-row"><span>Harga dasar</span><span class="val">Rp300.000</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:90.1%"></div></div>
+        <div class="price-row"><span>+ PPN 11%</span><span class="val">Rp33.000</span></div>
+        <div class="bar-track"><div class="bar-fill total" style="width:100%"></div></div>
+        <div class="total-price"><span class="amount">Rp333.000</span><span class="per">/bulan</span></div>
+        <div class="ppn-note">Sudah termasuk PPN 11% — bebas biaya tersembunyi.</div>
+        <a class="btn btn-primary order-btn" style="width:100%;" onclick="orderWA('FTTH 300 Mbps (up to 400 Mbps)','Rp333.000/bulan')">Order via WhatsApp</a>
+      </div>
+
+      <div class="price-card">
+        <div class="speed">600 Mbps</div>
+        <div class="speed-sub">Kecepatan tinggi</div>
+        <div class="price-row"><span>Harga dasar</span><span class="val">Rp500.000</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:90.1%"></div></div>
+        <div class="price-row"><span>+ PPN 11%</span><span class="val">Rp55.000</span></div>
+        <div class="bar-track"><div class="bar-fill total" style="width:100%"></div></div>
+        <div class="total-price"><span class="amount">Rp555.000</span><span class="per">/bulan</span></div>
+        <div class="ppn-note">Sudah termasuk PPN 11% — bebas biaya tersembunyi.</div>
+        <a class="btn btn-primary order-btn" style="width:100%;" onclick="orderWA('FTTH 600 Mbps','Rp555.000/bulan')">Order via WhatsApp</a>
+      </div>
+
+      <div class="price-card">
+        <div class="speed">1000 Mbps</div>
+        <div class="speed-sub">Untuk kebutuhan berat</div>
+        <div class="price-row"><span>Harga dasar</span><span class="val">Rp900.000</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:90.1%"></div></div>
+        <div class="price-row"><span>+ PPN 11%</span><span class="val">Rp99.000</span></div>
+        <div class="bar-track"><div class="bar-fill total" style="width:100%"></div></div>
+        <div class="total-price"><span class="amount">Rp999.000</span><span class="per">/bulan</span></div>
+        <div class="ppn-note">Sudah termasuk PPN 11% — bebas biaya tersembunyi.</div>
+        <a class="btn btn-primary order-btn" style="width:100%;" onclick="orderWA('FTTH 1000 Mbps','Rp999.000/bulan')">Order via WhatsApp</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= FWA PRICE LIST ================= -->
+<section id="fwa">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Daftar Harga FWA</h2>
+      <p>Pilih paket bulanan reguler, atau ambil paket hemat 4 bulan sekaligus untuk harga per bulan yang lebih ringan.</p>
+    </div>
+
+    <div class="price-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-bottom:34px;max-width:300px;">
+      <div class="price-card">
+        <div class="speed">100 Mbps</div>
+        <div class="speed-sub">Paket bulanan reguler</div>
+        <div class="price-row"><span>Harga dasar</span><span class="val">Rp219.000</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:90.1%"></div></div>
+        <div class="price-row"><span>+ PPN 11%</span><span class="val">Rp24.090</span></div>
+        <div class="bar-track"><div class="bar-fill total" style="width:100%"></div></div>
+        <div class="total-price"><span class="amount">Rp243.090</span><span class="per">/bulan</span></div>
+        <div class="ppn-note">Sudah termasuk PPN 11% — bebas biaya tersembunyi.</div>
+        <a class="btn btn-primary order-btn" style="width:100%;" onclick="orderWA('FWA 100 Mbps Reguler','Rp243.090/bulan')">Order via WhatsApp</a>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom:6px;">Paket Hemat 4 Bulan</h3>
+    <p style="margin-bottom:24px;font-size:14.5px;">Bayar satu kali di depan untuk pemakaian 4 bulan — cocok kalau kamu mau lebih hemat dan tidak repot bayar tiap bulan.</p>
+
+    <div class="hemat-grid">
+
+      <div class="hemat-card">
+        <div class="speed">50 Mbps</div>
+        <div class="speed-sub" style="margin-bottom:14px;">Paket hemat 4 bulan</div>
+        <div class="hemat-breakdown">
+          <div class="row"><span>Harga dasar (4 bulan)</span><span class="v">Rp650.000</span></div>
+          <div class="row"><span>PPN 11%</span><span class="v">Rp71.500</span></div>
+          <div class="row"><span>Total bayar di depan</span><span class="v">Rp721.500</span></div>
+        </div>
+        <p style="font-size:13px;margin-bottom:4px;">Setara per bulan:</p>
+        <div class="hemat-monthly"><span class="amount">Rp180.375</span><span class="per">/bulan (sudah + PPN)</span></div>
+        <p style="font-size:12px;color:var(--ink-soft);margin:6px 0 18px;">Harga dasar per bulan: Rp162.500 sebelum PPN.</p>
+        <a class="btn btn-primary" style="width:100%;" onclick="orderWA('FWA Paket Hemat 50 Mbps - 4 Bulan','Rp721.500 (4 bulan) / setara Rp180.375 per bulan')">Order via WhatsApp</a>
+      </div>
+
+      <div class="hemat-card">
+        <span class="save-tag">Hemat ~9,8% vs paket bulanan</span>
+        <div class="speed">100 Mbps</div>
+        <div class="speed-sub" style="margin-bottom:14px;">Paket hemat 4 bulan</div>
+        <div class="hemat-breakdown">
+          <div class="row"><span>Harga dasar (4 bulan)</span><span class="v">Rp790.000</span></div>
+          <div class="row"><span>PPN 11%</span><span class="v">Rp86.900</span></div>
+          <div class="row"><span>Total bayar di depan</span><span class="v">Rp876.900</span></div>
+        </div>
+        <p style="font-size:13px;margin-bottom:4px;">Setara per bulan:</p>
+        <div class="hemat-monthly"><span class="amount">Rp219.225</span><span class="per">/bulan (sudah + PPN)</span></div>
+        <p style="font-size:12px;color:var(--ink-soft);margin:6px 0 10px;">Harga dasar per bulan: Rp197.500 sebelum PPN.</p>
+        <div style="margin:10px 0 18px;">
+          <div class="price-row" style="margin-bottom:2px;"><span>Reguler 4 bulan (Rp243.090 x4)</span><span class="val">Rp972.360</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+          <div class="price-row" style="margin-bottom:2px;"><span>Paket hemat 4 bulan</span><span class="val">Rp876.900</span></div>
+          <div class="bar-track"><div class="bar-fill total" style="width:90.2%"></div></div>
+        </div>
+        <a class="btn btn-primary" style="width:100%;" onclick="orderWA('FWA Paket Hemat 100 Mbps - 4 Bulan','Rp876.900 (4 bulan) / setara Rp219.225 per bulan')">Order via WhatsApp</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= VIDEO ================= -->
+<section style="background:var(--white);">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Lihat Cerita Pelanggan Kami</h2>
+      <p>Tonton pengalaman langsung menggunakan internet rumah XL SATU.</p>
+    </div>
+    <div class="video-wrap">
+      <video controls preload="metadata" poster="hero-bg.jpg">
+        <source src="promo-video.mp4" type="video/mp4">
+        Browser kamu tidak mendukung pemutaran video.
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Pertanyaan yang Sering Ditanyakan</h2>
+      <p>Masih ada pertanyaan lain? Chat langsung ke WhatsApp kami.</p>
+    </div>
+    <div class="faq-list" id="faqList">
+
+      <div class="faq-item">
+        <div class="faq-q">Apa itu FTTH? <span class="icon">+</span></div>
+        <div class="faq-a"><p>FTTH (Fiber To The Home) adalah layanan internet rumah yang tersambung langsung ke rumah lewat kabel fiber optik, sehingga koneksinya stabil dan tidak terpengaruh cuaca.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Apa itu FWA? <span class="icon">+</span></div>
+        <div class="faq-a"><p>FWA (Fixed Wireless Access) adalah internet rumah tanpa kabel fiber, menggunakan sinyal wireless lewat router khusus. Instalasinya lebih cepat, cocok untuk area yang belum terjangkau kabel fiber.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Apa bedanya FTTH dan FWA? <span class="icon">+</span></div>
+        <div class="faq-a"><p>FTTH pakai kabel fiber langsung ke rumah dengan kecepatan lebih stabil dan kuota tanpa batas. FWA pakai sinyal wireless, lebih cepat dipasang tapi kecepatan bisa dipengaruhi jarak ke tower dan kepadatan pengguna sekitar.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Apakah harga yang tertera sudah termasuk pajak? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Harga yang kami tampilkan sudah kami hitungkan totalnya termasuk PPN 11%, jadi kamu bisa lihat langsung harga dasar dan harga akhir yang perlu dibayar setiap bulan.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Bagaimana cara cek apakah rumah saya sudah ter-coverage? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Kirim pesan ke WhatsApp kami dengan alamat lengkap atau titik lokasi, tim kami akan bantu cek ketersediaan jaringan FTTH atau FWA di lokasimu.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Bagaimana cara order paket? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Klik tombol "Order via WhatsApp" pada paket yang kamu pilih di halaman ini, nanti otomatis terkirim pesan dengan detail paket ke WhatsApp kami untuk diproses lebih lanjut.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Apakah paket hemat 4 bulan bisa diperpanjang otomatis? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Perpanjangan akan dikonfirmasi dulu ke kamu menjelang masa aktif habis. Kamu bisa lanjut paket hemat lagi atau pindah ke paket bulanan biasa, sesuai kebutuhan.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Apakah ini agen resmi XL SATU? <span class="icon">+</span></div>
+        <div class="faq-a"><p>Ya, halaman ini dikelola oleh sales resmi XL SATU. Detail lisensi dan kontak resmi tersedia di bagian bawah halaman ini.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= ORDER / CONTACT ================= -->
+<section>
+  <div class="wrap">
+    <div class="order-section">
+      <div class="order-cta-col">
+        <h2>Siap Pasang Internet di Rumah?</h2>
+        <p>Kirim format order di bawah ini via WhatsApp, atau tap tombol order di paket pilihanmu.</p>
+        <div class="contact-pill">
+          <div>
+            <div class="label">WhatsApp Order & Konsultasi</div>
+            <div class="value">0877-4764-3339</div>
+          </div>
+        </div>
+        <div class="contact-pill">
+          <div>
+            <div class="label">Customer Service</div>
+            <div class="value">0817-0123-442</div>
+          </div>
+        </div>
+        <a class="btn btn-primary" style="margin-top:20px;" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20order%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener">💬 Chat Order Sekarang</a>
+      </div>
+      <div class="order-steps">
+        <h3 style="color:#fff;">Format Order via WhatsApp</h3>
+        <ol>
+          <li>Pilih paket (FTTH/FWA) yang kamu mau</li>
+          <li>Sebutkan nama lengkap & alamat pemasangan</li>
+          <li>Sertakan nomor HP aktif yang bisa dihubungi</li>
+          <li>Tim kami akan konfirmasi coverage & jadwal instalasi</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-chip">
+          <img src="logo.png" alt="XL SATU">
+        </div>
+        <p style="margin-top:12px;color:#9AA8CC;">Internet rumah FTTH & FWA dari XL SATU. Cepat pasang, jaringan luas, harga transparan.</p>
+        <div class="license-box">
+          <strong>Keterangan Lisensi:</strong> Halaman ini dikelola oleh Sales Resmi (Authorized Reseller) XL SATU. Seluruh transaksi, pengecekan coverage, dan pemasangan mengikuti syarat & ketentuan resmi XL SATU. Harga dapat berubah sewaktu-waktu sesuai kebijakan resmi XL SATU.
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <a href="https://wa.me/6287747643339" target="_blank" rel="noopener">WhatsApp: 0877-4764-3339</a>
+        <a href="tel:+628170123442">CS: 0817-0123-442</a>
+      </div>
+      <div class="footer-col">
+        <h4>Navigasi</h4>
+        <a href="#solusi">FTTH vs FWA</a>
+        <a href="#ftth">Harga FTTH</a>
+        <a href="#fwa">Harga FWA</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 XL SATU — Sales Resmi. Semua harga sudah termasuk perhitungan PPN 11% seperti ditampilkan pada masing-masing paket.</div>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20tanya%20tentang%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <img src="wa-icon.png" alt="Chat WhatsApp">
+</a>
+
+<script>
+  // ---- Carousel ----
+  const track = document.getElementById('carouselTrack');
+  const slides = track.children;
+  const dotsWrap = document.getElementById('carDots');
+  let current = 0;
+  let autoTimer;
+
+  for(let i=0;i<slides.length;i++){
+    const dot = document.createElement('div');
+    dot.className = 'car-dot' + (i===0 ? ' active' : '');
+    dot.onclick = (e)=>{ e.stopPropagation(); goToSlide(i); };
+    dotsWrap.appendChild(dot);
+  }
+
+  function updateDots(){
+    [...dotsWrap.children].forEach((d,i)=> d.classList.toggle('active', i===current));
+  }
+
+  function goToSlide(i){
+    current = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current*100}%)`;
+    updateDots();
+    resetAuto();
+  }
+
+  function moveSlide(dir){ goToSlide(current+dir); }
+
+  function resetAuto(){
+    clearInterval(autoTimer);
+    autoTimer = setInterval(()=>moveSlide(1), 6000);
+  }
+  resetAuto();
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ---- WhatsApp order helper ----
+  function orderWA(paket, harga){
+    const msg = `Halo Admin XL SATU, saya ingin order paket berikut:\n\nPaket: ${paket}\nHarga: ${harga}\n\nNama: \nAlamat Pemasangan: \nNo. HP Aktif: `;
+    const url = `https://wa.me/6287747643339?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  }
+</script>
+
+</body>
+</html>

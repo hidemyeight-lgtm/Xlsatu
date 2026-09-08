@@ -137,32 +137,18 @@
 
   /* ---------- HERO ---------- */
   .hero{
-    position:relative;
-    background:linear-gradient(115deg, rgba(6,17,51,.94) 0%, rgba(11,30,77,.90) 42%, rgba(11,30,77,.55) 75%), url('hero-bg.jpg') right center/cover no-repeat;
-    color:var(--white);
-    padding:96px 0 84px;
+    background:var(--bg);
+    padding:56px 0 64px;
   }
-  .hero h1{color:var(--white);font-size:48px;max-width:620px;letter-spacing:-0.5px;}
-  .hero p.lead{color:#CBD6F0;font-size:18px;max-width:520px;}
-  .hero-badge-img{
-    max-width:320px;width:100%;height:auto;display:block;
-    filter:drop-shadow(0 4px 10px rgba(0,0,0,.3));
-    position:absolute;top:28px;right:20px;margin:0;z-index:2;
+  .hero-heading{max-width:640px;margin:0 auto 32px;text-align:center;}
+  .hero-heading h1{font-size:40px;letter-spacing:-0.5px;}
+  .hero-heading p.lead{font-size:17px;color:var(--ink-soft);}
+  .hero-photo{
+    max-width:900px;margin:0 auto 28px;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);
   }
-  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
-  @media(max-width:640px){ .hero h1{font-size:34px;} }
-  @media(max-width:780px){
-    .hero-badge-img{position:absolute;top:16px;right:16px;max-width:210px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.3));}
-  }
-  @media(max-width:420px){
-    .hero-badge-img{max-width:175px;top:14px;right:14px;}
-  }
-  @media(max-width:780px){
-    .hero{
-      background:linear-gradient(180deg, rgba(6,13,38,.88) 0%, rgba(8,18,54,.86) 45%, rgba(8,18,54,.72) 100%), url('hero-bg.jpg') right center/cover no-repeat;
-      padding:56px 0 48px;
-    }
-  }
+  .hero-photo img{width:100%;display:block;}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+  @media(max-width:640px){ .hero-heading h1{font-size:30px;} }
 
   /* ---------- AWARDS / KREDIBILITAS ---------- */
   .awards-section{background:var(--white);}
@@ -408,11 +394,15 @@
 <!-- ================= HERO ================= -->
 <section class="hero">
   <div class="wrap">
-    <h1>Lebih Mudah Internetan di Rumah</h1>
-    <p class="lead">Pasang internet rumah XL SATU se-Jabodetabek — FTTH fiber stabil atau FWA tanpa kabel yang cepat dipasang. Cek dulu jangkauannya, gratis konsultasi lewat WhatsApp.</p>
-    <img class="hero-badge-img" src="hero-badges.png" alt="Opensignal Award Winner - The Most Reliable Broadband Network - The Best Video Streaming, Fixed Broadband Experience Awards April 2026">
+    <div class="hero-heading">
+      <h1>Lebih Mudah Internetan di Rumah</h1>
+      <p class="lead">Pasang internet rumah XL SATU se-Jabodetabek — FTTH fiber stabil atau FWA tanpa kabel yang cepat dipasang. Cek dulu jangkauannya, gratis konsultasi lewat WhatsApp.</p>
+    </div>
+    <div class="hero-photo">
+      <img src="hero-bg.jpg" alt="Router WiFi XL SATU">
+    </div>
     <div class="hero-cta">
-      <a class="btn btn-light" href="#ftth">Lihat Daftar Harga</a>
+      <a class="btn btn-outline" href="#ftth">Lihat Daftar Harga</a>
     </div>
   </div>
 </section>

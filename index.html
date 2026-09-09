@@ -35,7 +35,7 @@
     {"@type": "City", "name": "Bekasi"}
   ],
   "priceRange": "Rp229.000 - Rp999.000",
-  "telephone": "+6287747643339"
+  "telephone": "+6287810963528"
 }
 </script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -175,39 +175,16 @@
     position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 46px rgba(11,30,77,.22);
   }
   .carousel-track{display:flex;transition:transform .5s cubic-bezier(.65,0,.35,1);}
-  .slide{
+  .slide-full{
     min-width:100%;
-    padding:38px 34px;
-    display:flex;align-items:center;gap:28px;
-    min-height:200px;
+    height:460px;
+    display:flex;align-items:center;justify-content:center;
     cursor:pointer;
+    background:linear-gradient(135deg,#0B1E4D,#081536);
   }
-  .slide-1{background:linear-gradient(120deg,#0B1E4D,#163DA6 70%);}
-  .slide-2{background:linear-gradient(120deg,#00463F,#00A99B 75%);}
-  .slide-3{background:linear-gradient(120deg,#12275E,#2F5CE0 75%);}
-  .slide-4{background:linear-gradient(120deg,#001233,#023E8A 75%);}
-  .slide-5{background:linear-gradient(120deg,#0B1E4D,#3A6FF7 75%);}
-  .slide-6{background:linear-gradient(120deg,#050B24,#142850 75%);}
-  .slide-text{color:var(--white);flex:1;}
-  .slide-text .tag{
-    display:inline-block;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:999px;
-    font-size:12.5px;font-weight:700;margin-bottom:12px;color:#fff;
-  }
-  .slide-text h3{color:var(--white);font-size:24px;margin-bottom:8px;}
-  .slide-text p{color:rgba(255,255,255,.88);margin-bottom:14px;max-width:480px;font-size:14.5px;}
-  .slide-cta{
-    background:var(--white);color:var(--navy);padding:10px 18px;border-radius:999px;
-    font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;
-  }
-  .slide-visual{width:120px;height:120px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-  .slide-visual.slide-visual-photo{width:130px;height:172px;}
-  .slide-visual.slide-visual-square{width:150px;height:150px;}
-  .slide-visual img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.25);}
+  .slide-full img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
   @media(max-width:720px){
-    .slide{flex-direction:column;text-align:center;padding:30px 22px;}
-    .slide-visual{width:80px;height:80px;}
-    .slide-visual.slide-visual-photo{width:90px;height:119px;}
-    .slide-visual.slide-visual-square{width:100px;height:100px;}
+    .slide-full{height:300px;}
   }
 
   .carousel-controls{
@@ -380,8 +357,8 @@
       <a href="#faq">FAQ</a>
     </nav>
     <div class="header-actions">
-      <a class="btn btn-outline" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20cek%20coverage%20XL%20SATU%20di%20lokasi%20saya." target="_blank" rel="noopener">Cek Coverage</a>
-      <a class="btn btn-primary" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20konsultasi%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener">Konsultasi Gratis</a>
+      <a class="btn btn-outline" href="https://wa.me/6287810963528?text=Halo%2C%20saya%20mau%20cek%20coverage%20XL%20SATU%20di%20lokasi%20saya." target="_blank" rel="noopener">Cek Coverage</a>
+      <a class="btn btn-primary" href="https://wa.me/6287810963528?text=Halo%2C%20saya%20mau%20konsultasi%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener">Konsultasi Gratis</a>
     </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -392,8 +369,8 @@
     <a href="#ftth">Harga FTTH</a>
     <a href="#fwa">Harga FWA</a>
     <a href="#faq">FAQ</a>
-    <a class="mm-wa" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20cek%20coverage%20XL%20SATU%20di%20lokasi%20saya." target="_blank" rel="noopener">Cek Coverage via WhatsApp</a>
-    <a class="mm-wa" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20konsultasi%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener">Konsultasi Gratis via WhatsApp</a>
+    <a class="mm-wa" href="https://wa.me/6287810963528?text=Halo%2C%20saya%20mau%20cek%20coverage%20XL%20SATU%20di%20lokasi%20saya." target="_blank" rel="noopener">Cek Coverage via WhatsApp</a>
+    <a class="mm-wa" href="https://wa.me/6287810963528?text=Halo%2C%20saya%20mau%20konsultasi%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener">Konsultasi Gratis via WhatsApp</a>
   </div>
 </header>
 
@@ -419,76 +396,16 @@
     <div class="carousel-track-wrap">
       <div class="carousel-track" id="carouselTrack">
 
-        <div class="slide slide-1" onclick="location.href='#promo'">
-          <div class="slide-text">
-            <span class="tag">Promo Bulan Ini</span>
-            <h3>Hemat sampai 9,8% dengan Paket 4 Bulan</h3>
-            <p>Bayar sekali untuk 4 bulan pemakaian FWA dan nikmati harga per bulan yang lebih murah dibanding paket bulanan biasa.</p>
-            <span class="slide-cta">Lihat Paket Hemat →</span>
-          </div>
-          <div class="slide-visual">
-            <svg viewBox="0 0 100 100" width="100" height="100"><circle cx="50" cy="50" r="46" fill="rgba(255,255,255,.12)"/><text x="50" y="58" font-size="30" text-anchor="middle" fill="#fff" font-family="Poppins">%</text></svg>
-          </div>
+        <div class="slide-full" onclick="location.href='#penghargaan'">
+          <img src="award-5g.jpg" alt="XL Ultra 5G+ Jaringan Nomor 1 di Indonesia">
         </div>
 
-        <div class="slide slide-2" onclick="location.href='#solusi'">
-          <div class="slide-text">
-            <span class="tag">Kenalan Dulu</span>
-            <h3>Apa itu FTTH?</h3>
-            <p>Fiber To The Home — internet rumah yang tersambung langsung lewat kabel fiber optik. Cocok untuk kamu yang butuh koneksi stabil untuk kerja, gaming, dan streaming banyak perangkat sekaligus.</p>
-            <span class="slide-cta">Pelajari FTTH →</span>
-          </div>
-          <div class="slide-visual">
-            <svg viewBox="0 0 100 100" width="100" height="100"><rect x="10" y="40" width="80" height="10" rx="5" fill="rgba(255,255,255,.5)"/><circle cx="15" cy="45" r="8" fill="#fff"/><circle cx="85" cy="45" r="8" fill="#fff"/></svg>
-          </div>
+        <div class="slide-full" onclick="location.href='#penghargaan'">
+          <img src="promo-opensignal-award.webp" alt="XL SATU Raih Penghargaan Opensignal - Ookla Speedtest">
         </div>
 
-        <div class="slide slide-3" onclick="location.href='#solusi'">
-          <div class="slide-text">
-            <span class="tag">Kenalan Dulu</span>
-            <h3>Apa itu FWA?</h3>
-            <p>Fixed Wireless Access — internet rumah tanpa kabel fiber, memakai sinyal wireless lewat router khusus. Solusi cepat pasang untuk area yang belum terjangkau kabel fiber.</p>
-            <span class="slide-cta">Pelajari FWA →</span>
-          </div>
-          <div class="slide-visual">
-            <svg viewBox="0 0 100 100" width="100" height="100"><path d="M50 80 a30 30 0 0 1 0 -60" stroke="rgba(255,255,255,.5)" stroke-width="6" fill="none"/><path d="M50 80 a18 18 0 0 1 0 -36" stroke="#fff" stroke-width="6" fill="none"/><circle cx="50" cy="80" r="6" fill="#fff"/></svg>
-          </div>
-        </div>
-
-        <div class="slide slide-4" onclick="location.href='#penghargaan'">
-          <div class="slide-text">
-            <span class="tag">Prestasi Nasional</span>
-            <h3>Jaringan #1 di Indonesia</h3>
-            <p>XL SATU raih Best 5G Network, Best Mobile Network, dan Fastest 5G Network 2026 versi Ookla Speedtest Awards.</p>
-            <span class="slide-cta">Lihat Selengkapnya →</span>
-          </div>
-          <div class="slide-visual slide-visual-photo">
-            <img src="award-5g.jpg" alt="XL Ultra 5G+ Jaringan Nomor 1 di Indonesia">
-          </div>
-        </div>
-
-        <div class="slide slide-5" onclick="window.open('https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20tanya%20soal%20cara%20bayar%20tagihan%20XL%20SATU.','_blank')">
-          <div class="slide-text">
-            <span class="tag">Fitur XL SATU</span>
-            <h3>Bayar Tagihan Makin Praktis</h3>
-            <p>Pelanggan XL SATU bisa bayar tagihan langsung lewat website resmi — tinggal masukkan ID pelanggan, bisa transfer bank, Shopee, DANA, atau kartu.</p>
-            <span class="slide-cta">Tanya via WhatsApp →</span>
-          </div>
-          <div class="slide-visual slide-visual-square">
-            <img src="promo-bayar-tagihan.webp" alt="Bayar Tagihan XL SATU Lewat Website">
-          </div>
-        </div>
-
-        <div class="slide slide-6" onclick="location.href='#penghargaan'">
-          <div class="slide-text">
-            <span class="tag">Penghargaan Resmi</span>
-            <h3>Diakui Opensignal</h3>
-            <p>The Most Reliable Broadband Network — pengakuan resmi atas kualitas jaringan fixed broadband XL SATU.</p>
-            <span class="slide-cta">Cek Coverage →</span>
-          </div>
-          <div class="slide-visual slide-visual-square">
-            <img src="promo-opensignal-award.webp" alt="XL SATU Raih Penghargaan Opensignal">
-          </div>
+        <div class="slide-full" onclick="window.open('https://wa.me/6287810963528?text=Halo%2C%20saya%20mau%20tanya%20soal%20cara%20bayar%20tagihan%20XL%20SATU.','_blank')">
+          <img src="promo-bayar-tagihan.webp" alt="Bayar Tagihan XL SATU Lewat Website Jadi Lebih Mudah">
         </div>
 
       </div>
@@ -514,7 +431,7 @@
         <li><span class="dot"></span> Fastest 5G Network 2026 — Ookla Speedtest Awards</li>
       </ul>
       <p class="awards-note">*Berdasarkan data intelijen Ookla Speedtest, semester 1 2026. Semua hak dilindungi undang-undang.</p>
-      <a class="btn btn-primary" style="margin-top:22px;" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20cek%20coverage%20XL%20SATU%20di%20lokasi%20saya." target="_blank" rel="noopener">Cek Coverage via WhatsApp</a>
+      <a class="btn btn-primary" style="margin-top:22px;" href="https://wa.me/6287810963528?text=Halo%2C%20saya%20mau%20cek%20coverage%20XL%20SATU%20di%20lokasi%20saya." target="_blank" rel="noopener">Cek Coverage via WhatsApp</a>
     </div>
   </div>
 </section>
@@ -571,7 +488,7 @@
       </div>
 
     </div>
-    <p class="center" style="margin-top:28px;font-size:14px;">Masih bingung pilih yang mana? <a href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20konsultasi%2C%20lebih%20cocok%20FTTH%20atau%20FWA%20untuk%20rumah%20saya." target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">Konsultasi gratis via WhatsApp →</a></p>
+    <p class="center" style="margin-top:28px;font-size:14px;">Masih bingung pilih yang mana? <a href="https://wa.me/6287810963528?text=Halo%2C%20saya%20mau%20konsultasi%2C%20lebih%20cocok%20FTTH%20atau%20FWA%20untuk%20rumah%20saya." target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">Konsultasi gratis via WhatsApp →</a></p>
   </div>
 </section>
 
@@ -804,7 +721,7 @@
         <div class="contact-pill">
           <div>
             <div class="label">WhatsApp Order & Konsultasi</div>
-            <div class="value">0877-4764-3339</div>
+            <div class="value">0878-1096-3528</div>
           </div>
         </div>
         <div class="contact-pill">
@@ -813,7 +730,7 @@
             <div class="value">0817-0123-442</div>
           </div>
         </div>
-        <a class="btn btn-primary" style="margin-top:20px;" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20order%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener">Chat Order Sekarang</a>
+        <a class="btn btn-primary" style="margin-top:20px;" href="https://wa.me/6287810963528?text=Halo%2C%20saya%20mau%20order%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener">Chat Order Sekarang</a>
       </div>
       <div class="order-steps">
         <h3 style="color:#fff;">Format Order via WhatsApp</h3>
@@ -843,7 +760,8 @@
       </div>
       <div class="footer-col">
         <h4>Kontak</h4>
-        <a href="https://wa.me/6287747643339" target="_blank" rel="noopener">WhatsApp: 0877-4764-3339</a>
+        <a href="https://wa.me/6287810963528" target="_blank" rel="noopener">WhatsApp Admin 1: 0878-1096-3528</a>
+        <a href="https://wa.me/6287747643339" target="_blank" rel="noopener">WhatsApp Admin 2: 0877-4764-3339</a>
         <a href="tel:+628170123442">CS: 0817-0123-442</a>
       </div>
       <div class="footer-col">
@@ -858,7 +776,7 @@
   </div>
 </footer>
 
-<a class="float-wa" href="https://wa.me/6287747643339?text=Halo%2C%20saya%20mau%20tanya%20tentang%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+<a class="float-wa" href="https://wa.me/6287810963528?text=Halo%2C%20saya%20mau%20tanya%20tentang%20paket%20internet%20XL%20SATU." target="_blank" rel="noopener" aria-label="Chat WhatsApp">
   <img src="wa-icon.png" alt="Chat WhatsApp">
 </a>
 
@@ -922,7 +840,7 @@
   // ---- WhatsApp order helper ----
   function orderWA(paket, harga){
     const msg = `Halo Admin XL SATU, saya ingin order paket berikut:\n\nPaket: ${paket}\nHarga: ${harga}\n\nNama: \nAlamat Pemasangan: \nNo. HP Aktif: `;
-    const url = `https://wa.me/6287747643339?text=${encodeURIComponent(msg)}`;
+    const url = `https://wa.me/6287810963528?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
   }
 </script>

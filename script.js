@@ -55,6 +55,35 @@ if (carouselTrack) {
   carouselTrack.addEventListener("mouseleave", () => { autoplay = setInterval(() => moveSlide(1), 6000); });
 }
 
+// ===== Lazy load video (baru dimuat saat scroll mendekat, bukan saat page load) =====
+const lazyVideos = document.querySelectorAll("video.lazy-video");
+if (lazyVideos.length) {
+  if ("IntersectionObserver" in window) {
+    const videoObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const video = entry.target;
+        video.querySelectorAll("source[data-src]").forEach(source => {
+          source.src = source.dataset.src;
+          source.removeAttribute("data-src");
+        });
+        video.load();
+        observer.unobserve(video);
+      });
+    }, { rootMargin: "200px 0px" });
+    lazyVideos.forEach(video => videoObserver.observe(video));
+  } else {
+    // Fallback untuk browser lama tanpa IntersectionObserver
+    lazyVideos.forEach(video => {
+      video.querySelectorAll("source[data-src]").forEach(source => {
+        source.src = source.dataset.src;
+        source.removeAttribute("data-src");
+      });
+      video.load();
+    });
+  }
+}
+
 // ===== FAQ accordion =====
 document.querySelectorAll(".faq-item").forEach(item => {
   const btn = item.querySelector(".faq-q");

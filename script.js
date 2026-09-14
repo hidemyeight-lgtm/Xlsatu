@@ -1,6 +1,13 @@
 // ===== Nomor WhatsApp utama =====
 const WA_NUMBER = "6287810963528";
 
+// ===== Google Ads Conversion Tracking =====
+function trackConversion() {
+  if (typeof gtag === "function") {
+    gtag('event', 'conversion_event_purchase', {});
+  }
+}
+
 // ===== Menu mobile =====
 const menuToggle = document.getElementById("menuToggle");
 const mobileMenu = document.getElementById("mobileMenu");
@@ -96,6 +103,7 @@ document.querySelectorAll(".faq-item").forEach(item => {
 
 // ===== Order via WhatsApp (dari tombol paket) =====
 function orderWA(paket, harga) {
+  trackConversion();
   const pesan = `Halo, saya mau order paket internet XL SATU.\nPaket: ${paket}\nHarga: ${harga}`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pesan)}`, "_blank");
 }
@@ -109,6 +117,7 @@ function cekAreaWA() {
     alert("Mohon lengkapi semua data dulu.");
     return;
   }
+  trackConversion();
   const pesan = `Halo, saya mau cek coverage XL SATU.\nNama: ${nama}\nAlamat: ${alamat}\nNo HP: ${hp}`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pesan)}`, "_blank");
 }
@@ -124,6 +133,14 @@ function registrasiWA() {
     alert("Mohon lengkapi semua data dulu.");
     return;
   }
+  trackConversion();
   const pesan = `Halo, saya mau daftar XL SATU.\nNama: ${nama}\nNo HP: ${hp}\nAlamat: ${alamat}\nPaket diminati: ${paket || "belum ditentukan"}`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pesan)}`, "_blank");
 }
+
+// ===== Track semua link WhatsApp statis =====
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(`a[href*="wa.me"]`).forEach(link => {
+    link.addEventListener("click", () => trackConversion());
+  });
+});

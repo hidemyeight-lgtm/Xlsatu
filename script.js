@@ -1,0 +1,100 @@
+// ===== Nomor WhatsApp utama =====
+const WA_NUMBER = "6287810963528";
+
+// ===== Menu mobile =====
+const menuToggle = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+if (menuToggle && mobileMenu) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+  mobileMenu.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => {
+      mobileMenu.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+// ===== Carousel =====
+const carouselTrack = document.getElementById("carouselTrack");
+const carDots = document.getElementById("carDots");
+let currentSlide = 0;
+
+function setupCarousel() {
+  if (!carouselTrack) return;
+  const slides = carouselTrack.children.length;
+  carDots.innerHTML = "";
+  for (let i = 0; i < slides; i++) {
+    const dot = document.createElement("button");
+    dot.className = "dot-btn" + (i === 0 ? " active" : "");
+    dot.setAttribute("aria-label", "Slide " + (i + 1));
+    dot.addEventListener("click", () => goToSlide(i));
+    carDots.appendChild(dot);
+  }
+}
+
+function goToSlide(index) {
+  const slides = carouselTrack.children.length;
+  currentSlide = (index + slides) % slides;
+  carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+  [...carDots.children].forEach((dot, i) => dot.classList.toggle("active", i === currentSlide));
+}
+
+function moveSlide(direction) {
+  goToSlide(currentSlide + direction);
+}
+
+setupCarousel();
+
+// Autoplay ringan, berhenti kalau user hover
+let autoplay = setInterval(() => moveSlide(1), 6000);
+if (carouselTrack) {
+  carouselTrack.addEventListener("mouseenter", () => clearInterval(autoplay));
+  carouselTrack.addEventListener("mouseleave", () => { autoplay = setInterval(() => moveSlide(1), 6000); });
+}
+
+// ===== FAQ accordion =====
+document.querySelectorAll(".faq-item").forEach(item => {
+  const btn = item.querySelector(".faq-q");
+  btn.addEventListener("click", () => {
+    const wasOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach(el => el.classList.remove("open"));
+    if (!wasOpen) item.classList.add("open");
+  });
+});
+
+// ===== Order via WhatsApp (dari tombol paket) =====
+function orderWA(paket, harga) {
+  const pesan = `Halo, saya mau order paket internet XL SATU.\nPaket: ${paket}\nHarga: ${harga}`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pesan)}`, "_blank");
+}
+
+// ===== Cek Area =====
+function cekAreaWA() {
+  const nama = document.getElementById("cekNama").value.trim();
+  const alamat = document.getElementById("cekAlamat").value.trim();
+  const hp = document.getElementById("cekHP").value.trim();
+  if (!nama || !alamat || !hp) {
+    alert("Mohon lengkapi semua data dulu.");
+    return;
+  }
+  const pesan = `Halo, saya mau cek coverage XL SATU.\nNama: ${nama}\nAlamat: ${alamat}\nNo HP: ${hp}`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pesan)}`, "_blank");
+}
+
+// ===== Registrasi =====
+function registrasiWA() {
+  const nama = document.getElementById("regNama").value.trim();
+  const hp = document.getElementById("regHP").value.trim();
+  const alamat = document.getElementById("regAlamat").value.trim();
+  const paketEl = document.getElementById("regPaket");
+  const paket = paketEl ? paketEl.value : "";
+  if (!nama || !hp || !alamat) {
+    alert("Mohon lengkapi semua data dulu.");
+    return;
+  }
+  const pesan = `Halo, saya mau daftar XL SATU.\nNama: ${nama}\nNo HP: ${hp}\nAlamat: ${alamat}\nPaket diminati: ${paket || "belum ditentukan"}`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pesan)}`, "_blank");
+}

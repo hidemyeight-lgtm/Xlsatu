@@ -4,7 +4,7 @@ const WA_NUMBER = "6287810963528";
 // ===== Google Ads Conversion Tracking =====
 function trackConversion() {
   if (typeof gtag === "function") {
-    gtag('event', 'conversion_event_purchase', {});
+    gtag('event', 'conversion_event_contact_1', {});
   }
 }
 

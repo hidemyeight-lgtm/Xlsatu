@@ -16,10 +16,19 @@ function trackConversion2() {
   }
 }
 
-// Panggil kedua tracker sekaligus - dipakai di semua titik klik ke WA.
+// Conversion action ketiga (contact_3) - sama seperti contact_1 & contact_2,
+// semua link WA di-tracking ke event ini juga.
+function trackConversion3() {
+  if (typeof gtag === "function") {
+    gtag('event', 'conversion_event_contact_3', {});
+  }
+}
+
+// Panggil ketiga tracker sekaligus - dipakai di semua titik klik ke WA.
 function trackAllConversions() {
   trackConversion();
   trackConversion2();
+  trackConversion3();
 }
 
 // ===== Menu mobile =====

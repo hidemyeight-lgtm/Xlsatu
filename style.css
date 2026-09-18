@@ -333,3 +333,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Brand banner (XL Home | First Media) */
+.about-banner { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+.about-banner img { width: 100%; display: block; }
+
+/* Bantuan / CS card */
+.bantuan-card { background: linear-gradient(135deg, #EAF2FF 0%, #F3F7FF 100%); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+.bantuan-card h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.bantuan-card .bantuan-sub { color: var(--gray); font-size: 14px; margin-bottom: 20px; }
+.bantuan-label { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.cs-number-pill { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; margin-bottom: 10px; cursor: default; }
+.cs-number-pill .label { font-size: 12px; color: var(--gray); margin-bottom: 2px; }
+.cs-number-pill .value { font-size: 17px; font-weight: 700; }
+.sales-block { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; margin-top: 8px; }
+.sales-photo { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid #EEF2FF; }
+.sales-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.sales-block .sname { font-weight: 700; font-size: 15px; }
+.sales-block .srole { font-size: 12px; color: var(--gray); margin-bottom: 8px; }
+.sales-block .btn { padding: 8px 14px; font-size: 13px; }
+@media (max-width: 760px) {
+  .bantuan-card { grid-template-columns: 1fr; }
+}

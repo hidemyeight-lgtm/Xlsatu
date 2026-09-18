@@ -8,6 +8,20 @@ function trackConversion() {
   }
 }
 
+// Conversion action kedua (contact_2) - dipasang biar semua klik link WA
+// ikut ke-track di kedua conversion action Google Ads.
+function trackConversion2() {
+  if (typeof gtag === "function") {
+    gtag('event', 'conversion_event_contact_2', {});
+  }
+}
+
+// Panggil kedua tracker sekaligus - dipakai di semua titik klik ke WA.
+function trackAllConversions() {
+  trackConversion();
+  trackConversion2();
+}
+
 // ===== Menu mobile =====
 const menuToggle = document.getElementById("menuToggle");
 const mobileMenu = document.getElementById("mobileMenu");
@@ -103,7 +117,7 @@ document.querySelectorAll(".faq-item").forEach(item => {
 
 // ===== Order via WhatsApp (dari tombol paket) =====
 function orderWA(paket, harga) {
-  trackConversion();
+  trackAllConversions();
   const pesan = `Halo, saya mau order paket internet XL SATU.\nPaket: ${paket}\nHarga: ${harga}`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pesan)}`, "_blank");
 }
@@ -117,7 +131,7 @@ function cekAreaWA() {
     alert("Mohon lengkapi semua data dulu.");
     return;
   }
-  trackConversion();
+  trackAllConversions();
   const pesan = `Halo, saya mau cek coverage XL SATU.\nNama: ${nama}\nAlamat: ${alamat}\nNo HP: ${hp}`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pesan)}`, "_blank");
 }
@@ -133,7 +147,7 @@ function registrasiWA() {
     alert("Mohon lengkapi semua data dulu.");
     return;
   }
-  trackConversion();
+  trackAllConversions();
   const pesan = `Halo, saya mau daftar XL SATU.\nNama: ${nama}\nNo HP: ${hp}\nAlamat: ${alamat}\nPaket diminati: ${paket || "belum ditentukan"}`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pesan)}`, "_blank");
 }
@@ -141,6 +155,6 @@ function registrasiWA() {
 // ===== Track semua link WhatsApp statis =====
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(`a[href*="wa.me"]`).forEach(link => {
-    link.addEventListener("click", () => trackConversion());
+    link.addEventListener("click", () => trackAllConversions());
   });
 });

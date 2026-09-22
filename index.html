@@ -3,8 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>XL HOME – Hafidh Al Rosyid | Sales Resmi XL Home</title>
-<meta name="description" content="Sales resmi XL Home area Jabodetabek. Paket internet FWA dan FTTH terbaik dari XL SATU. Hubungi Hafidh: 087747643339">
+<title>First Media Jadi XL SATU | Internet Rumah Terbaik untuk Keluarga</title>
+<meta name="description" content="First Media kini resmi menjadi XL SATU. Nikmati internet rumah FWA &amp; FTTH terbaik untuk keluarga di area Jabodetabek. Hubungi Hafidh: 087747643339">
+
+<!-- Open Graph: judul & preview link saat dibagikan -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="XL Home">
+<meta property="og:title" content="First Media Jadi XL SATU | Internet Rumah Terbaik untuk Keluarga">
+<meta property="og:description" content="First Media kini resmi menjadi XL SATU. Nikmati internet rumah FWA &amp; FTTH terbaik untuk keluarga di area Jabodetabek.">
+<meta property="og:image" content="images/banner-1.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="First Media Jadi XL SATU | Internet Rumah Terbaik untuk Keluarga">
+<meta name="twitter:description" content="First Media kini resmi menjadi XL SATU. Nikmati internet rumah FWA &amp; FTTH terbaik untuk keluarga di area Jabodetabek.">
+<meta name="twitter:image" content="images/banner-1.webp">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
 <style>
  :root {
  --blue: #0033A0;
@@ -196,14 +214,18 @@
  /* CS SECTION */
  .cs-section {
    background: linear-gradient(135deg, var(--sky) 0%, #dceeff 100%);
-   padding: 60px 32px;
+   padding: 0;
+   overflow: hidden;
  }
  .cs-inner {
    max-width: 1200px; margin: 0 auto;
    display: grid;
-   grid-template-columns: 1fr 420px;
-   gap: 60px;
-   align-items: center;
+   grid-template-columns: 1fr 1fr;
+   align-items: stretch;
+ }
+ .cs-text {
+   padding: 60px 32px;
+   display: flex; flex-direction: column; justify-content: center;
  }
  .cs-text h2 {
    font-size: 32px; font-weight: 800; color: var(--blue); margin-bottom: 10px;
@@ -220,18 +242,32 @@
  .cs-btn:hover { background: var(--blue-mid); }
  .cs-btn.wa { background: #25D366; }
  .cs-btn.wa:hover { background: #1ebe5d; }
+ /* Foto CS ditampilkan penuh (landscape/banner), TIDAK dipotong -
+    object-fit: contain menjaga seluruh foto terlihat, sisa ruang diisi gradasi brand */
  .cs-img {
+   position: relative;
    width: 100%;
-   border-radius: 16px;
+   min-height: 380px;
+   background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 55%, var(--teal) 100%);
+   display: flex;
+   align-items: flex-end;
+   justify-content: center;
    overflow: hidden;
-   box-shadow: 0 8px 40px rgba(0,51,160,0.15);
-   line-height: 0;
+ }
+ .cs-img::before {
+   content: "";
+   position: absolute; inset: 0;
+   background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 60%);
  }
  .cs-img img {
-   width: 100%;
-   height: auto;
+   position: relative;
+   max-width: 90%;
+   max-height: 100%;
+   width: auto;
+   height: 100%;
    display: block;
    object-fit: contain;
+   object-position: bottom;
  }
 
  /* FOOTER */
@@ -275,6 +311,59 @@
  }
  .footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: underline; }
 
+ /* LOGO -> balik ke header/beranda */
+ .logo-link { display: inline-flex; line-height: 0; cursor: pointer; }
+ .footer-logo a { display: inline-flex; line-height: 0; cursor: pointer; }
+
+ /* WA FLOATING BUTTON */
+ body { padding-bottom: 96px; }
+ .wa-float {
+   position: fixed;
+   bottom: 20px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: calc(100% - 32px);
+   max-width: 380px;
+   background: linear-gradient(135deg, #ffffff 0%, #eef6ff 100%);
+   border: 1px solid rgba(0,51,160,0.08);
+   border-radius: 18px;
+   box-shadow: 0 10px 30px rgba(0,51,160,0.28), 0 2px 10px rgba(0,0,0,0.10);
+   display: flex;
+   align-items: center;
+   gap: 14px;
+   padding: 12px 16px;
+   text-decoration: none;
+   z-index: 999;
+   animation: waPulse 2.6s ease-in-out infinite;
+ }
+ .wa-float:hover { transform: translateX(-50%) translateY(-2px); }
+ .wa-float-icon {
+   flex-shrink: 0;
+   width: 46px; height: 46px;
+   border-radius: 50%;
+   background: #25D366;
+   display: flex; align-items: center; justify-content: center;
+   box-shadow: 0 4px 10px rgba(37,211,102,0.4);
+ }
+ .wa-float-icon svg { width: 24px; height: 24px; fill: #fff; }
+ .wa-float-text { display: flex; flex-direction: column; min-width: 0; }
+ .wa-float-text strong { font-size: 15px; color: var(--blue); font-weight: 800; line-height: 1.25; }
+ .wa-float-text span { font-size: 12.5px; color: var(--gray-text); line-height: 1.3; }
+ .wa-float-brand {
+   position: absolute;
+   top: 8px; right: 10px;
+   height: 16px;
+   opacity: 0.9;
+ }
+ @keyframes waPulse {
+   0%, 100% { box-shadow: 0 10px 30px rgba(0,51,160,0.28), 0 2px 10px rgba(0,0,0,0.10), 0 0 0 0 rgba(37,211,102,0.35); }
+   50% { box-shadow: 0 10px 30px rgba(0,51,160,0.28), 0 2px 10px rgba(0,0,0,0.10), 0 0 0 10px rgba(37,211,102,0); }
+ }
+ @media (min-width: 769px) {
+   .wa-float { left: auto; right: 24px; bottom: 24px; transform: none; }
+   .wa-float:hover { transform: translateY(-2px); }
+ }
+
  /* PRIVACY PAGE */
  #page-privacy {
  display: none;
@@ -296,29 +385,40 @@
  .section-title { font-size: 22px; }
  .tab { padding: 9px 16px; font-size: 13px; }
  .pkg-grid { grid-template-columns: 1fr; }
- .cs-section { padding: 0 16px; }
- .cs-inner { grid-template-columns: 1fr; gap: 0; }
- .cs-text { padding: 40px 0 32px; }
+ .cs-section { padding: 0; }
+ .cs-inner { grid-template-columns: 1fr; }
+ .cs-img { order: -1; min-height: 260px; width: 100%; }
+ .cs-img img { max-width: 92%; }
+ .cs-text { padding: 32px 16px 40px; align-items: center; text-align: center; }
  .cs-text h2 { font-size: 24px; }
+ .cs-text p { max-width: none; }
+ .cs-contacts { align-items: center; }
  .cs-btn { font-size: 14px; padding: 12px 16px; }
- .cs-img { justify-content: center; }
- .cs-img img { max-width: 280px; }
  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+ /* WA floating button - mobile: bottom bar mengambang penuh */
+ .wa-float {
+   left: 12px; right: 12px; bottom: 12px;
+   width: auto; max-width: none;
+   transform: none;
+ }
  }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
+<nav id="header">
+ <a href="#" class="logo-link" onclick="goHome();return false;" aria-label="Kembali ke beranda">
  <img src="images/logo.png" alt="XL Home">
+ </a>
  <div class="nav-links">
  <a href="#paket">Paket</a>
  <a href="#bantuan">Hubungi Kami</a>
  <a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a>
  </div>
- <a href="https://wa.me/6287747643339" class="nav-cta">Daftar Sekarang</a>
+ <a href="https://wa.me/6287747643339?text=Halo%20Hafidh%2C%20saya%20tertarik%20dengan%20paket%20XL%20Home.%20Boleh%20info%20promo%20%26%20cara%20daftarnya%3F" class="nav-cta">Daftar Sekarang</a>
 </nav>
 
 <!-- HOME PAGE -->
@@ -526,7 +626,7 @@
  <h2>Butuh Bantuan?</h2>
  <p>Kami siap bantu kamu untuk semua informasi tentang paket XL SATU — dari konsultasi hingga proses pendaftaran.</p>
  <div class="cs-contacts">
- <a href="https://wa.me/6287747643339" class="cs-btn wa">
+ <a href="https://wa.me/6287747643339?text=Halo%20Hafidh%2C%20saya%20butuh%20bantuan%20soal%20paket%20XL%20Home" class="cs-btn wa">
  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
  Chat WA: 087747643339
  </a>
@@ -591,7 +691,7 @@
 <footer>
  <div class="footer-inner">
  <div class="footer-brand">
- <div class="footer-logo"><img src="images/logo.png" alt="XL Home"></div>
+ <div class="footer-logo"><a href="#" onclick="goHome();return false;" aria-label="Kembali ke beranda"><img src="images/logo.png" alt="XL Home"></a></div>
  <p>Sales &amp; Agen Resmi XL Home untuk wilayah Jabodetabek dan sekitarnya. Melayani pendaftaran paket internet Fixed Wireless Access (FWA) dan Fiber Optik (FTTH) dari XL SATU.</p>
  </div>
  <div class="footer-col">
@@ -619,7 +719,24 @@
  </div>
 </footer>
 
+<!-- WA FLOATING BUTTON -->
+<a href="https://wa.me/6287747643339?text=Halo%20Hafidh%2C%20saya%20tertarik%20dengan%20paket%20XL%20Home.%20Boleh%20info%20promo%20%26%20cara%20daftarnya%3F"
+   class="wa-float" target="_blank" rel="noopener" aria-label="Chat WhatsApp Sales XL SATU">
+ <span class="wa-float-icon">
+ <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+ </span>
+ <span class="wa-float-text">
+ <strong>Chat WA Sales XL SATU</strong>
+ <span>Konsultasi Promo &amp; Daftar Cepat</span>
+ </span>
+ <img src="images/logo.png" alt="" class="wa-float-brand">
+</a>
+
 <script>
+ function goHome() {
+ showPage('home');
+ document.getElementById('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+ }
  // Carousel
  let current = 0;
  const slides = document.querySelectorAll('.carousel-slide');

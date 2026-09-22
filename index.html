@@ -217,21 +217,16 @@
    padding: 0;
    overflow: hidden;
  }
- .cs-inner {
-   max-width: 1200px; margin: 0 auto;
-   display: grid;
-   grid-template-columns: 1fr 1fr;
-   align-items: stretch;
- }
  .cs-text {
-   padding: 60px 32px;
-   display: flex; flex-direction: column; justify-content: center;
+   max-width: 780px; margin: 0 auto;
+   padding: 60px 32px 40px;
+   text-align: center;
  }
  .cs-text h2 {
    font-size: 32px; font-weight: 800; color: var(--blue); margin-bottom: 10px;
  }
- .cs-text p { font-size: 16px; color: var(--gray-text); margin-bottom: 32px; max-width: 420px; }
- .cs-contacts { display: flex; flex-direction: column; gap: 12px; }
+ .cs-text p { font-size: 16px; color: var(--gray-text); margin: 0 auto 32px; max-width: 520px; }
+ .cs-contacts { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 12px; }
  .cs-btn {
    display: flex; align-items: center; gap: 12px;
    background: var(--blue); color: var(--white);
@@ -242,33 +237,10 @@
  .cs-btn:hover { background: var(--blue-mid); }
  .cs-btn.wa { background: #25D366; }
  .cs-btn.wa:hover { background: #1ebe5d; }
- /* Foto CS ditampilkan penuh (landscape/banner), TIDAK dipotong -
-    object-fit: contain menjaga seluruh foto terlihat, sisa ruang diisi gradasi brand */
- .cs-img {
-   position: relative;
-   width: 100%;
-   min-height: 380px;
-   background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 55%, var(--teal) 100%);
-   display: flex;
-   align-items: flex-end;
-   justify-content: center;
-   overflow: hidden;
- }
- .cs-img::before {
-   content: "";
-   position: absolute; inset: 0;
-   background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 60%);
- }
- .cs-img img {
-   position: relative;
-   max-width: 90%;
-   max-height: 100%;
-   width: auto;
-   height: 100%;
-   display: block;
-   object-fit: contain;
-   object-position: bottom;
- }
+ /* Banner foto CS full-width seperti carousel. height:auto menjaga rasio asli
+    gambar (3:1) di SEMUA ukuran layar sehingga tidak pernah kepotong. */
+ .cs-banner { width: 100%; line-height: 0; }
+ .cs-banner img { width: 100%; height: auto; display: block; }
 
  /* FOOTER */
  footer {
@@ -386,13 +358,10 @@
  .tab { padding: 9px 16px; font-size: 13px; }
  .pkg-grid { grid-template-columns: 1fr; }
  .cs-section { padding: 0; }
- .cs-inner { grid-template-columns: 1fr; }
- .cs-img { order: -1; min-height: 260px; width: 100%; }
- .cs-img img { max-width: 92%; }
- .cs-text { padding: 32px 16px 40px; align-items: center; text-align: center; }
+ .cs-text { padding: 32px 16px 32px; }
  .cs-text h2 { font-size: 24px; }
  .cs-text p { max-width: none; }
- .cs-contacts { align-items: center; }
+ .cs-contacts { flex-direction: column; align-items: center; }
  .cs-btn { font-size: 14px; padding: 12px 16px; }
  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
@@ -621,7 +590,6 @@
 
  <!-- CS SECTION -->
  <div class="cs-section" id="bantuan">
- <div class="cs-inner">
  <div class="cs-text">
  <h2>Butuh Bantuan?</h2>
  <p>Kami siap bantu kamu untuk semua informasi tentang paket XL SATU — dari konsultasi hingga proses pendaftaran.</p>
@@ -638,9 +606,8 @@
  </a>
  </div>
  </div>
- <div class="cs-img">
- <img src="images/customer-service.webp" alt="Customer Service XL Home">
- </div>
+ <div class="cs-banner">
+ <img src="images/cs-banner.webp" alt="Customer Service XL SATU" loading="lazy">
  </div>
  </div>
 

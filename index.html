@@ -1129,11 +1129,10 @@
     );
   }
 
-  // Sertakan link maps di pesan WA jika ada
-  const _kirimFormOri = kirimForm;
+  // Kirim form ke Sheets + WA sekaligus
   kirimForm = function() {
-    const mapLink = document.getElementById('maps-link');
-    const mapsHref = (mapLink && mapLink.href && mapLink.href !== '#') ? mapLink.href : null;
+    const mapLink  = document.getElementById('maps-link');
+    const mapsHref = (mapLink && mapLink.href && mapLink.href !== '#' && !mapLink.href.endsWith('#')) ? mapLink.href : '';
 
     const nama   = document.getElementById('f-nama').value.trim();
     const wa     = document.getElementById('f-wa').value.trim();
@@ -1149,6 +1148,32 @@
     const [y, m, d] = tgl.split('-');
     const tglFormatted = d + '/' + m + '/' + y;
 
+    // --- 1. Kirim ke Google Sheets (background) ---
+    const submitBtn = document.querySelector('.form-submit');
+    const oriHTML   = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spin">⟳</span>&nbsp; Mengirim...';
+
+    fetch('https://script.google.com/macros/s/AKfycby_D1abPNwwE7a3fLTNndxnx74j14govFUYLGZTfrKgGwVw4DIP4OR2pqIX1oHMgYytSA/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nama:    nama,
+        wa:      wa,
+        alamat:  alamat,
+        maps:    mapsHref,
+        paket:   paket,
+        tanggal: tglFormatted
+      })
+    })
+    .catch(() => {}) // no-cors always throws — data tetap masuk
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = oriHTML;
+    });
+
+    // --- 2. Kirim ke WA (langsung buka) ---
     let pesan =
       'Halo, saya ingin mendaftar paket XL Home:%0A%0A' +
       '*Nama:* ' + encodeURIComponent(nama) + '%0A' +
@@ -1165,6 +1190,16 @@
       'Mohon konfirmasi jadwal instalasi. Terima kasih!';
 
     window.open('https://wa.me/6287747643339?text=' + pesan, '_blank');
+
+    // --- 3. Reset form ---
+    setTimeout(() => {
+      document.getElementById('f-nama').value    = '';
+      document.getElementById('f-wa').value      = '';
+      document.getElementById('f-alamat').value  = '';
+      document.getElementById('f-paket').value   = '';
+      document.getElementById('f-tanggal').value = '';
+      document.getElementById('maps-link-wrap').style.display = 'none';
+    }, 800);
   };
 
 </script>

@@ -742,18 +742,38 @@
  <div class="section-title">Daftar & Cek Ketersediaan Jaringan</div>
  <div class="section-sub">Isi data kamu, bagikan titik lokasi biar kami cek jangkauan sinyal, lalu lanjut chat WhatsApp</div>
  <div class="reg-form-wrap">
- <form id="regForm" onsubmit="submitRegistration(event)">
- <label for="regName">Nama Lengkap</label>
- <input type="text" id="regName" required placeholder="Sesuai KTP">
+ <form id="regForm" onsubmit="event.preventDefault(); kirimForm();">
+ <label for="f-nama">Nama Lengkap</label>
+ <input type="text" id="f-nama" required placeholder="Sesuai KTP">
 
- <label>Titik Lokasi (untuk cek coverage)</label>
- <button type="button" class="loc-btn" id="locBtn" onclick="getLocation()">📍 Bagikan Lokasi Saya</button>
- <div id="locResult" class="loc-result" style="display:none;"></div>
- <input type="hidden" id="regLat">
- <input type="hidden" id="regLng">
- <input type="hidden" id="regAddress">
+ <label for="f-wa">Nomor WhatsApp Aktif</label>
+ <input type="tel" id="f-wa" required placeholder="08xxxxxxxxxx">
 
- <button type="submit" class="reg-submit" id="regSubmitBtn">Daftar &amp; Lanjut ke WhatsApp</button>
+ <label for="f-alamat">Alamat Lengkap Pemasangan</label>
+ <div class="alamat-wrap">
+ <input type="text" id="f-alamat" required placeholder="Alamat lengkap pemasangan">
+ <button type="button" class="btn-lokasi" id="btn-lokasi" onclick="deteksiLokasi()">📍 <span id="lokasi-label">Deteksi Lokasi</span></button>
+ </div>
+ <div id="lokasi-error" style="display:none;color:#dc2626;font-size:12.5px;margin-top:6px;"></div>
+ <div id="maps-link-wrap" style="display:none;margin-top:8px;">
+ <a id="maps-link" href="#" target="_blank" rel="noopener" style="font-size:13px;color:var(--blue);font-weight:600;">📍 Lihat titik lokasi di Google Maps</a>
+ </div>
+
+ <label for="f-paket">Paket yang Diminati</label>
+ <select id="f-paket" required style="width:100%;padding:14px 16px;border:1.5px solid #dbe6f5;border-radius:10px;font-size:15px;font-family:inherit;color:var(--dark);">
+ <option value="">Pilih paket yang diminati</option>
+ <option value="FTTH 100 Mbps">FTTH 100 Mbps (up to 250 Mbps)</option>
+ <option value="FTTH 150 Mbps">FTTH 150 Mbps (up to 350 Mbps)</option>
+ <option value="FTTH 300 Mbps">FTTH 300 Mbps (up to 400 Mbps)</option>
+ <option value="FWA 100 Mbps Reguler">FWA 100 Mbps Reguler</option>
+ <option value="FWA Paket Hemat 4 Bulan">FWA Paket Hemat 4 Bulan</option>
+ <option value="Belum tahu, mau konsultasi dulu">Belum tahu, mau konsultasi dulu</option>
+ </select>
+
+ <label for="f-tanggal">Rencana Tanggal Instalasi</label>
+ <input type="date" id="f-tanggal" required>
+
+ <button type="submit" class="form-submit reg-submit" id="regSubmitBtn">Daftar &amp; Lanjut ke WhatsApp</button>
  </form>
  <p class="reg-note">Data kamu hanya dipakai tim sales XL Home untuk cek coverage &amp; follow-up pendaftaran.</p>
  </div>
@@ -1035,7 +1055,7 @@
       tanggal: tglFormatted
     });
 
-    fetch('https://script.google.com/macros/s/AKfycby_D1abPNwwE7a3fLTNndxnx74j14govFUYLGZTfrKgGwVw4DIP4OR2pqIX1oHMgYytSA/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbx5mWTKa5qfot5a9iLoCqmRxBRvHG6bOViWQmGPPf4TMUTgEe5vyWF6aRI_dcC5HKcxCQ/exec', {
       method:  'POST',
       mode:    'no-cors',
       headers: { 'Content-Type': 'application/json' },

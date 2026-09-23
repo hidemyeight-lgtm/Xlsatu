@@ -231,6 +231,13 @@
    font-size: 15px; font-family: inherit; color: var(--dark);
  }
  .reg-form-wrap input[type="text"]:focus { outline: none; border-color: var(--blue); }
+ .reg-form-wrap select,
+ .reg-form-wrap input[type="date"] {
+   width: 100%; padding: 14px 16px; border: 1.5px solid #dbe6f5; border-radius: 10px;
+   font-size: 15px; font-family: inherit; color: var(--dark); background: var(--white);
+ }
+ .reg-form-wrap select:focus,
+ .reg-form-wrap input[type="date"]:focus { outline: none; border-color: var(--blue); }
  .loc-btn {
    width: 100%; padding: 14px 16px; border-radius: 10px; border: 1.5px dashed var(--blue-mid);
    background: var(--sky); color: var(--blue); font-weight: 600; font-size: 15px;
@@ -738,39 +745,20 @@
  </div>
 
  <!-- FORMULIR PENDAFTARAN -->
- <div class="section form-section" id="daftar">
- <div class="form-wrap">
- <div class="form-title">Daftar &amp; Cek Ketersediaan Jaringan</div>
- <div class="form-sub">Isi data kamu, deteksi lokasi biar kami cek jangkauan sinyal, lalu lanjut chat WhatsApp</div>
+ <div class="section reg-section" id="daftar">
+ <div class="section-title">Daftar & Cek Ketersediaan Jaringan</div>
+ <div class="section-sub">Isi data kamu, bagikan titik lokasi biar kami cek jangkauan sinyal, lalu lanjut chat WhatsApp</div>
+ <div class="reg-form-wrap">
+ <form id="regForm" onsubmit="submitRegistration(event)">
+ <label for="regName">Nama Lengkap</label>
+ <input type="text" id="regName" required placeholder="Sesuai KTP">
 
- <div class="form-row">
- <div class="form-group">
- <label for="f-nama">Nama Lengkap</label>
- <input type="text" id="f-nama" placeholder="Sesuai KTP">
- </div>
- <div class="form-group">
- <label for="f-wa">No. WhatsApp</label>
- <input type="text" id="f-wa" placeholder="08xxxxxxxxxx">
- </div>
- </div>
+ <label for="regWa">No. WhatsApp</label>
+ <input type="text" id="regWa" required placeholder="Contoh: 08123456789" inputmode="tel">
 
- <div class="form-group">
- <label for="f-alamat">Alamat Pemasangan</label>
- <div class="alamat-wrap">
- <input type="text" id="f-alamat" placeholder="Nama jalan, RT/RW, kelurahan">
- <button type="button" class="btn-lokasi" id="btn-lokasi" onclick="deteksiLokasi()"><span id="lokasi-label">📍 Deteksi Lokasi</span></button>
- </div>
- <p id="lokasi-error" style="display:none;color:#e53e3e;font-size:12.5px;margin-top:6px;"></p>
- <p id="maps-link-wrap" style="display:none;margin-top:6px;">
- <a id="maps-link" href="#" target="_blank" rel="noopener" style="font-size:12.5px;color:var(--blue);">📍 Lihat titik lokasi di Google Maps</a>
- </p>
- </div>
-
- <div class="form-row">
- <div class="form-group">
- <label for="f-paket">Pilih Paket</label>
- <select id="f-paket">
- <option value="">-- Pilih paket --</option>
+ <label for="regPaket">Paket yang Diminati</label>
+ <select id="regPaket" required>
+ <option value="">Pilih paket</option>
  <optgroup label="Fixed Wireless (FWA)">
  <option value="FWA 100 Mbps — Rp219.000/bln">FWA 100 Mbps — Rp219.000/bln</option>
  <option value="FWA 50 Mbps — Rp650.000 (4 bln)">FWA 50 Mbps — Rp650.000 (4 bln)</option>
@@ -784,18 +772,23 @@
  <option value="FTTH 1000 Mbps — Rp900.000/bln">FTTH 1000 Mbps — Rp900.000/bln</option>
  </optgroup>
  </select>
- </div>
- <div class="form-group">
- <label for="f-tanggal">Rencana Instalasi</label>
- <input type="date" id="f-tanggal">
- </div>
- </div>
 
- <button type="button" class="form-submit" onclick="kirimForm()">
- <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
- Daftar &amp; Lanjut ke WhatsApp
- </button>
- <p class="form-note">Data kamu hanya dipakai tim sales XL Home untuk cek coverage &amp; follow-up pendaftaran.</p>
+ <label for="regAddress">Alamat Pemasangan</label>
+ <div class="alamat-wrap">
+ <input type="text" id="regAddress" required placeholder="Ketik alamat atau deteksi otomatis">
+ <button type="button" class="btn-lokasi" id="locBtn" onclick="getLocation()"><span id="locBtnLabel">📍 Deteksi</span></button>
+ </div>
+ <div id="locResult" class="loc-result" style="display:none;"></div>
+ <input type="hidden" id="regLat">
+ <input type="hidden" id="regLng">
+ <input type="hidden" id="regMapsUrl">
+
+ <label for="regTanggal">Rencana Tanggal Instalasi (opsional)</label>
+ <input type="date" id="regTanggal">
+
+ <button type="submit" class="reg-submit" id="regSubmitBtn">Daftar &amp; Lanjut ke WhatsApp</button>
+ </form>
+ <p class="reg-note">Data kamu hanya dipakai tim sales XL Home untuk cek coverage &amp; follow-up pendaftaran.</p>
  </div>
  </div>
 
@@ -950,7 +943,7 @@
   function pilihPaket(paketVal) {
     goToSection('daftar');
     setTimeout(function() {
-      const sel = document.getElementById('f-paket');
+      const sel = document.getElementById('regPaket');
       if (sel && paketVal) {
         for (var i = 0; i < sel.options.length; i++) {
           if (sel.options[i].value === paketVal) {
@@ -962,36 +955,58 @@
           }
         }
       }
-      var nama = document.getElementById('f-nama');
+      var nama = document.getElementById('regName');
       if (nama && !nama.value) nama.focus();
     }, 650);
   }
 
   // ── Deteksi Lokasi GPS ──
-  function deteksiLokasi() {
-    const btn     = document.getElementById('btn-lokasi');
-    const label   = document.getElementById('lokasi-label');
-    const input   = document.getElementById('f-alamat');
-    const errEl   = document.getElementById('lokasi-error');
-    const mapWrap = document.getElementById('maps-link-wrap');
-    const mapLink = document.getElementById('maps-link');
+  function getLocation() {
+    const btn     = document.getElementById('locBtn');
+    const label   = document.getElementById('locBtnLabel');
+    const input   = document.getElementById('regAddress');
+    const resEl   = document.getElementById('locResult');
+    const latIn   = document.getElementById('regLat');
+    const lngIn   = document.getElementById('regLng');
+    const mapsIn  = document.getElementById('regMapsUrl');
+
+    function showResult(msg, isError) {
+      resEl.style.display    = 'block';
+      resEl.style.background = isError ? '#fdeaea' : '#e8f9ef';
+      resEl.style.borderColor= isError ? '#f3b7b7' : '#b6ecc9';
+      resEl.style.color      = isError ? '#b42318' : '#1a7a3d';
+      resEl.innerHTML = msg;
+    }
 
     if (!navigator.geolocation) {
-      errEl.textContent = 'Browser kamu tidak mendukung GPS. Isi alamat manual.';
-      errEl.style.display = 'block';
+      showResult('Browser kamu tidak mendukung deteksi lokasi. Silakan isi alamat manual.', true);
       return;
     }
 
     btn.classList.add('loading');
+    btn.disabled = true;
     label.innerHTML = '<span class="spin">⟳</span> Mendeteksi...';
-    errEl.style.display  = 'none';
-    mapWrap.style.display = 'none';
+    resEl.style.display = 'none';
+
+    function finishDetect(acc, mapsUrl) {
+      btn.classList.remove('loading');
+      btn.classList.add('success');
+      btn.disabled = false;
+      label.innerHTML = '✓ Terdeteksi';
+      showResult('✓ Lokasi terdeteksi' + (acc > 100 ? ' (akurasi ±' + acc + 'm, mohon verifikasi)' : '') +
+        '. <a href="' + mapsUrl + '" target="_blank" rel="noopener" style="color:#1a7a3d;text-decoration:underline;">Lihat di Google Maps</a>', false);
+      setTimeout(() => { btn.classList.remove('success'); label.innerHTML = '📍 Deteksi'; }, 3000);
+    }
 
     navigator.geolocation.getCurrentPosition(
       function(pos) {
         const lat = pos.coords.latitude.toFixed(6);
         const lng = pos.coords.longitude.toFixed(6);
         const acc = Math.round(pos.coords.accuracy);
+        const mapsUrl = 'https://www.google.com/maps?q=' + lat + ',' + lng;
+        latIn.value  = lat;
+        lngIn.value  = lng;
+        mapsIn.value = mapsUrl;
 
         fetch('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lng + '&format=json&addressdetails=1&accept-language=id')
           .then(r => r.json())
@@ -1004,32 +1019,17 @@
               a.city || a.town || a.county || '',
               a.state || ''
             ].filter(Boolean);
-            input.value = parts.join(', ') + (acc > 100 ? ' (akurasi ±' + acc + 'm, mohon verifikasi)' : '');
-            const mapsUrl = 'https://www.google.com/maps?q=' + lat + ',' + lng;
-            mapLink.href = mapsUrl;
-            mapWrap.style.display = 'block';
-            btn.classList.remove('loading');
-            btn.classList.add('success');
-            label.innerHTML = '✓ Terdeteksi';
-            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = 'Deteksi Lokasi'; }, 3000);
+            if (parts.length) input.value = parts.join(', ');
+            finishDetect(acc, mapsUrl);
           })
-          .catch(() => {
-            input.value = 'Koordinat: ' + lat + ', ' + lng;
-            const mapsUrl = 'https://www.google.com/maps?q=' + lat + ',' + lng;
-            mapLink.href = mapsUrl;
-            mapWrap.style.display = 'block';
-            btn.classList.remove('loading');
-            btn.classList.add('success');
-            label.innerHTML = '✓ Terdeteksi';
-            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = 'Deteksi Lokasi'; }, 3000);
-          });
+          .catch(() => finishDetect(acc, mapsUrl));
       },
       function(err) {
         btn.classList.remove('loading');
-        label.innerHTML = 'Deteksi Lokasi';
-        const msgs = { 1: 'Izin lokasi ditolak. Aktifkan izin lokasi di browser.', 2: 'Lokasi tidak terdeteksi. Coba lagi atau isi manual.', 3: 'Timeout. Coba lagi atau isi manual.' };
-        errEl.textContent  = msgs[err.code] || 'Gagal mendeteksi lokasi.';
-        errEl.style.display = 'block';
+        btn.disabled = false;
+        label.innerHTML = '📍 Deteksi';
+        const msgs = { 1: 'Izin lokasi ditolak. Aktifkan izin lokasi di browser lalu coba lagi.', 2: 'Lokasi tidak terdeteksi. Coba lagi atau isi manual.', 3: 'Waktu deteksi habis. Coba lagi atau isi manual.' };
+        showResult(msgs[err.code] || 'Gagal mendeteksi lokasi.', true);
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
@@ -1038,30 +1038,39 @@
   // Set minimum tanggal = hari ini
   (function() {
     const today = new Date().toISOString().split('T')[0];
-    const dateInput = document.getElementById('f-tanggal');
+    const dateInput = document.getElementById('regTanggal');
     if (dateInput) dateInput.min = today;
   })();
 
-  // ── FORM KIRIM → Google Sheets + WA ──
-  function kirimForm() {
-    const nama   = document.getElementById('f-nama').value.trim();
-    const wa     = document.getElementById('f-wa').value.trim();
-    const alamat = document.getElementById('f-alamat').value.trim();
-    const paket  = document.getElementById('f-paket').value;
-    const tgl    = document.getElementById('f-tanggal').value;
-    const mapLink = document.getElementById('maps-link');
-    const mapsHref = (mapLink && mapLink.href && !mapLink.href.endsWith('#')) ? mapLink.href : '';
+  // ── URL Web App Google Apps Script (Google Sheets) ──
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbximK6hJ-dSUPqcko7oot3XHMt9ZND-Ne4r6udY-rSb/dev';
 
-    if (!nama || !wa || !alamat || !paket || !tgl) {
-      alert('Mohon lengkapi semua field terlebih dahulu.');
+  // ── FORM KIRIM → Google Sheets + WA ──
+  function submitRegistration(event) {
+    event.preventDefault();
+
+    const nama    = document.getElementById('regName').value.trim();
+    const wa      = document.getElementById('regWa').value.trim();
+    const paket   = document.getElementById('regPaket').value;
+    const alamat  = document.getElementById('regAddress').value.trim();
+    const tgl     = document.getElementById('regTanggal').value;
+    const lat     = document.getElementById('regLat').value;
+    const lng     = document.getElementById('regLng').value;
+    const mapsUrl = document.getElementById('regMapsUrl').value;
+
+    if (!nama || !wa || !paket || !alamat) {
+      alert('Mohon lengkapi Nama, No. WhatsApp, Paket, dan Alamat terlebih dahulu.');
       return;
     }
 
-    const [y, m, d] = tgl.split('-');
-    const tglFormatted = d + '/' + m + '/' + y;
+    let tglFormatted = '';
+    if (tgl) {
+      const [y, m, d] = tgl.split('-');
+      tglFormatted = d + '/' + m + '/' + y;
+    }
 
     // 1. Kirim ke Google Sheets
-    const submitBtn = document.querySelector('.form-submit');
+    const submitBtn = document.getElementById('regSubmitBtn');
     const oriHTML   = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spin">⟳</span>&nbsp; Mengirim...';
@@ -1069,16 +1078,18 @@
     const payload = JSON.stringify({
       nama:    nama,
       wa:      wa,
-      alamat:  alamat,
-      maps:    mapsHref,
       paket:   paket,
+      alamat:  alamat,
+      lat:     lat,
+      lng:     lng,
+      maps:    mapsUrl,
       tanggal: tglFormatted
     });
 
-    fetch('https://script.google.com/macros/s/AKfycby_D1abPNwwE7a3fLTNndxnx74j14govFUYLGZTfrKgGwVw4DIP4OR2pqIX1oHMgYytSA/exec', {
+    fetch(GAS_URL, {
       method:  'POST',
       mode:    'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body:    payload
     })
     .catch(() => {})
@@ -1090,24 +1101,23 @@
     // 2. Buka WA
     const pesan =
       'Halo, saya ingin mendaftar paket XL Home:%0A%0A' +
-      '*Nama:* '             + encodeURIComponent(nama)         + '%0A' +
-      '*No. WA:* '           + encodeURIComponent(wa)           + '%0A' +
-      '*Alamat:* '           + encodeURIComponent(alamat)       + '%0A' +
-      (mapsHref ? '*Lokasi Maps:* ' + encodeURIComponent(mapsHref) + '%0A' : '') +
-      '*Paket:* '            + encodeURIComponent(paket)        + '%0A' +
-      '*Rencana Instalasi:* '+ encodeURIComponent(tglFormatted) + '%0A%0A' +
-      'Mohon konfirmasi jadwal instalasi. Terima kasih!';
+      '*Nama:* '   + encodeURIComponent(nama)   + '%0A' +
+      '*No. WA:* ' + encodeURIComponent(wa)     + '%0A' +
+      '*Paket:* '  + encodeURIComponent(paket)  + '%0A' +
+      '*Alamat:* ' + encodeURIComponent(alamat) + '%0A' +
+      (mapsUrl ? '*Lokasi Maps:* ' + encodeURIComponent(mapsUrl) + '%0A' : '') +
+      (tglFormatted ? '*Rencana Instalasi:* ' + encodeURIComponent(tglFormatted) + '%0A' : '') +
+      '%0AMohon konfirmasi ketersediaan jaringan & jadwal instalasi. Terima kasih!';
 
     window.open('https://wa.me/6287747643339?text=' + pesan, '_blank');
 
     // 3. Reset form
     setTimeout(() => {
-      document.getElementById('f-nama').value    = '';
-      document.getElementById('f-wa').value      = '';
-      document.getElementById('f-alamat').value  = '';
-      document.getElementById('f-paket').value   = '';
-      document.getElementById('f-tanggal').value = '';
-      document.getElementById('maps-link-wrap').style.display = 'none';
+      document.getElementById('regForm').reset();
+      document.getElementById('regLat').value     = '';
+      document.getElementById('regLng').value     = '';
+      document.getElementById('regMapsUrl').value = '';
+      document.getElementById('locResult').style.display = 'none';
     }, 800);
   }
 </script>

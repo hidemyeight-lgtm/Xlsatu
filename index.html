@@ -744,7 +744,7 @@
  <div class="reg-form-wrap">
  <form id="regForm" onsubmit="submitRegistration(event)">
  <label for="regName">Nama Lengkap</label>
- <input type="text" id="regName" required placeholder="Nama Lengkap">
+ <input type="text" id="regName" required placeholder="Sesuai KTP">
 
  <label>Titik Lokasi (untuk cek coverage)</label>
  <button type="button" class="loc-btn" id="locBtn" onclick="getLocation()">📍 Bagikan Lokasi Saya</button>
@@ -834,7 +834,7 @@
  </div>
 
  <div class="footer-disclaimer">
- <strong>Disclaimer &amp; Transparansi:</strong> Halaman ini dikelola oleh <strong>Rizky Sepliansyah</strong> selaku <strong>Sales/Agen Resmi XL Home</strong> dari vendor <strong>PT Cahaya Bumi Nasional (CBN)</strong>, yang ditempatkan di <strong>PT XLSmart Telecom Tbk (XL SATU)</strong>. Kami bukan situs resmi XLSmart. Harga yang tercantum adalah harga dasar dan dapat berubah sewaktu-waktu sesuai kebijakan perusahaan. Untuk informasi resmi, kunjungi <a href="https://xlsatu.co.id" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.6)">xlsatu.co.id</a>.
+ <strong>Disclaimer &amp; Transparansi:</strong> Halaman ini dikelola oleh <strong>Rizky Sepliansyah</strong> selaku <strong>Sales/Agen Resmi XL Home</strong> dari vendor <strong>PT Cahaya Bumi Nasional (CBN)</strong>, yang ditempatkan di <strong>PT XLSmart Telecom Tbk (XL SATU)</strong>. Kami bukan situs resmi XL Axiata atau XLSmart. Harga yang tercantum adalah harga dasar dan dapat berubah sewaktu-waktu sesuai kebijakan perusahaan. Untuk informasi resmi, kunjungi <a href="https://xlsatu.co.id" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.6)">xlsatu.co.id</a>.
  </div>
 
  <div class="footer-bottom">
@@ -856,189 +856,83 @@
 </a>
 
 <script>
- function goHome() {
- showPage('home');
- document.getElementById('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
- }
-
- // Navigasi ke section tertentu (Paket, Bantuan) - pastikan pindah ke
- // halaman beranda dulu (kalau lagi di halaman lain, mis. Privacy Policy)
- // baru scroll ke section-nya. Ini memperbaiki bug link tidak berfungsi
- // saat diklik dari halaman Privacy Policy.
- function goToSection(id) {
- showPage('home');
- requestAnimationFrame(() => {
- const el = document.getElementById(id);
- if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
- });
- }
- // === FORMULIR PENDAFTARAN: lokasi otomatis + kirim ke WA & Google Sheet ===
-
- // GANTI dengan URL Web App Google Apps Script kamu (lihat panduan yang saya kirim).
- // Selama masih kosong, data TIDAK terkirim ke spreadsheet - hanya lanjut ke WA saja.
- const GOOGLE_SCRIPT_URL = "PASTE_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DI_SINI";
-
- function getLocation() {
- const btn = document.getElementById('locBtn');
- const resultBox = document.getElementById('locResult');
-
- if (!navigator.geolocation) {
- alert('Browser kamu tidak mendukung fitur lokasi otomatis. Nanti kirim alamat manual saat chat WA ya.');
- return;
- }
-
- btn.disabled = true;
- btn.textContent = 'Mendeteksi lokasi...';
-
- navigator.geolocation.getCurrentPosition(async (pos) => {
- const lat = pos.coords.latitude;
- const lng = pos.coords.longitude;
- document.getElementById('regLat').value = lat;
- document.getElementById('regLng').value = lng;
-
- let address = lat.toFixed(6) + ', ' + lng.toFixed(6);
- try {
- const res = await fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lng + '&zoom=18&addressdetails=1', {
- headers: { 'Accept-Language': 'id' }
- });
- const data = await res.json();
- if (data && data.display_name) address = data.display_name;
- } catch (e) { /* kalau gagal, tetap pakai koordinat sebagai fallback */ }
-
- document.getElementById('regAddress').value = address;
- resultBox.style.display = 'block';
- resultBox.innerHTML = '📍 Lokasi terdeteksi:<br><strong>' + address + '</strong>';
- btn.textContent = '✓ Lokasi tersimpan — ambil ulang';
- btn.disabled = false;
- }, () => {
- btn.disabled = false;
- btn.textContent = '📍 Bagikan Lokasi Saya';
- alert('Gagal mengambil lokasi. Pastikan izin lokasi (GPS) diaktifkan di browser, lalu coba lagi.');
- }, { enableHighAccuracy: true, timeout: 10000 });
- }
-
- function submitRegistration(e) {
- e.preventDefault();
- const name = document.getElementById('regName').value.trim();
- const lat = document.getElementById('regLat').value;
- const lng = document.getElementById('regLng').value;
- const address = document.getElementById('regAddress').value;
-
- if (!name) { alert('Nama lengkap wajib diisi.'); return; }
- if (!lat || !lng) { alert('Silakan bagikan lokasi kamu dulu, supaya kami bisa cek coverage jaringannya.'); return; }
-
- const submitBtn = document.getElementById('regSubmitBtn');
- submitBtn.disabled = true;
- submitBtn.textContent = 'Memproses...';
-
- const mapsLink = 'https://maps.google.com/?q=' + lat + ',' + lng;
-
- // Kirim ke Google Sheet (best-effort - mode no-cors berarti kita tidak bisa
- // baca respons-nya, tapi datanya tetap masuk ke sheet selama URL sudah diisi benar)
- if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.indexOf('PASTE_URL') === -1) {
- fetch(GOOGLE_SCRIPT_URL, {
- method: 'POST',
- mode: 'no-cors',
- headers: { 'Content-Type': 'text/plain' },
- body: JSON.stringify({
- nama: name,
- alamat: address,
- lat: lat,
- lng: lng,
- mapsLink: mapsLink,
- waktu: new Date().toLocaleString('id-ID')
- })
- }).catch(() => {});
- }
-
- // Lanjut ke WhatsApp dengan data yang sudah terisi
- const waMessage = 'Halo Rizky, saya ' + name + ' ingin daftar paket XL Home.\nLokasi saya: ' + address + '\nMaps: ' + mapsLink;
- window.open('https://wa.me/6287810963528?text=' + encodeURIComponent(waMessage), '_blank');
-
- submitBtn.disabled = false;
- submitBtn.textContent = 'Daftar & Lanjut ke WhatsApp';
- }
-
- // Carousel
- let current = 0;
- const slides = document.querySelectorAll('.carousel-slide');
- const track = document.getElementById('track');
- const dotsWrap = document.getElementById('dots');
- const total = slides.length;
-
- slides.forEach((_, i) => {
- const d = document.createElement('button');
- d.className = 'dot' + (i === 0 ? ' active' : '');
- d.onclick = () => goTo(i);
- dotsWrap.appendChild(d);
- });
-
- function goTo(n) {
- current = (n + total) % total;
- track.style.transform = `translateX(-${current * 100}%)`;
- document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
- }
- function moveCarousel(dir) { goTo(current + dir); }
- setInterval(() => moveCarousel(1), 5000);
-
- // Tabs
- function switchTab(id, btn) {
- document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
- document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
- document.getElementById('tab-' + id).classList.add('active');
- btn.classList.add('active');
- }
-
- // Pages
- function showPage(page) {
- document.getElementById('page-home').style.display = page === 'home' ? 'block' : 'none';
- document.getElementById('page-privacy').style.display = page === 'privacy' ? 'block' : 'none';
- window.scrollTo(0, 0);
- }
-
-  // Form Instalasi
-  function kirimForm() {
-    const nama    = document.getElementById('f-nama').value.trim();
-    const wa      = document.getElementById('f-wa').value.trim();
-    const alamat  = document.getElementById('f-alamat').value.trim();
-    const paket   = document.getElementById('f-paket').value;
-    const tgl     = document.getElementById('f-tanggal').value;
-
-    if (!nama || !wa || !alamat || !paket || !tgl) {
-      alert('Mohon lengkapi semua field terlebih dahulu.');
-      return;
-    }
-
-    // Format tanggal jadi DD/MM/YYYY
-    const [y, m, d] = tgl.split('-');
-    const tglFormatted = d + '/' + m + '/' + y;
-
-    const pesan =
-      'Halo, saya ingin mendaftar paket XL Home:%0A%0A' +
-      '*Nama:* ' + encodeURIComponent(nama) + '%0A' +
-      '*No. WA:* ' + encodeURIComponent(wa) + '%0A' +
-      '*Alamat:* ' + encodeURIComponent(alamat) + '%0A' +
-      '*Paket:* ' + encodeURIComponent(paket) + '%0A' +
-      '*Rencana Instalasi:* ' + encodeURIComponent(tglFormatted) + '%0A%0A' +
-      'Mohon konfirmasi jadwal instalasi. Terima kasih!';
-
-    window.open('https://wa.me/6287747643339?' + 'text=' + pesan, '_blank');
+  function goHome() {
+    showPage('home');
+    document.getElementById('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // Set minimum date to today
-  (function() {
-    const today = new Date().toISOString().split('T')[0];
-    const dateInput = document.getElementById('f-tanggal');
-    if (dateInput) dateInput.min = today;
-  })();
+  function goToSection(id) {
+    showPage('home');
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 
+  // ── Carousel ──
+  let current = 0;
+  const slides   = document.querySelectorAll('.carousel-slide');
+  const track    = document.getElementById('track');
+  const dotsWrap = document.getElementById('dots');
+  const total    = slides.length;
 
-  // Deteksi Lokasi
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsWrap.appendChild(d);
+  });
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+  function moveCarousel(dir) { goTo(current + dir); }
+  setInterval(() => moveCarousel(1), 5000);
+
+  // ── Tabs ──
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── Pages ──
+  function showPage(page) {
+    document.getElementById('page-home').style.display    = page === 'home'    ? 'block' : 'none';
+    document.getElementById('page-privacy').style.display = page === 'privacy' ? 'block' : 'none';
+    window.scrollTo(0, 0);
+  }
+
+  // ── Pilih paket dari card → scroll ke form + select paket ──
+  function pilihPaket(paketVal) {
+    goToSection('daftar');
+    setTimeout(function() {
+      const sel = document.getElementById('f-paket');
+      if (sel && paketVal) {
+        for (var i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].value === paketVal) {
+            sel.selectedIndex = i;
+            sel.style.borderColor = 'var(--teal)';
+            sel.style.boxShadow   = '0 0 0 3px rgba(0,167,157,0.15)';
+            setTimeout(function() { sel.style.borderColor = ''; sel.style.boxShadow = ''; }, 2000);
+            break;
+          }
+        }
+      }
+      var nama = document.getElementById('f-nama');
+      if (nama && !nama.value) nama.focus();
+    }, 650);
+  }
+
+  // ── Deteksi Lokasi GPS ──
   function deteksiLokasi() {
-    const btn   = document.getElementById('btn-lokasi');
-    const label = document.getElementById('lokasi-label');
-    const input = document.getElementById('f-alamat');
-    const errEl = document.getElementById('lokasi-error');
+    const btn     = document.getElementById('btn-lokasi');
+    const label   = document.getElementById('lokasi-label');
+    const input   = document.getElementById('f-alamat');
+    const errEl   = document.getElementById('lokasi-error');
     const mapWrap = document.getElementById('maps-link-wrap');
     const mapLink = document.getElementById('maps-link');
 
@@ -1048,10 +942,9 @@
       return;
     }
 
-    // Loading state
     btn.classList.add('loading');
     label.innerHTML = '<span class="spin">⟳</span> Mendeteksi...';
-    errEl.style.display = 'none';
+    errEl.style.display  = 'none';
     mapWrap.style.display = 'none';
 
     navigator.geolocation.getCurrentPosition(
@@ -1060,12 +953,10 @@
         const lng = pos.coords.longitude.toFixed(6);
         const acc = Math.round(pos.coords.accuracy);
 
-        // Reverse geocode pakai nominatim (gratis, tanpa API key)
         fetch('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lng + '&format=json&addressdetails=1&accept-language=id')
           .then(r => r.json())
           .then(data => {
             const a = data.address || {};
-            // Build alamat string
             const parts = [
               a.road || a.pedestrian || a.footway || '',
               a.suburb || a.neighbourhood || a.village || '',
@@ -1073,71 +964,53 @@
               a.city || a.town || a.county || '',
               a.state || ''
             ].filter(Boolean);
-
-            const alamatText = parts.join(', ');
-            input.value = alamatText + (acc > 100 ? ' (akurasi ±' + acc + 'm, mohon verifikasi)' : '');
-
-            // Show maps link
+            input.value = parts.join(', ') + (acc > 100 ? ' (akurasi ±' + acc + 'm, mohon verifikasi)' : '');
             const mapsUrl = 'https://www.google.com/maps?q=' + lat + ',' + lng;
             mapLink.href = mapsUrl;
-            mapLink.dataset.lat = lat;
-            mapLink.dataset.lng = lng;
             mapWrap.style.display = 'block';
-
-            // Update input placeholder with coords hint
-            input.placeholder = 'Tambahkan detail RT/RW atau nomor rumah jika perlu';
-
-            // Success state
             btn.classList.remove('loading');
             btn.classList.add('success');
             label.innerHTML = '✓ Terdeteksi';
-
-            setTimeout(() => {
-              btn.classList.remove('success');
-              label.innerHTML = 'Deteksi Lokasi';
-            }, 3000);
+            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = 'Deteksi Lokasi'; }, 3000);
           })
           .catch(() => {
-            // Fallback: just use coordinates
             input.value = 'Koordinat: ' + lat + ', ' + lng;
             const mapsUrl = 'https://www.google.com/maps?q=' + lat + ',' + lng;
             mapLink.href = mapsUrl;
             mapWrap.style.display = 'block';
-
             btn.classList.remove('loading');
             btn.classList.add('success');
             label.innerHTML = '✓ Terdeteksi';
-            setTimeout(() => {
-              btn.classList.remove('success');
-              label.innerHTML = 'Deteksi Lokasi';
-            }, 3000);
+            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = 'Deteksi Lokasi'; }, 3000);
           });
       },
       function(err) {
         btn.classList.remove('loading');
         label.innerHTML = 'Deteksi Lokasi';
-        const msgs = {
-          1: 'Izin lokasi ditolak. Aktifkan izin lokasi di browser, lalu coba lagi.',
-          2: 'Lokasi tidak dapat dideteksi. Coba lagi atau isi manual.',
-          3: 'Waktu habis. Coba lagi atau isi alamat manual.'
-        };
-        errEl.textContent = msgs[err.code] || 'Gagal mendeteksi lokasi.';
+        const msgs = { 1: 'Izin lokasi ditolak. Aktifkan izin lokasi di browser.', 2: 'Lokasi tidak terdeteksi. Coba lagi atau isi manual.', 3: 'Timeout. Coba lagi atau isi manual.' };
+        errEl.textContent  = msgs[err.code] || 'Gagal mendeteksi lokasi.';
         errEl.style.display = 'block';
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
   }
 
-  // Kirim form ke Sheets + WA sekaligus
-  kirimForm = function() {
-    const mapLink  = document.getElementById('maps-link');
-    const mapsHref = (mapLink && mapLink.href && mapLink.href !== '#' && !mapLink.href.endsWith('#')) ? mapLink.href : '';
+  // Set minimum tanggal = hari ini
+  (function() {
+    const today = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('f-tanggal');
+    if (dateInput) dateInput.min = today;
+  })();
 
+  // ── FORM KIRIM → Google Sheets + WA ──
+  function kirimForm() {
     const nama   = document.getElementById('f-nama').value.trim();
     const wa     = document.getElementById('f-wa').value.trim();
     const alamat = document.getElementById('f-alamat').value.trim();
     const paket  = document.getElementById('f-paket').value;
     const tgl    = document.getElementById('f-tanggal').value;
+    const mapLink = document.getElementById('maps-link');
+    const mapsHref = (mapLink && mapLink.href && !mapLink.href.endsWith('#')) ? mapLink.href : '';
 
     if (!nama || !wa || !alamat || !paket || !tgl) {
       alert('Mohon lengkapi semua field terlebih dahulu.');
@@ -1147,50 +1020,47 @@
     const [y, m, d] = tgl.split('-');
     const tglFormatted = d + '/' + m + '/' + y;
 
-    // --- 1. Kirim ke Google Sheets (background) ---
+    // 1. Kirim ke Google Sheets
     const submitBtn = document.querySelector('.form-submit');
     const oriHTML   = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spin">⟳</span>&nbsp; Mengirim...';
 
+    const payload = JSON.stringify({
+      nama:    nama,
+      wa:      wa,
+      alamat:  alamat,
+      maps:    mapsHref,
+      paket:   paket,
+      tanggal: tglFormatted
+    });
+
     fetch('https://script.google.com/macros/s/AKfycby_D1abPNwwE7a3fLTNndxnx74j14govFUYLGZTfrKgGwVw4DIP4OR2pqIX1oHMgYytSA/exec', {
-      method: 'POST',
-      mode: 'no-cors',
+      method:  'POST',
+      mode:    'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nama:    nama,
-        wa:      wa,
-        alamat:  alamat,
-        maps:    mapsHref,
-        paket:   paket,
-        tanggal: tglFormatted
-      })
+      body:    payload
     })
-    .catch(() => {}) // no-cors always throws — data tetap masuk
+    .catch(() => {})
     .finally(() => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = oriHTML;
     });
 
-    // --- 2. Kirim ke WA (langsung buka) ---
-    let pesan =
+    // 2. Buka WA
+    const pesan =
       'Halo, saya ingin mendaftar paket XL Home:%0A%0A' +
-      '*Nama:* ' + encodeURIComponent(nama) + '%0A' +
-      '*No. WA:* ' + encodeURIComponent(wa) + '%0A' +
-      '*Alamat:* ' + encodeURIComponent(alamat) + '%0A';
-
-    if (mapsHref) {
-      pesan += '*Lokasi Maps:* ' + encodeURIComponent(mapsHref) + '%0A';
-    }
-
-    pesan +=
-      '*Paket:* ' + encodeURIComponent(paket) + '%0A' +
-      '*Rencana Instalasi:* ' + encodeURIComponent(tglFormatted) + '%0A%0A' +
+      '*Nama:* '             + encodeURIComponent(nama)         + '%0A' +
+      '*No. WA:* '           + encodeURIComponent(wa)           + '%0A' +
+      '*Alamat:* '           + encodeURIComponent(alamat)       + '%0A' +
+      (mapsHref ? '*Lokasi Maps:* ' + encodeURIComponent(mapsHref) + '%0A' : '') +
+      '*Paket:* '            + encodeURIComponent(paket)        + '%0A' +
+      '*Rencana Instalasi:* '+ encodeURIComponent(tglFormatted) + '%0A%0A' +
       'Mohon konfirmasi jadwal instalasi. Terima kasih!';
 
     window.open('https://wa.me/6287747643339?text=' + pesan, '_blank');
 
-    // --- 3. Reset form ---
+    // 3. Reset form
     setTimeout(() => {
       document.getElementById('f-nama').value    = '';
       document.getElementById('f-wa').value      = '';
@@ -1199,32 +1069,7 @@
       document.getElementById('f-tanggal').value = '';
       document.getElementById('maps-link-wrap').style.display = 'none';
     }, 800);
-  };
-
-
-  // Klik paket → isi dropdown form + scroll ke form
-  function pilihPaket(paketVal) {
-    goToSection('daftar');
-    setTimeout(function() {
-      const sel = document.getElementById('f-paket');
-      if (sel && paketVal) {
-        for (var i = 0; i < sel.options.length; i++) {
-          if (sel.options[i].value === paketVal) {
-            sel.selectedIndex = i;
-            // Highlight border
-            sel.style.borderColor = 'var(--teal)';
-            sel.style.boxShadow = '0 0 0 3px rgba(0,167,157,0.15)';
-            setTimeout(function(){ sel.style.borderColor=''; sel.style.boxShadow=''; }, 2000);
-            break;
-          }
-        }
-      }
-      // Fokus ke field nama kalau belum diisi
-      var nama = document.getElementById('f-nama');
-      if (nama && !nama.value) nama.focus();
-    }, 650);
   }
-
 </script>
 </body>
 </html>

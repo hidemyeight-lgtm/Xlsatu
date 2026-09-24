@@ -75,6 +75,13 @@
  transition: background 0.2s;
  }
  .nav-cta:hover { background: var(--blue-mid); }
+ .nav-cta-group { display: flex; align-items: center; gap: 10px; }
+ .nav-cta-outline {
+   background: var(--white); color: var(--blue); border: 1.5px solid var(--blue);
+   border-radius: 8px; padding: 8.5px 18px; font-size: 14px; font-weight: 600;
+   cursor: pointer; text-decoration: none; transition: background 0.2s, color 0.2s;
+ }
+ .nav-cta-outline:hover { background: var(--sky); }
  .nav-links { display: flex; gap: 28px; align-items: center; }
  .nav-links a { text-decoration: none; color: var(--blue); font-weight: 500; font-size: 14px; }
  .nav-links a:hover { color: var(--teal); }
@@ -226,11 +233,27 @@
    display: block; font-weight: 600; color: var(--blue); font-size: 14px; margin-bottom: 8px; margin-top: 20px;
  }
  .reg-form-wrap label:first-of-type { margin-top: 0; }
- .reg-form-wrap input[type="text"] {
-   width: 100%; padding: 14px 16px; border: 1.5px solid #dbe6f5; border-radius: 10px;
+ /* Semua jenis kolom (teks, nomor WA, tanggal, dropdown paket) disamakan
+    persis: tinggi, padding, border, dan radius supaya kotaknya seragam */
+ .reg-form-wrap input[type="text"],
+ .reg-form-wrap input[type="tel"],
+ .reg-form-wrap input[type="date"],
+ .reg-form-wrap select {
+   width: 100%; height: 50px; box-sizing: border-box;
+   padding: 0 16px; border: 1.5px solid #dbe6f5; border-radius: 10px;
    font-size: 15px; font-family: inherit; color: var(--dark);
+   background: var(--white); -webkit-appearance: none; appearance: none;
  }
- .reg-form-wrap input[type="text"]:focus { outline: none; border-color: var(--blue); }
+ .reg-form-wrap select {
+   background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230033A0' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+   background-repeat: no-repeat; background-position: right 14px center; background-size: 18px;
+   padding-right: 42px; cursor: pointer;
+ }
+ .reg-form-wrap input[type="date"] { cursor: pointer; }
+ .reg-form-wrap input[type="text"]:focus,
+ .reg-form-wrap input[type="tel"]:focus,
+ .reg-form-wrap input[type="date"]:focus,
+ .reg-form-wrap select:focus { outline: none; border-color: var(--blue); }
  .loc-btn {
    width: 100%; padding: 14px 16px; border-radius: 10px; border: 1.5px dashed var(--blue-mid);
    background: var(--sky); color: var(--blue); font-weight: 600; font-size: 15px;
@@ -385,6 +408,8 @@
  @media (max-width: 768px) {
  nav { padding: 12px 16px; }
  .nav-links { display: none; }
+ .nav-cta-group { gap: 6px; }
+ .nav-cta, .nav-cta-outline { padding: 8px 12px; font-size: 12.5px; }
  .section { padding: 40px 16px; }
  .section-title { font-size: 22px; }
  .tab { padding: 9px 16px; font-size: 13px; }
@@ -402,59 +427,7 @@
  }
  }
 
-  /* FORM INSTALASI */
-  .form-section {
-    background: var(--white);
-    padding: 60px 32px;
-  }
-  .form-wrap {
-    max-width: 600px;
-    margin: 0 auto;
-    background: var(--white);
-    border: 2px solid #E2EAF8;
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 8px 40px rgba(0,51,160,0.08);
-  }
-  .form-title {
-    font-size: 22px; font-weight: 800; color: var(--blue);
-    margin-bottom: 4px;
-  }
-  .form-sub {
-    font-size: 14px; color: var(--gray-mid); margin-bottom: 28px;
-  }
-  .form-row {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-    margin-bottom: 16px;
-  }
-  .form-group {
-    display: flex; flex-direction: column; gap: 6px;
-    margin-bottom: 16px;
-  }
-  .form-group label {
-    font-size: 13px; font-weight: 600; color: var(--dark);
-  }
-  .form-group input,
-  .form-group select {
-    padding: 11px 14px;
-    border: 1.5px solid #D1DAEA;
-    border-radius: 8px;
-    font-size: 14px;
-    color: var(--dark);
-    background: #FAFCFF;
-    outline: none;
-    transition: border-color 0.2s;
-    font-family: inherit;
-    width: 100%;
-  }
-  .form-group input:focus,
-  .form-group select:focus {
-    border-color: var(--blue);
-    background: var(--white);
-  }
-  .form-group input[type="date"] {
-    cursor: pointer;
-  }
+  /* Tombol submit form (dipakai juga oleh JS: document.querySelector('.form-submit')) */
   .form-submit {
     width: 100%;
     padding: 14px;
@@ -475,19 +448,6 @@
   }
   .form-submit:hover { background: #1ebe5d; }
   .form-submit svg { flex-shrink: 0; }
-  .form-note {
-    text-align: center;
-    font-size: 12px;
-    color: var(--gray-mid);
-    margin-top: 12px;
-  }
-  @media (max-width: 768px) {
-    .form-section { padding: 40px 16px; }
-    .form-wrap { padding: 28px 20px; }
-    .form-row { grid-template-columns: 1fr; gap: 0; }
-  }
-
-
   /* DETEKSI LOKASI */
   .alamat-wrap {
     display: flex;
@@ -495,19 +455,21 @@
   }
   .alamat-wrap input {
     flex: 1;
-    border-radius: 8px 0 0 8px !important;
+    min-width: 0;
+    border-radius: 10px 0 0 10px !important;
     border-right: none !important;
   }
   .btn-lokasi {
     flex-shrink: 0;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 0 14px;
+    padding: 0 16px;
     background: var(--blue);
     color: var(--white);
     border: 1.5px solid var(--blue);
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 10px 10px 0;
     font-size: 12.5px;
     font-weight: 600;
     cursor: pointer;
@@ -536,7 +498,10 @@
  <a href="#bantuan" onclick="goToSection('bantuan');return false;">Hubungi Kami</a>
  <a href="#page-privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
  </div>
+ <div class="nav-cta-group">
+ <a href="#daftar" onclick="pilihPaket('Cek Coverage — belum tahu paketnya');return false;" class="nav-cta nav-cta-outline">Cek Coverage</a>
  <a href="#daftar" onclick="goToSection('daftar');return false;" class="nav-cta">Daftar Sekarang</a>
+ </div>
 </nav>
 
 <!-- HOME PAGE -->
@@ -760,14 +725,17 @@
  </div>
 
  <label for="f-paket">Paket yang Diminati</label>
- <select id="f-paket" required style="width:100%;padding:14px 16px;border:1.5px solid #dbe6f5;border-radius:10px;font-size:15px;font-family:inherit;color:var(--dark);">
+ <select id="f-paket" required>
  <option value="">Pilih paket yang diminati</option>
- <option value="FTTH 100 Mbps">FTTH 100 Mbps (up to 250 Mbps)</option>
- <option value="FTTH 150 Mbps">FTTH 150 Mbps (up to 350 Mbps)</option>
- <option value="FTTH 300 Mbps">FTTH 300 Mbps (up to 400 Mbps)</option>
- <option value="FWA 100 Mbps Reguler">FWA 100 Mbps Reguler</option>
- <option value="FWA Paket Hemat 4 Bulan">FWA Paket Hemat 4 Bulan</option>
- <option value="Belum tahu, mau konsultasi dulu">Belum tahu, mau konsultasi dulu</option>
+ <option value="FWA 100 Mbps — Rp219.000/bln">FWA 100 Mbps — Rp219.000/bln (Bulanan)</option>
+ <option value="FWA 50 Mbps — Rp650.000 (4 bln)">FWA 50 Mbps — Rp650.000 (Hemat 4 Bulan)</option>
+ <option value="FWA 100 Mbps — Rp790.000 (4 bln)">FWA 100 Mbps — Rp790.000 (Hemat 4 Bulan)</option>
+ <option value="FTTH 100 Mbps — Rp229.000/bln">FTTH 100 Mbps — Rp229.000/bln</option>
+ <option value="FTTH 150 Mbps — Rp279.000/bln">FTTH 150 Mbps — Rp279.000/bln</option>
+ <option value="FTTH 300 Mbps — Rp300.000/bln">FTTH 300 Mbps — Rp300.000/bln</option>
+ <option value="FTTH 600 Mbps — Rp500.000/bln">FTTH 600 Mbps — Rp500.000/bln</option>
+ <option value="FTTH 1000 Mbps — Rp900.000/bln">FTTH 1000 Mbps — Rp900.000/bln</option>
+ <option value="Cek Coverage — belum tahu paketnya">Belum tahu, mau cek coverage dulu</option>
  </select>
 
  <label for="f-tanggal">Rencana Tanggal Instalasi</label>
@@ -944,6 +912,16 @@
       }
       var nama = document.getElementById('f-nama');
       if (nama && !nama.value) nama.focus();
+
+      // Kalau masuk lewat tombol "Cek Coverage", sorot juga tombol deteksi lokasi
+      if (paketVal.indexOf('Cek Coverage') === 0) {
+        var wrap = document.querySelector('.alamat-wrap');
+        if (wrap) {
+          wrap.style.boxShadow = '0 0 0 3px rgba(0,51,160,0.15)';
+          wrap.style.borderRadius = '10px';
+          setTimeout(function() { wrap.style.boxShadow = ''; }, 2000);
+        }
+      }
     }, 650);
   }
 
@@ -1078,7 +1056,7 @@
       '*Rencana Instalasi:* '+ encodeURIComponent(tglFormatted) + '%0A%0A' +
       'Mohon konfirmasi jadwal instalasi. Terima kasih!';
 
-    window.open('https://wa.me/6287747643339?text=' + pesan, '_blank');
+    window.open('https://wa.me/6287810963528?text=' + pesan, '_blank');
 
     // 3. Reset form
     setTimeout(() => {

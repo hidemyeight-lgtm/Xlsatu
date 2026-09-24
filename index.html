@@ -505,6 +505,11 @@
   .btn-lokasi:hover { background: var(--blue-mid); }
   .btn-lokasi.loading { background: var(--gray-mid); border-color: var(--gray-mid); cursor: wait; }
   .btn-lokasi.success { background: #16a34a; border-color: #16a34a; }
+  @media (max-width: 520px) {
+    .alamat-wrap { flex-direction: column-reverse; gap: 8px; }
+    .alamat-wrap input { border-radius: 10px !important; border-right: 1.5px solid #dbe6f5 !important; }
+    .btn-lokasi { justify-content: center; height: 48px; border-radius: 10px; font-size: 14px; }
+  }
   @keyframes spin { to { transform: rotate(360deg); } }
   .spin { animation: spin 0.8s linear infinite; display: inline-block; }
 
@@ -558,7 +563,6 @@
  </div>
  <div class="nav-cta-group">
  <a href="#daftar" onclick="bukaCekCoverage();return false;" class="nav-cta nav-cta-outline">Cek Coverage</a>
- <a href="#daftar" onclick="goToSection('daftar');return false;" class="nav-cta">Daftar Sekarang</a>
  </div>
 </nav>
 
@@ -604,7 +608,7 @@
  <button class="tab active" onclick="switchTab('fwa', this)"><span class="tab-title">Fixed Wireless (FWA)</span><span class="tab-sub">Mulai Rp219rb/bln</span></button>
  <button class="tab" onclick="switchTab('ftth', this)"><span class="tab-title">Fiber Optik (FTTH)</span><span class="tab-sub">Mulai Rp185rb/bln</span></button>
  <button class="tab" onclick="switchTab('fmc', this)"><span class="tab-title">FMC + Kuota HP</span><span class="tab-sub">+ Kuota HP sekeluarga</span></button>
- <button class="tab" onclick="switchTab('combo', this)"><span class="tab-badge">BARU</span><span class="tab-title">Combo TV</span><span class="tab-sub">Internet + TV</span></button>
+ <button class="tab" onclick="switchTab('combo', this)"><span class="tab-title">Combo TV</span><span class="tab-sub">Internet + TV</span></button>
  <button class="tab" onclick="switchTab('promo', this)"><span class="tab-badge promo">PROMO</span><span class="tab-title">Promo Bayar di Muka</span><span class="tab-sub">Hemat s/d 40%</span></button>
  </div>
  </div>
@@ -1225,8 +1229,8 @@
 
  <label for="f-alamat">Alamat Lengkap Pemasangan</label>
  <div class="alamat-wrap">
- <input type="text" id="f-alamat" required placeholder="Alamat lengkap pemasangan">
- <button type="button" class="btn-lokasi" id="btn-lokasi" onclick="deteksiLokasi()"><span id="lokasi-label">Deteksi Lokasi</span></button>
+ <input type="text" id="f-alamat" required placeholder="Atau ketik alamat lengkap manual">
+ <button type="button" class="btn-lokasi" id="btn-lokasi" onclick="deteksiLokasi()"><span id="lokasi-label">📍 Pakai Lokasi Saya</span></button>
  </div>
  <div id="lokasi-error" style="display:none;color:#dc2626;font-size:12.5px;margin-top:6px;"></div>
  <div id="maps-link-wrap" style="display:none;margin-top:8px;">
@@ -1288,7 +1292,7 @@
  <li>Nama lengkap</li>
  <li>Nomor telepon / WhatsApp</li>
  <li>Alamat pemasangan yang diinginkan</li>
- <li>Paket yang diminati, rencana tanggal instalasi, dan titik lokasi (hanya bila Anda menekan tombol Deteksi Lokasi)</li>
+ <li>Paket yang diminati, rencana tanggal instalasi, dan titik lokasi (hanya bila Anda menekan tombol Pakai Lokasi Saya)</li>
  </ul>
 
  <h2>3. Bagaimana Kami Menggunakan Informasi Anda</h2>
@@ -1300,7 +1304,7 @@
  </ul>
 
  <h2>4. Penyimpanan &amp; Keamanan Data</h2>
- <p>Data dari formulir dikirim ke spreadsheet Google (Google Sheets) milik pengelola halaman ini dan ke WhatsApp pengelola saat Anda menekan tombol kirim. Bila Anda memakai tombol Deteksi Lokasi, koordinat Anda dikirim ke layanan OpenStreetMap Nominatim untuk diubah menjadi alamat. Bila analitik diaktifkan, kami hanya mencatat interaksi umum (misalnya paket yang diklik) tanpa nama, nomor, atau alamat. Akses spreadsheet dibatasi untuk pengelola, dan data dihapus setelah proses pendaftaran selesai atau tidak dilanjutkan. Untuk data yang diproses dalam sistem PT XLSmart Telecom Tbk (XL SATU) / PT Cahaya Bumi Nasional (CBN), berlaku kebijakan privasi resmi perusahaan tersebut.</p>
+ <p>Data dari formulir dikirim ke spreadsheet Google (Google Sheets) milik pengelola halaman ini dan ke WhatsApp pengelola saat Anda menekan tombol kirim. Bila Anda memakai tombol Pakai Lokasi Saya, koordinat Anda dikirim ke layanan OpenStreetMap Nominatim untuk diubah menjadi alamat. Bila analitik diaktifkan, kami hanya mencatat interaksi umum (misalnya paket yang diklik) tanpa nama, nomor, atau alamat. Akses spreadsheet dibatasi untuk pengelola, dan data dihapus setelah proses pendaftaran selesai atau tidak dilanjutkan. Untuk data yang diproses dalam sistem PT XLSmart Telecom Tbk (XL SATU) / PT Cahaya Bumi Nasional (CBN), berlaku kebijakan privasi resmi perusahaan tersebut.</p>
 
  <h2>5. Tidak Ada Penjualan Data</h2>
  <p>Kami tidak menjual, menyewakan, atau membagikan data pribadi Anda kepada pihak lain manapun selain dalam rangka proses pendaftaran layanan XL Home yang Anda ajukan.</p>
@@ -1459,7 +1463,7 @@
     }
 
     btn.classList.add('loading');
-    label.innerHTML = '<span class="spin">⟳</span> Mendeteksi...';
+    label.innerHTML = '<span class="spin">⟳</span> Mencari lokasi...';
     errEl.style.display  = 'none';
     mapWrap.style.display = 'none';
 
@@ -1486,8 +1490,8 @@
             mapWrap.style.display = 'block';
             btn.classList.remove('loading');
             btn.classList.add('success');
-            label.innerHTML = '✓ Terdeteksi';
-            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = 'Deteksi Lokasi'; }, 3000);
+            label.innerHTML = '✓ Alamat terisi';
+            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = '📍 Pakai Lokasi Saya'; }, 3000);
           })
           .catch(() => {
             input.value = 'Koordinat: ' + lat + ', ' + lng;
@@ -1496,13 +1500,13 @@
             mapWrap.style.display = 'block';
             btn.classList.remove('loading');
             btn.classList.add('success');
-            label.innerHTML = '✓ Terdeteksi';
-            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = 'Deteksi Lokasi'; }, 3000);
+            label.innerHTML = '✓ Alamat terisi';
+            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = '📍 Pakai Lokasi Saya'; }, 3000);
           });
       },
       function(err) {
         btn.classList.remove('loading');
-        label.innerHTML = 'Deteksi Lokasi';
+        label.innerHTML = '📍 Pakai Lokasi Saya';
         const msgs = { 1: 'Izin lokasi ditolak. Aktifkan izin lokasi di browser.', 2: 'Lokasi tidak terdeteksi. Coba lagi atau isi manual.', 3: 'Timeout. Coba lagi atau isi manual.' };
         errEl.textContent  = msgs[err.code] || 'Gagal mendeteksi lokasi.';
         errEl.style.display = 'block';

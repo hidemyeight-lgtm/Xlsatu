@@ -554,7 +554,7 @@
  <a href="#page-privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
  </div>
  <div class="nav-cta-group">
- <a href="#daftar" onclick="goToSection('coverage');return false;" class="nav-cta nav-cta-outline">Cek Coverage</a>
+ <a href="#daftar" onclick="goToSection('daftar');return false;" class="nav-cta nav-cta-outline">Cek Coverage</a>
  <a href="#daftar" onclick="goToSection('daftar');return false;" class="nav-cta">Daftar Sekarang</a>
  </div>
 </nav>
@@ -589,22 +589,11 @@
  <p class="trust-note">*Gratis instalasi berlaku untuk sebagian besar paket; paket Starter 20 Mbps dikenakan Rp100.000. Harga belum termasuk PPN 11%.</p>
  </div>
 
- <!-- CEK COVERAGE -->
- <div class="section cov" id="coverage">
- <div class="section-title">Cek Ketersediaan di Kotamu</div>
- <div class="section-sub">Pilih kotamu, kami tunjukkan jenis internet yang paling mungkin tersedia</div>
- <div class="cov-box">
- <label for="cov-city" style="display:block;font-weight:600;margin-bottom:8px;color:var(--blue);">Kota / Kabupaten</label>
- <select id="cov-city" onchange="cekKota()"><option value="">Pilih kota atau kabupaten</option></select>
- <div id="cov-result" class="cov-result" aria-live="polite"></div>
- </div>
- </div>
-
  <!-- PAKET SECTION -->
  <div id="paket">
  <div class="section">
  <div class="section-title">Pilih Paket Internet Terbaik</div>
- <div class="section-sub">Pilih sesuai kebutuhan rumah kamu. Ketersediaan mengikuti alamat, jadi cek kotamu dulu di atas</div>
+ <div class="section-sub">Pilih sesuai kebutuhan rumah kamu. Ketersediaan mengikuti alamat kamu</div>
 
  <p class="tab-hint">Klik kategori di bawah untuk lihat semua pilihan paket</p>
  <div class="tabs-wrap">
@@ -694,7 +683,6 @@
  </div>
  <div class="nudge"><span><b>Alamat kamu tercover Fiber?</b> Naik dari FWA 100 Mbps (Rp219rb) ke Fiber 250 Mbps cuma <b>+Rp10rb/bln</b> (Rp229rb, gratis instalasi).</span><button onclick="gotoTab('ftth')">Lihat paket Fiber</button></div>
  <p style="text-align:center;font-size:13px;color:#8899AA;margin-top:24px;"> FWA memakai jaringan nirkabel dan dipasang teknisi di lokasi, tanpa tarik kabel fiber ke rumah.</p>
- <p style="text-align:center;font-size:12px;color:#8899AA;margin-top:8px;">Paket bayar di muka wajib lunas sebelum instalasi. Minimum berlangganan 12 bulan; berhenti sebelum 12 bulan dikenakan penalti Rp1.000.000. FUP FWA Outdoor 1.024 GB per periode tagihan. Harga belum termasuk PPN 11%.</p>
  </div>
 
  <!-- FTTH TAB -->
@@ -1608,38 +1596,11 @@
   })();
 </script>
 <script>
-  // ── Data coverage FWA (sumber: materi training XL Home, Sept 2026) ──
-  const FWA_CITIES = {
-    'Kota Jakarta Barat':'8 Maret 2026','Kota Jakarta Timur':'17 Juni 2026','Kota Jakarta Pusat':'17 Juni 2026',
-    'Kota Jakarta Selatan':'17 Juni 2026','Kota Jakarta Utara':'17 Juni 2026','Kota Bogor':'17 Juni 2026',
-    'Kota Tangerang':'22 Juni 2026','Kota Tangerang Selatan':'22 Juni 2026','Kota Bekasi':'13 Juli 2026',
-    'Kota Depok':'13 Juli 2026','Kota Cilegon':'10 September 2026','Kota Serang':'10 September 2026'
-  };
-  (function () {
-    const sel = document.getElementById('cov-city');
-    Object.keys(FWA_CITIES).forEach(k => sel.add(new Option(k, k)));
-    sel.add(new Option('Kabupaten Bogor / Bekasi / Tangerang / lainnya', 'other'));
-  })();
-
   function gotoTab(id) {
     const i = { fwa: 0, ftth: 1, fmc: 2, combo: 3, promo: 4 }[id];
     goToSection('paket');
     switchTab(id, document.querySelectorAll('#tabsBar .tab')[i]);
     trackEvt('nudge_click', { to: id });
-  }
-
-  function cekKota() {
-    const v = document.getElementById('cov-city').value, out = document.getElementById('cov-result');
-    if (!v) { out.innerHTML = ''; return; }
-    const cek = '<button onclick="pilihPaket(\'Cek Coverage \u2014 belum tahu paketnya\')">Cek Alamat Saya</button>';
-    if (FWA_CITIES[v]) {
-      out.innerHTML = '<p><span class="ok">FWA sudah tersedia di ' + v + '</span> sejak ' + FWA_CITIES[v] + '. Fiber tergantung jaringan di alamat kamu: kalau alamat tercover fiber, paket Fiber yang ditawarkan; kalau hanya tercover FWA, kamu bisa ambil FWA 100 Mbps.</p>' +
-        '<div class="cov-actions">' + cek + '<button class="alt" onclick="gotoTab(\'fwa\')">Lihat paket FWA</button><button class="alt" onclick="gotoTab(\'ftth\')">Lihat paket Fiber</button></div>';
-    } else {
-      out.innerHTML = '<p>Area ini belum ada di daftar FWA kami, tapi jaringan fiber menjangkau sekitar 126 kota/kabupaten. Alamat kamu mungkin tetap tercover fiber, jadi cek lewat alamat dan titik lokasi.</p>' +
-        '<div class="cov-actions">' + cek + '<button class="alt" onclick="gotoTab(\'ftth\')">Lihat paket Fiber</button></div>';
-    }
-    trackEvt('coverage_check', { city: v });
   }
 
   // ── Tracking: isi GA_ID (mis. 'G-XXXXXXXXXX') untuk mengaktifkan Google Analytics 4 ──

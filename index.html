@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://nominatim.openstreetmap.org https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>First Media Jadi XL SATU | Internet Rumah Terbaik untuk Keluarga</title>
 <meta name="description" content="First Media kini resmi menjadi XL SATU. Nikmati internet rumah FWA &amp; FTTH terbaik untuk keluarga di area Jabodetabek. Hubungi Rizky: 087810963528">
 
@@ -1233,7 +1235,7 @@
  </div>
  <div id="lokasi-error" style="display:none;color:#dc2626;font-size:12.5px;margin-top:6px;"></div>
  <div id="maps-link-wrap" style="display:none;margin-top:8px;">
- <a id="maps-link" href="#" target="_blank" rel="noopener" style="font-size:13px;color:var(--blue);font-weight:600;">Lihat titik lokasi di Google Maps</a>
+ <a id="maps-link" href="#" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--blue);font-weight:600;">Lihat titik lokasi di Google Maps</a>
  </div>
 
  <label for="f-paket">Paket yang Diminati</label>
@@ -1259,6 +1261,8 @@
  <label for="f-tanggal">Rencana Tanggal Instalasi</label>
  <input type="date" id="f-tanggal" required>
 
+ <div style="position:absolute;left:-9999px;" aria-hidden="true"><label for="f-website">Website</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+ <label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13px;margin-top:14px;"><input type="checkbox" id="f-setuju" style="margin-top:3px;width:auto;"><span>Saya setuju data saya (nama, WhatsApp, alamat, dan lokasi) dipakai untuk cek coverage dan pendaftaran sesuai <a href="#page-privacy" onclick="showPage('privacy');return false;" style="color:var(--blue);font-weight:600;">Kebijakan Privasi</a>.</span></label>
  <button type="submit" class="form-submit reg-submit" id="regSubmitBtn">Daftar &amp; Lanjut ke WhatsApp</button>
  </form>
  <p class="reg-note">Data kamu hanya dipakai tim sales XL Home untuk cek coverage &amp; follow-up pendaftaran.</p>
@@ -1289,7 +1293,7 @@
  <li>Nama lengkap</li>
  <li>Nomor telepon / WhatsApp</li>
  <li>Alamat pemasangan yang diinginkan</li>
- <li>Email (bila Anda berikan)</li>
+ <li>Paket yang diminati, rencana tanggal instalasi, dan titik lokasi (hanya bila Anda menekan tombol Deteksi Lokasi)</li>
  </ul>
 
  <h2>3. Bagaimana Kami Menggunakan Informasi Anda</h2>
@@ -1301,13 +1305,13 @@
  </ul>
 
  <h2>4. Penyimpanan &amp; Keamanan Data</h2>
- <p>Data Anda tidak disimpan di server pihak ketiga melalui halaman ini. Komunikasi dilakukan langsung melalui WhatsApp dan email. Untuk data yang diproses dalam sistem PT XLSmart Telecom Tbk (XL SATU) / PT Cahaya Bumi Nasional (CBN), berlaku kebijakan privasi resmi perusahaan tersebut.</p>
+ <p>Data dari formulir dikirim ke spreadsheet Google (Google Sheets) milik pengelola halaman ini dan ke WhatsApp pengelola saat Anda menekan tombol kirim. Bila Anda memakai tombol Deteksi Lokasi, koordinat Anda dikirim ke layanan OpenStreetMap Nominatim untuk diubah menjadi alamat. Bila analitik diaktifkan, kami hanya mencatat interaksi umum (misalnya paket yang diklik) tanpa nama, nomor, atau alamat. Akses spreadsheet dibatasi untuk pengelola, dan data dihapus setelah proses pendaftaran selesai atau tidak dilanjutkan. Untuk data yang diproses dalam sistem PT XLSmart Telecom Tbk (XL SATU) / PT Cahaya Bumi Nasional (CBN), berlaku kebijakan privasi resmi perusahaan tersebut.</p>
 
  <h2>5. Tidak Ada Penjualan Data</h2>
  <p>Kami tidak menjual, menyewakan, atau membagikan data pribadi Anda kepada pihak lain manapun selain dalam rangka proses pendaftaran layanan XL Home yang Anda ajukan.</p>
 
  <h2>6. Hak Anda</h2>
- <p>Anda berhak untuk meminta penghapusan data yang pernah Anda berikan kepada kami. Hubungi kami melalui email di bawah untuk mengajukan permintaan tersebut.</p>
+ <p>Anda berhak untuk meminta penghapusan data yang pernah Anda berikan kepada kami. Hubungi kami melalui WhatsApp atau email di bawah untuk mengajukan permintaan tersebut.</p>
 
  <h2>7. Kontak</h2>
  <p>Untuk pertanyaan mengenai kebijakan privasi ini, silakan hubungi:<br>
@@ -1530,9 +1534,13 @@
     const mapsHref = (mapLink && mapLink.href && !mapLink.href.endsWith('#')) ? mapLink.href : '';
 
     if (!nama || !wa || !alamat || !paket || !tgl) {
-      alert('Mohon lengkapi semua field terlebih dahulu.');
-      return;
-    }
+      alert('\1
+    if (document.getElementById('f-website').value) return; // honeypot: bot
+    if (Date.now() - PAGE_T0 < 4000) { alert('Mohon tunggu sebentar, lalu kirim lagi.'); return; }
+    if (!document.getElementById('f-setuju').checked) { alert('Mohon centang persetujuan penggunaan data.'); return; }
+    if (!/^(\\+62|62|0)8\\d{8,12}$/.test(wa.replace(/[\\s-]/g, ''))) { alert('Nomor WhatsApp tidak valid. Contoh: 08123456789'); return; }
+    if (nama.length > 100 || alamat.length > 300) { alert('Nama atau alamat terlalu panjang.'); return; }
+    try { const last = +localStorage.getItem('lastSubmit') || 0; if (Date.now() - last < 30000) { alert('Tunggu 30 detik sebelum mengirim lagi.'); return; } localStorage.setItem('lastSubmit', Date.now()); } catch (e) {}
 
     const [y, m, d] = tgl.split('-');
     const tglFormatted = d + '/' + m + '/' + y;
@@ -1549,7 +1557,9 @@
       alamat:  alamat,
       maps:    mapsHref,
       paket:   paket,
-      tanggal: tglFormatted
+      tanggal: tglFormatted,
+      hp:      document.getElementById('f-website').value,
+      t:       Date.now() - PAGE_T0
     });
 
     fetch('https://script.google.com/macros/s/AKfycbx5mWTKa5qfot5a9iLoCqmRxBRvHG6bOViWQmGPPf4TMUTgEe5vyWF6aRI_dcC5HKcxCQ/exec', {
@@ -1575,7 +1585,7 @@
       '*Rencana Instalasi:* '+ encodeURIComponent(tglFormatted) + '%0A%0A' +
       'Mohon konfirmasi jadwal instalasi. Terima kasih!';
 
-    window.open('https://wa.me/6287810963528?text=' + pesan, '_blank');
+    window.open('https://wa.me/6287810963528?text=' + pesan, '_blank', 'noopener,noreferrer');
 
     // 3. Reset form
     setTimeout(() => {
@@ -1647,6 +1657,10 @@
   document.querySelectorAll('.faq details').forEach(d => d.addEventListener('toggle', () => {
     if (d.open) track('faq_open', { question: d.querySelector('summary').textContent });
   }));
+</script>
+<script>
+  var PAGE_T0 = Date.now();
+  if (window.top !== window.self) { try { window.top.location = window.self.location; } catch (e) { document.body.innerHTML = ''; } }
 </script>
 </body>
 </html>

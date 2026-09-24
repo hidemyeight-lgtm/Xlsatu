@@ -215,6 +215,8 @@
  .pkg-btn.teal { background: var(--teal); }
  .pkg-btn.teal:hover { background: #009088; }
 
+ .tabs { flex-wrap: wrap; gap: 8px; }
+ .tab { border-radius: 8px !important; padding: 10px 20px; }
  .tab-content { display: none; }
  .tab-content.active { display: block; }
 
@@ -531,6 +533,9 @@
  <div class="tabs">
  <button class="tab active" onclick="switchTab('fwa', this)"> Fixed Wireless (FWA)</button>
  <button class="tab" onclick="switchTab('ftth', this)"> Fiber Optik (FTTH)</button>
+ <button class="tab" onclick="switchTab('fmc', this)">FMC + Kuota HP</button>
+ <button class="tab" onclick="switchTab('combo', this)">Combo TV</button>
+ <button class="tab" onclick="switchTab('promo', this)">Promo Bayar di Muka</button>
  </div>
 
  <!-- FWA TAB -->
@@ -564,11 +569,11 @@
  <li>Streaming SD–HD</li>
  <li>Video call standar</li>
  <li>1–3 perangkat aktif</li>
- <li>Hemat bayar di muka</li>
+ <li>Bonus Vidio Lite &amp; CatchPlay+ 3 bulan</li>
  </ul>
  <div class="pkg-label">Harga dasar (4 bulan)</div>
  <div class="pkg-price">Rp650.000</div>
- <div class="pkg-note">Setara ±Rp162.500/bln · Belum termasuk PPN</div>
+ <div class="pkg-note">Setara ±Rp162.500/bln · Lanjut Rp199.000/bln · Belum termasuk PPN</div>
  <button class="pkg-btn" onclick="pilihPaket('FWA 50 Mbps — Rp650.000 (4 bln)')">Pesan via WhatsApp</button>
  </div>
 
@@ -581,16 +586,34 @@
  <li>WFH + belajar online bareng</li>
  <li>Gaming online lancar</li>
  <li>Seluruh anggota keluarga</li>
- <li>Lebih hemat vs bayar bulanan</li>
+ <li>Bonus Vidio Lite &amp; CatchPlay+ 3 bulan</li>
  </ul>
  <div class="pkg-label">Harga dasar (4 bulan)</div>
  <div class="pkg-price">Rp790.000</div>
- <div class="pkg-note">Setara ±Rp197.500/bln · Belum termasuk PPN</div>
+ <div class="pkg-note">Setara ±Rp197.500/bln · Lanjut Rp219.000/bln · Belum termasuk PPN</div>
  <button class="pkg-btn" onclick="pilihPaket('FWA 100 Mbps — Rp790.000 (4 bln)')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Fixed Wireless · Hemat 3 Bulan</div>
+ <div class="pkg-speed">100<span> Mbps</span></div>
+ <div class="pkg-upspeed">Paket Hemat 3 Bulan</div>
+ <ul class="pkg-uses">
+ <li>Streaming 4K multi-ruangan</li>
+ <li>WFH + belajar online bareng</li>
+ <li>Gaming online lancar</li>
+ <li>Bonus Vidio Lite &amp; CatchPlay+ 3 bulan</li>
+ <li>Bayar di muka, lebih hemat</li>
+ </ul>
+ <div class="pkg-label">Harga dasar (3 bulan)</div>
+ <div class="pkg-price">Rp650.000</div>
+ <div class="pkg-note">Setara ±Rp216.667/bln · Lanjut Rp219.000/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('FWA 100 Mbps — Rp650.000 (3 bln)')">Pesan via WhatsApp</button>
  </div>
 
  </div>
  <p style="text-align:center;font-size:13px;color:#8899AA;margin-top:24px;"> FWA menggunakan teknologi nirkabel — tidak perlu bongkar rumah, aktivasi lebih cepat.</p>
+ <p style="text-align:center;font-size:12px;color:#8899AA;margin-top:8px;">Paket bayar di muka wajib lunas sebelum instalasi. Minimum berlangganan 12 bulan; berhenti sebelum 12 bulan dikenakan penalti Rp1.000.000. FUP FWA Outdoor 1.024 GB per periode tagihan. Harga belum termasuk PPN 11%.</p>
  </div>
 
  <!-- FTTH TAB -->
@@ -599,70 +622,82 @@
 
  <div class="pkg-card">
  <div class="pkg-type">Fiber Optik · FTTH</div>
+ <div class="pkg-speed">20<span> Mbps</span></div>
+ <div class="pkg-upspeed">Paket Starter</div>
+ <ul class="pkg-uses">
+ <li>Browsing &amp; media sosial harian</li>
+ <li>Streaming SD</li>
+ <li>Video call standar</li>
+ <li>Kebutuhan internet dasar</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp185.000</div>
+ <div class="pkg-note">Biaya instalasi Rp100.000 · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('FTTH 20 Mbps — Rp185.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Fiber Optik · FTTH</div>
  <div class="pkg-speed-ftth">
  <span class="basic">100<span> Mbps</span></span>
- <span class="upto-label">Up to</span>
+ <span class="upto-label">Speed Upgrade to</span>
  <span class="upto">250<span> Mbps</span></span>
  </div>
  <ul class="pkg-uses">
- <li>Streaming HD multi-layar</li>
- <li>Video call &amp; WFH</li>
- <li>Belajar online anak sekolah</li>
- <li>3–5 perangkat sekaligus</li>
+ <li>Hingga 10 perangkat</li>
+ <li>Video streaming 4K</li>
+ <li>Work from Home</li>
+ <li>CCTV / smart device</li>
  </ul>
  <div class="pkg-label">Harga dasar / bulan</div>
  <div class="pkg-price">Rp229.000</div>
- <div class="pkg-note">Belum termasuk PPN</div>
- <button class="pkg-btn" onclick="pilihPaket('FTTH 100 Mbps — Rp229.000/bln')">Pesan via WhatsApp</button>
- </div>
-
- <div class="pkg-card">
- <div class="pkg-type">Fiber Optik · FTTH</div>
- <div class="pkg-speed-ftth">
- <span class="basic">150<span> Mbps</span></span>
- <span class="upto-label">Up to</span>
- <span class="upto">350<span> Mbps</span></span>
- </div>
- <ul class="pkg-uses">
- <li>Streaming 4K tanpa gangguan</li>
- <li>Gaming online &amp; e-sports</li>
- <li>WFH profesional</li>
- <li>5–8 perangkat aktif</li>
- </ul>
- <div class="pkg-label">Harga dasar / bulan</div>
- <div class="pkg-price">Rp279.000</div>
- <div class="pkg-note">Belum termasuk PPN</div>
- <button class="pkg-btn" onclick="pilihPaket('FTTH 150 Mbps — Rp279.000/bln')">Pesan via WhatsApp</button>
+ <div class="pkg-note">Gratis instalasi · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('FTTH 250 Mbps — Rp229.000/bln')">Pesan via WhatsApp</button>
  </div>
 
  <div class="pkg-card featured">
- <span class="pkg-badge">POPULER</span>
+ <span class="pkg-badge">BARU</span>
  <div class="pkg-type">Fiber Optik · FTTH</div>
  <div class="pkg-speed-ftth">
- <span class="basic">300<span> Mbps</span></span>
- <span class="upto-label">Up to</span>
- <span class="upto">400<span> Mbps</span></span>
+ <span class="basic">200<span> Mbps</span></span>
+ <span class="upto-label">Speed Upgrade to</span>
+ <span class="upto">300<span> Mbps</span></span>
  </div>
  <ul class="pkg-uses">
- <li>Rumah dengan banyak pengguna</li>
- <li>Streaming 4K di semua TV</li>
- <li>Smart home &amp; IoT devices</li>
- <li>Download besar &amp; cloud backup</li>
- <li>Gaming + WFH bersamaan</li>
+ <li>Hingga 12+ perangkat</li>
+ <li>Video streaming 4K</li>
+ <li>Work from Home &amp; gaming online</li>
+ <li>CCTV / smart device</li>
  </ul>
  <div class="pkg-label">Harga dasar / bulan</div>
- <div class="pkg-price">Rp300.000</div>
- <div class="pkg-note">Belum termasuk PPN</div>
- <button class="pkg-btn teal" onclick="pilihPaket('FTTH 300 Mbps — Rp300.000/bln')">Pesan via WhatsApp</button>
+ <div class="pkg-price">Rp239.000</div>
+ <div class="pkg-note">Gratis instalasi · Belum termasuk PPN</div>
+ <button class="pkg-btn teal" onclick="pilihPaket('FTTH 300 Mbps — Rp239.000/bln')">Pesan via WhatsApp</button>
  </div>
 
  <div class="pkg-card">
  <div class="pkg-type">Fiber Optik · FTTH</div>
  <div class="pkg-speed-ftth">
- <span class="basic">600<span> Mbps</span></span>
- <span class="upto-label">Kecepatan Tinggi</span>
- <span class="upto">600<span> Mbps</span></span>
+ <span class="basic">300<span> Mbps</span></span>
+ <span class="upto-label">Speed Upgrade to</span>
+ <span class="upto">400<span> Mbps</span></span>
  </div>
+ <ul class="pkg-uses">
+ <li>Hingga 14+ perangkat</li>
+ <li>Video streaming 4K</li>
+ <li>Work from Home &amp; gaming online</li>
+ <li>Smart home &amp; IoT devices</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp299.000</div>
+ <div class="pkg-note">Gratis instalasi · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('FTTH 400 Mbps — Rp299.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Fiber Optik · FTTH</div>
+ <div class="pkg-speed">500<span> Mbps</span></div>
+ <div class="pkg-upspeed">Tanpa Speed Upgrade</div>
  <ul class="pkg-uses">
  <li>Rumah dengan 10+ perangkat</li>
  <li>Konten kreator &amp; upload besar</li>
@@ -670,33 +705,422 @@
  <li>Video conference HD non-stop</li>
  </ul>
  <div class="pkg-label">Harga dasar / bulan</div>
- <div class="pkg-price">Rp500.000</div>
- <div class="pkg-note">Belum termasuk PPN</div>
- <button class="pkg-btn" onclick="pilihPaket('FTTH 600 Mbps — Rp500.000/bln')">Pesan via WhatsApp</button>
+ <div class="pkg-price">Rp399.000</div>
+ <div class="pkg-note">Gratis instalasi · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('FTTH 500 Mbps — Rp399.000/bln')">Pesan via WhatsApp</button>
  </div>
 
  <div class="pkg-card">
  <div class="pkg-type">Fiber Optik · FTTH</div>
- <div class="pkg-speed-ftth">
- <span class="basic">1000<span> Mbps</span></span>
- <span class="upto-label">Kebutuhan Berat</span>
- <span class="upto">1000<span> Mbps</span></span>
- </div>
+ <div class="pkg-speed">1<span> Gbps</span></div>
+ <div class="pkg-upspeed">Tanpa Speed Upgrade</div>
  <ul class="pkg-uses">
  <li>Bisnis rumahan &amp; UMKM</li>
  <li>Multi-user simultan tanpa lag</li>
  <li>Virtualisasi &amp; cloud computing</li>
  <li>Backup &amp; sinkronisasi masif</li>
- <li>Performa puncak tak terbatas</li>
  </ul>
  <div class="pkg-label">Harga dasar / bulan</div>
- <div class="pkg-price">Rp900.000</div>
- <div class="pkg-note">Belum termasuk PPN</div>
- <button class="pkg-btn" onclick="pilihPaket('FTTH 1000 Mbps — Rp900.000/bln')">Pesan via WhatsApp</button>
+ <div class="pkg-price">Rp899.000</div>
+ <div class="pkg-note">Gratis instalasi · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('FTTH 1000 Mbps — Rp899.000/bln')">Pesan via WhatsApp</button>
  </div>
 
  </div>
  <p style="text-align:center;font-size:13px;color:#8899AA;margin-top:24px;"> FTTH menggunakan kabel fiber optik langsung ke rumah — koneksi lebih stabil untuk kebutuhan jangka panjang.</p>
+ <p style="text-align:center;font-size:12px;color:#8899AA;margin-top:8px;">Harga flat selama berlangganan, khusus pelanggan baru. Benefit speed upgrade berlaku 12 bulan dan dapat diperpanjang selama pembayaran lancar. Minimum berlangganan 12 bulan; berhenti sebelum 12 bulan dikenakan penalti Rp1.000.000. Paket 1 Gbps hanya tersedia di area tertentu. Ketersediaan paket mengikuti coverage di alamat kamu. Harga belum termasuk PPN 11%.</p>
+ </div>
+
+ <div class="tab-content" id="tab-fmc">
+ <h3 style="text-align:center;color:var(--blue);font-size:20px;margin:36px 0 18px;">Paket FMC — Internet Rumah + Kuota HP Sekeluarga</h3>
+ <div class="pkg-grid">
+ <div class="pkg-card">
+ <div class="pkg-type">XL Satu FMC · Internet + Kuota HP</div>
+ <div class="pkg-speed">20<span> Mbps</span></div>
+ <div class="pkg-upspeed">Internet 20 Mbps + kuota HP 8 GB</div>
+ <ul class="pkg-uses">
+ <li>Internet Rp185.000 + kuota HP 8 GB hanya tambah Rp24.000</li>
+ <li>Kuota dibagi untuk 2 anggota</li>
+ <li>Tanpa bonus speed booster</li>
+ <li>Biaya instalasi Rp100.000</li>
+ <li>Gratis 2 SIM XL Prabayar dari teknisi</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp209.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn" onclick="pilihPaket('FMC Starter 20 Mbps — Rp209.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">XL Satu FMC · Internet + Kuota HP</div>
+ <div class="pkg-speed">50<span> Mbps</span></div>
+ <div class="pkg-upspeed">Internet 50 Mbps + kuota HP 10 GB</div>
+ <ul class="pkg-uses">
+ <li>Internet Rp229.000 + kuota HP 10 GB hanya tambah Rp20.000</li>
+ <li>Kuota dibagi untuk 2 anggota</li>
+ <li>Bonus speed 6 bulan jadi 75 Mbps</li>
+ <li>Gratis instalasi</li>
+ <li>Gratis 2 SIM XL Prabayar dari teknisi</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp249.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn" onclick="pilihPaket('FMC Smart 50 Mbps — Rp249.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card featured">
+ <div class="pkg-type">XL Satu FMC · Internet + Kuota HP</div>
+ <div class="pkg-speed">100<span> Mbps</span></div>
+ <div class="pkg-upspeed">Internet 100 Mbps + kuota HP 25 GB</div>
+ <ul class="pkg-uses">
+ <li>Internet Rp279.000 + kuota HP 25 GB hanya tambah Rp40.000</li>
+ <li>Kuota dibagi untuk 2 anggota</li>
+ <li>Bonus speed 6 bulan jadi 150 Mbps</li>
+ <li>Gratis instalasi</li>
+ <li>Gratis 2 SIM XL Prabayar dari teknisi</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp319.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn teal" onclick="pilihPaket('FMC Family 100 Mbps — Rp319.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">XL Satu FMC · Internet + Kuota HP</div>
+ <div class="pkg-speed">150<span> Mbps</span></div>
+ <div class="pkg-upspeed">Internet 150 Mbps + kuota HP 50 GB</div>
+ <ul class="pkg-uses">
+ <li>Internet Rp299.000 + kuota HP 50 GB hanya tambah Rp70.000</li>
+ <li>Kuota dibagi untuk 3 anggota</li>
+ <li>Bonus speed 6 bulan jadi 200 Mbps</li>
+ <li>Gratis instalasi</li>
+ <li>Gratis 2 SIM XL Prabayar dari teknisi</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp369.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn" onclick="pilihPaket('FMC Superuser 150 Mbps — Rp369.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ </div>
+ <p style="text-align:center;font-size:12px;color:#8899AA;margin-top:12px;">Harga flat selama berlangganan, khusus pelanggan baru. Minimum berlangganan 12 bulan; berhenti sebelum 12 bulan dikenakan penalti Rp1.000.000. Speed booster berlaku 6 bulan lalu kembali ke speed normal. Berlaku di DSA, Telesales, dan XL Center. Harga belum termasuk PPN 11%.</p>
+ </div>
+
+ <div class="tab-content" id="tab-combo">
+ <h3 style="text-align:center;color:var(--blue);font-size:20px;margin:36px 0 18px;">Paket Combo — Internet + TV</h3>
+ <div class="pkg-grid">
+ <div class="pkg-card">
+ <div class="pkg-type">Combo · Internet + TV</div>
+ <div class="pkg-speed">100<span> Mbps</span></div>
+ <div class="pkg-upspeed">Joy Value</div>
+ <ul class="pkg-uses">
+ <li>107 channel TV</li>
+ <li>Bonus kuota HP sekeluarga 25 GB untuk 2 member</li>
+ <li>Gratis instalasi</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp350.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn" onclick="pilihPaket('Combo Joy Value 100 Mbps — Rp350.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card featured">
+ <div class="pkg-type">Combo · Internet + TV</div>
+ <div class="pkg-speed">150<span> Mbps</span></div>
+ <div class="pkg-upspeed">Joy Pro</div>
+ <ul class="pkg-uses">
+ <li>107 channel TV</li>
+ <li>Bonus kuota HP sekeluarga 50 GB untuk 3 member</li>
+ <li>Gratis instalasi</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp425.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn teal" onclick="pilihPaket('Combo Joy Pro 150 Mbps — Rp425.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Combo · Internet + TV</div>
+ <div class="pkg-speed">200<span> Mbps</span></div>
+ <div class="pkg-upspeed">Joy Premium</div>
+ <ul class="pkg-uses">
+ <li>167 channel TV</li>
+ <li>Bonus kuota HP sekeluarga 50 GB untuk 3 member</li>
+ <li>Gratis instalasi</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp675.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn" onclick="pilihPaket('Combo Joy Premium 200 Mbps — Rp675.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Combo · Internet + TV</div>
+ <div class="pkg-speed">300<span> Mbps</span></div>
+ <div class="pkg-upspeed">Star Value</div>
+ <ul class="pkg-uses">
+ <li>187 channel TV</li>
+ <li>Bonus OTT: CatchPlay+ &amp; Viu</li>
+ <li>Bonus kuota HP sekeluarga 100 GB untuk 4 member</li>
+ <li>Gratis instalasi</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp985.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn" onclick="pilihPaket('Combo Star Value 300 Mbps — Rp985.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Combo · Internet + TV</div>
+ <div class="pkg-speed">500<span> Mbps</span></div>
+ <div class="pkg-upspeed">Star Pro</div>
+ <ul class="pkg-uses">
+ <li>189 channel TV</li>
+ <li>Bonus OTT: CatchPlay+ &amp; Viu</li>
+ <li>Bonus kuota HP sekeluarga 100 GB untuk 4 member</li>
+ <li>Gratis instalasi</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp1.850.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn" onclick="pilihPaket('Combo Star Pro 500 Mbps — Rp1.850.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Combo · Internet + TV</div>
+ <div class="pkg-speed">1<span> Gbps</span></div>
+ <div class="pkg-upspeed">Star Premium</div>
+ <ul class="pkg-uses">
+ <li>196 channel TV</li>
+ <li>Bonus OTT: CatchPlay+, Viu &amp; Lionsgate Play</li>
+ <li>Bonus kuota HP sekeluarga 100 GB untuk 4 member</li>
+ <li>Gratis instalasi</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Harga dasar / bulan</div>
+ <div class="pkg-price">Rp4.500.000</div>
+ <div class="pkg-note">Belum termasuk PPN · Min. 12 bulan</div>
+ <button class="pkg-btn" onclick="pilihPaket('Combo Star Premium 1 Gbps — Rp4.500.000/bln')">Pesan via WhatsApp</button>
+ </div>
+
+ </div>
+ <p style="text-align:center;font-size:12px;color:#8899AA;margin-top:12px;">Khusus pelanggan baru di area footprint First Media (HFC/FTTH). Jumlah channel dan OTT dapat berubah sewaktu-waktu sesuai kebijakan XL SATU. Harga flat, minimum berlangganan 12 bulan, penalti Rp1.000.000 bila berhenti lebih awal. Berlaku di DSA, Telesales, dan XL Center. Harga belum termasuk PPN 11%.</p>
+ </div>
+
+ <div class="tab-content" id="tab-promo">
+ <h3 style="text-align:center;color:var(--blue);font-size:20px;margin:36px 0 18px;">Paket Hemat Bayar di Muka — FTTH</h3>
+ <div class="pkg-grid">
+ <div class="pkg-card">
+ <div class="pkg-type">Fiber Optik · Bayar di Muka</div>
+ <div class="pkg-speed">50<span> Mbps</span></div>
+ <div class="pkg-upspeed">Bayar 3 dapat 4 bulan</div>
+ <ul class="pkg-uses">
+ <li>Bonus Vidio Lite &amp; CatchPlay+ 3 bulan</li>
+ <li>Pembayaran lunas sebelum instalasi</li>
+ <li>Setelah periode promo otomatis bulanan</li>
+ <li>Perubahan paket basic setelah periode promo</li>
+ </ul>
+ <div class="pkg-label">Harga dasar (4 bulan)</div>
+ <div class="pkg-price">Rp650.000</div>
+ <div class="pkg-note">Setara ±Rp162.500/bln · lanjut Rp199.000/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('FTTH 50 Mbps — Rp650.000 (4 bln)')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Fiber Optik · Bayar di Muka</div>
+ <div class="pkg-speed">100<span> Mbps</span></div>
+ <div class="pkg-upspeed">Bayar 3 dapat 4 bulan</div>
+ <ul class="pkg-uses">
+ <li>Bonus Vidio Lite &amp; CatchPlay+ 3 bulan</li>
+ <li>Pembayaran lunas sebelum instalasi</li>
+ <li>Setelah periode promo otomatis bulanan</li>
+ <li>Perubahan paket basic setelah periode promo</li>
+ </ul>
+ <div class="pkg-label">Harga dasar (4 bulan)</div>
+ <div class="pkg-price">Rp790.000</div>
+ <div class="pkg-note">Setara ±Rp197.500/bln · lanjut Rp219.000/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('FTTH 100 Mbps — Rp790.000 (4 bln)')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Fiber Optik · Bayar di Muka</div>
+ <div class="pkg-speed">100<span> Mbps</span></div>
+ <div class="pkg-upspeed">Bayar 3 dapat 3 bulan</div>
+ <ul class="pkg-uses">
+ <li>Bonus Vidio Lite &amp; CatchPlay+ 3 bulan</li>
+ <li>Pembayaran lunas sebelum instalasi</li>
+ <li>Setelah periode promo otomatis bulanan</li>
+ <li>Perubahan paket basic setelah periode promo</li>
+ </ul>
+ <div class="pkg-label">Harga dasar (3 bulan)</div>
+ <div class="pkg-price">Rp650.000</div>
+ <div class="pkg-note">Setara ±Rp216.667/bln · lanjut Rp219.000/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('FTTH 100 Mbps — Rp650.000 (3 bln)')">Pesan via WhatsApp</button>
+ </div>
+
+ </div>
+ <h3 style="text-align:center;color:var(--blue);font-size:20px;margin:36px 0 18px;">Promo Bayar 10 Dapat 12 Bulan — FMC (XL SATU &amp; First Media)</h3>
+ <div class="pkg-grid">
+ <div class="pkg-card">
+ <div class="pkg-type">Promo Bayar 10 Dapat 12</div>
+ <div class="pkg-speed">Basic Smart</div>
+ <div class="pkg-upspeed">Internet 50 Mbps · booster 75 Mbps</div>
+ <ul class="pkg-uses">
+ <li>Kuota HP 10 GB untuk 2 member</li>
+ <li>Bonus speed booster 6 bulan</li>
+ <li>Bayar 10 bulan di muka, bulan sisanya gratis</li>
+ <li>Tidak bisa ganti paket basic selama program</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Total bayar di muka (12 bulan)</div>
+ <div class="pkg-price">Rp2.490.000</div>
+ <div class="pkg-note">Setara ±Rp207K/bln · Normal Rp249K/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('Promo Bayar 10 Dapat 12 Basic Smart — Rp2.490.000')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Promo Bayar 10 Dapat 12</div>
+ <div class="pkg-speed">Basic Family</div>
+ <div class="pkg-upspeed">Internet 100 Mbps · booster 150 Mbps</div>
+ <ul class="pkg-uses">
+ <li>Kuota HP 25 GB untuk 2 member</li>
+ <li>Bonus speed booster 6 bulan</li>
+ <li>Bayar 10 bulan di muka, bulan sisanya gratis</li>
+ <li>Tidak bisa ganti paket basic selama program</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Total bayar di muka (12 bulan)</div>
+ <div class="pkg-price">Rp3.190.000</div>
+ <div class="pkg-note">Setara ±Rp265K/bln · Normal Rp319K/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('Promo Bayar 10 Dapat 12 Basic Family — Rp3.190.000')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Promo Bayar 10 Dapat 12</div>
+ <div class="pkg-speed">Basic Superuser</div>
+ <div class="pkg-upspeed">Internet 150 Mbps · booster 200 Mbps</div>
+ <ul class="pkg-uses">
+ <li>Kuota HP 50 GB untuk 3 member</li>
+ <li>Bonus speed booster 6 bulan</li>
+ <li>Bayar 10 bulan di muka, bulan sisanya gratis</li>
+ <li>Tidak bisa ganti paket basic selama program</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Total bayar di muka (12 bulan)</div>
+ <div class="pkg-price">Rp3.690.000</div>
+ <div class="pkg-note">Setara ±Rp307K/bln · Normal Rp369K/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('Promo Bayar 10 Dapat 12 Basic Superuser — Rp3.690.000')">Pesan via WhatsApp</button>
+ </div>
+
+ </div>
+ <h3 style="text-align:center;color:var(--blue);font-size:20px;margin:36px 0 18px;">Promo Bayar 6 Dapat 8 Bulan — Combo TV Silver (First Media)</h3>
+ <div class="pkg-grid">
+ <div class="pkg-card">
+ <div class="pkg-type">Promo Bayar 6 Dapat 8</div>
+ <div class="pkg-speed">Joy Value</div>
+ <div class="pkg-upspeed">Internet 100 Mbps · 98 channel TV</div>
+ <ul class="pkg-uses">
+ <li>Kuota HP 25 GB untuk 2 member</li>
+ <li>Bayar 6 bulan di muka, bulan sisanya gratis</li>
+ <li>Tidak bisa ganti paket basic selama program</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Total bayar di muka (8 bulan)</div>
+ <div class="pkg-price">Rp2.100.000</div>
+ <div class="pkg-note">Setara ±Rp262K/bln · Normal Rp350K/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('Promo Bayar 6 Dapat 8 Joy Value — Rp2.100.000')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Promo Bayar 6 Dapat 8</div>
+ <div class="pkg-speed">Joy Pro</div>
+ <div class="pkg-upspeed">Internet 150 Mbps · 99 channel TV</div>
+ <ul class="pkg-uses">
+ <li>Kuota HP 50 GB untuk 3 member</li>
+ <li>Bayar 6 bulan di muka, bulan sisanya gratis</li>
+ <li>Tidak bisa ganti paket basic selama program</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Total bayar di muka (8 bulan)</div>
+ <div class="pkg-price">Rp2.550.000</div>
+ <div class="pkg-note">Setara ±Rp319K/bln · Normal Rp425K/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('Promo Bayar 6 Dapat 8 Joy Pro — Rp2.550.000')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Promo Bayar 6 Dapat 8</div>
+ <div class="pkg-speed">Joy Premium</div>
+ <div class="pkg-upspeed">Internet 200 Mbps · 167 channel TV</div>
+ <ul class="pkg-uses">
+ <li>Kuota HP 50 GB untuk 3 member</li>
+ <li>Bayar 6 bulan di muka, bulan sisanya gratis</li>
+ <li>Tidak bisa ganti paket basic selama program</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Total bayar di muka (8 bulan)</div>
+ <div class="pkg-price">Rp4.050.000</div>
+ <div class="pkg-note">Setara ±Rp506K/bln · Normal Rp675K/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('Promo Bayar 6 Dapat 8 Joy Premium — Rp4.050.000')">Pesan via WhatsApp</button>
+ </div>
+
+ </div>
+ <h3 style="text-align:center;color:var(--blue);font-size:20px;margin:36px 0 18px;">Promo Bayar 9 Dapat 12 Bulan — Combo TV Gold (First Media)</h3>
+ <div class="pkg-grid">
+ <div class="pkg-card">
+ <div class="pkg-type">Promo Bayar 9 Dapat 12</div>
+ <div class="pkg-speed">Joy Value</div>
+ <div class="pkg-upspeed">Internet 100 Mbps · 98 channel TV</div>
+ <ul class="pkg-uses">
+ <li>Kuota HP 25 GB untuk 2 member</li>
+ <li>Bayar 9 bulan di muka, bulan sisanya gratis</li>
+ <li>Tidak bisa ganti paket basic selama program</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Total bayar di muka (12 bulan)</div>
+ <div class="pkg-price">Rp3.150.000</div>
+ <div class="pkg-note">Setara ±Rp262K/bln · Normal Rp350K/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('Promo Bayar 9 Dapat 12 Joy Value — Rp3.150.000')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Promo Bayar 9 Dapat 12</div>
+ <div class="pkg-speed">Joy Pro</div>
+ <div class="pkg-upspeed">Internet 150 Mbps · 99 channel TV</div>
+ <ul class="pkg-uses">
+ <li>Kuota HP 50 GB untuk 3 member</li>
+ <li>Bayar 9 bulan di muka, bulan sisanya gratis</li>
+ <li>Tidak bisa ganti paket basic selama program</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Total bayar di muka (12 bulan)</div>
+ <div class="pkg-price">Rp3.850.000</div>
+ <div class="pkg-note">Setara ±Rp320K/bln · Normal Rp425K/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('Promo Bayar 9 Dapat 12 Joy Pro — Rp3.850.000')">Pesan via WhatsApp</button>
+ </div>
+
+ <div class="pkg-card">
+ <div class="pkg-type">Promo Bayar 9 Dapat 12</div>
+ <div class="pkg-speed">Joy Premium</div>
+ <div class="pkg-upspeed">Internet 200 Mbps · 167 channel TV</div>
+ <ul class="pkg-uses">
+ <li>Kuota HP 50 GB untuk 3 member</li>
+ <li>Bayar 9 bulan di muka, bulan sisanya gratis</li>
+ <li>Tidak bisa ganti paket basic selama program</li>
+ <li>Gratis 2 SIM XL Prabayar</li>
+ </ul>
+ <div class="pkg-label">Total bayar di muka (12 bulan)</div>
+ <div class="pkg-price">Rp6.000.000</div>
+ <div class="pkg-note">Setara ±Rp500K/bln · Normal Rp675K/bln · Belum termasuk PPN</div>
+ <button class="pkg-btn" onclick="pilihPaket('Promo Bayar 9 Dapat 12 Joy Premium — Rp6.000.000')">Pesan via WhatsApp</button>
+ </div>
+
+ </div>
+ <p style="text-align:center;font-size:12px;color:#8899AA;margin-top:24px;">Promo bayar di muka hanya untuk pelanggan baru, tidak dapat digabung dengan promo diskon bulanan, dan tidak bisa ditambah add-on selama masa program. Setelah masa promo, tagihan kembali ke harga normal bulanan. Berlaku di DSA, Telesales, dan XL Center. Harga belum termasuk PPN 11%.</p>
  </div>
 
  </div>
@@ -709,7 +1133,7 @@
  <div class="reg-form-wrap">
  <form id="regForm" onsubmit="event.preventDefault(); kirimForm();">
  <label for="f-nama">Nama Lengkap</label>
- <input type="text" id="f-nama" required placeholder="Nama Lengkap">
+ <input type="text" id="f-nama" required placeholder="Sesuai KTP">
 
  <label for="f-wa">Nomor WhatsApp Aktif</label>
  <input type="tel" id="f-wa" required placeholder="08xxxxxxxxxx">
@@ -730,11 +1154,17 @@
  <option value="FWA 100 Mbps — Rp219.000/bln">FWA 100 Mbps — Rp219.000/bln (Bulanan)</option>
  <option value="FWA 50 Mbps — Rp650.000 (4 bln)">FWA 50 Mbps — Rp650.000 (Hemat 4 Bulan)</option>
  <option value="FWA 100 Mbps — Rp790.000 (4 bln)">FWA 100 Mbps — Rp790.000 (Hemat 4 Bulan)</option>
- <option value="FTTH 100 Mbps — Rp229.000/bln">FTTH 100 Mbps — Rp229.000/bln</option>
- <option value="FTTH 150 Mbps — Rp279.000/bln">FTTH 150 Mbps — Rp279.000/bln</option>
- <option value="FTTH 300 Mbps — Rp300.000/bln">FTTH 300 Mbps — Rp300.000/bln</option>
- <option value="FTTH 600 Mbps — Rp500.000/bln">FTTH 600 Mbps — Rp500.000/bln</option>
- <option value="FTTH 1000 Mbps — Rp900.000/bln">FTTH 1000 Mbps — Rp900.000/bln</option>
+ <option value="FWA 100 Mbps — Rp650.000 (3 bln)">FWA 100 Mbps — Rp650.000 (Hemat 3 Bulan)</option>
+ <option value="FTTH 20 Mbps — Rp185.000/bln">FTTH 20 Mbps — Rp185.000/bln</option>
+ <option value="FTTH 250 Mbps — Rp229.000/bln">FTTH 250 Mbps — Rp229.000/bln</option>
+ <option value="FTTH 300 Mbps — Rp239.000/bln">FTTH 300 Mbps — Rp239.000/bln</option>
+ <option value="FTTH 400 Mbps — Rp299.000/bln">FTTH 400 Mbps — Rp299.000/bln</option>
+ <option value="FTTH 500 Mbps — Rp399.000/bln">FTTH 500 Mbps — Rp399.000/bln</option>
+ <option value="FTTH 1000 Mbps — Rp899.000/bln">FTTH 1 Gbps — Rp899.000/bln</option>
+ <optgroup label="FMC (Internet + Kuota HP)"><option value="FMC Starter 20 Mbps — Rp209.000/bln">FMC Starter 20 Mbps — Rp209.000/bln</option><option value="FMC Smart 50 Mbps — Rp249.000/bln">FMC Smart 50 Mbps — Rp249.000/bln</option><option value="FMC Family 100 Mbps — Rp319.000/bln">FMC Family 100 Mbps — Rp319.000/bln</option><option value="FMC Superuser 150 Mbps — Rp369.000/bln">FMC Superuser 150 Mbps — Rp369.000/bln</option></optgroup>
+ <optgroup label="Combo Internet + TV"><option value="Combo Joy Value 100 Mbps — Rp350.000/bln">Combo Joy Value 100 Mbps — Rp350.000/bln</option><option value="Combo Joy Pro 150 Mbps — Rp425.000/bln">Combo Joy Pro 150 Mbps — Rp425.000/bln</option><option value="Combo Joy Premium 200 Mbps — Rp675.000/bln">Combo Joy Premium 200 Mbps — Rp675.000/bln</option><option value="Combo Star Value 300 Mbps — Rp985.000/bln">Combo Star Value 300 Mbps — Rp985.000/bln</option><option value="Combo Star Pro 500 Mbps — Rp1.850.000/bln">Combo Star Pro 500 Mbps — Rp1.850.000/bln</option><option value="Combo Star Premium 1 Gbps — Rp4.500.000/bln">Combo Star Premium 1 Gbps — Rp4.500.000/bln</option></optgroup>
+ <optgroup label="Promo Bayar di Muka"><option value="FTTH 50 Mbps — Rp650.000 (4 bln)">FTTH 50 Mbps — Rp650.000 (4 bln)</option><option value="FTTH 100 Mbps — Rp790.000 (4 bln)">FTTH 100 Mbps — Rp790.000 (4 bln)</option><option value="FTTH 100 Mbps — Rp650.000 (3 bln)">FTTH 100 Mbps — Rp650.000 (3 bln)</option></optgroup>
+ <optgroup label="Promo Bayar X Dapat Y"><option value="Promo Bayar 10 Dapat 12 Basic Smart — Rp2.490.000">Promo Bayar 10 Dapat 12 Basic Smart — Rp2.490.000</option><option value="Promo Bayar 10 Dapat 12 Basic Family — Rp3.190.000">Promo Bayar 10 Dapat 12 Basic Family — Rp3.190.000</option><option value="Promo Bayar 10 Dapat 12 Basic Superuser — Rp3.690.000">Promo Bayar 10 Dapat 12 Basic Superuser — Rp3.690.000</option><option value="Promo Bayar 6 Dapat 8 Joy Value — Rp2.100.000">Promo Bayar 6 Dapat 8 Joy Value — Rp2.100.000</option><option value="Promo Bayar 6 Dapat 8 Joy Pro — Rp2.550.000">Promo Bayar 6 Dapat 8 Joy Pro — Rp2.550.000</option><option value="Promo Bayar 6 Dapat 8 Joy Premium — Rp4.050.000">Promo Bayar 6 Dapat 8 Joy Premium — Rp4.050.000</option><option value="Promo Bayar 9 Dapat 12 Joy Value — Rp3.150.000">Promo Bayar 9 Dapat 12 Joy Value — Rp3.150.000</option><option value="Promo Bayar 9 Dapat 12 Joy Pro — Rp3.850.000">Promo Bayar 9 Dapat 12 Joy Pro — Rp3.850.000</option><option value="Promo Bayar 9 Dapat 12 Joy Premium — Rp6.000.000">Promo Bayar 9 Dapat 12 Joy Premium — Rp6.000.000</option></optgroup>
  <option value="Cek Coverage — belum tahu paketnya">Belum tahu, mau cek coverage dulu</option>
  </select>
 
@@ -822,7 +1252,7 @@
  </div>
 
  <div class="footer-disclaimer">
- <strong>Disclaimer &amp; Transparansi:</strong> Halaman ini dikelola oleh <strong>Rizky Sepliansyah</strong> selaku <strong>Sales/Agen Resmi XL Home</strong> dari vendor <strong>PT Cahaya Bumi Nasional (CBN)</strong>, yang ditempatkan di <strong>PT XLSmart Telecom Tbk (XL SATU)</strong>. Kami bukan situs resmi XLSmart atau XL Home. Harga yang tercantum adalah harga dasar dan dapat berubah sewaktu-waktu sesuai kebijakan perusahaan. Untuk informasi resmi, kunjungi <a href="https://xlsatu.co.id" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.6)">xlsatu.co.id</a>.
+ <strong>Disclaimer &amp; Transparansi:</strong> Halaman ini dikelola oleh <strong>Rizky Sepliansyah</strong> selaku <strong>Sales/Agen Resmi XL Home</strong> dari vendor <strong>PT Cahaya Bumi Nasional (CBN)</strong>, yang ditempatkan di <strong>PT XLSmart Telecom Tbk (XL SATU)</strong>. Kami bukan situs resmi XL Axiata atau XLSmart. Harga yang tercantum adalah harga dasar dan dapat berubah sewaktu-waktu sesuai kebijakan perusahaan. Untuk informasi resmi, kunjungi <a href="https://xlsatu.co.id" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.6)">xlsatu.co.id</a>.
  </div>
 
  <div class="footer-bottom">

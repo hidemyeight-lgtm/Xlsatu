@@ -294,6 +294,9 @@
  }
  .reg-submit:hover { background: #1ebe5d; }
  .reg-submit:disabled { opacity: 0.7; cursor: wait; }
+ .reg-mode { display: flex; gap: 6px; background: var(--gray-light); border-radius: 12px; padding: 5px; margin-bottom: 24px; }
+ .reg-mode button { flex: 1; border: none; background: transparent; padding: 11px 8px; border-radius: 9px; font-size: 14px; font-weight: 600; color: var(--gray-text); cursor: pointer; font-family: inherit; }
+ .reg-mode button.active { background: var(--white); color: var(--blue); box-shadow: 0 2px 8px rgba(0,51,160,0.12); }
  .reg-note { text-align: center; font-size: 12.5px; color: var(--gray-text); margin-top: 16px; }
 
  /* CS SECTION */
@@ -554,7 +557,7 @@
  <a href="#page-privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
  </div>
  <div class="nav-cta-group">
- <a href="#daftar" onclick="goToSection('daftar');return false;" class="nav-cta nav-cta-outline">Cek Coverage</a>
+ <a href="#daftar" onclick="bukaCekCoverage();return false;" class="nav-cta nav-cta-outline">Cek Coverage</a>
  <a href="#daftar" onclick="goToSection('daftar');return false;" class="nav-cta">Daftar Sekarang</a>
  </div>
 </nav>
@@ -1209,6 +1212,10 @@
  <div class="section-title">Daftar & Cek Ketersediaan Jaringan</div>
  <div class="section-sub">Isi data kamu, bagikan titik lokasi biar kami cek jangkauan sinyal, lalu lanjut chat WhatsApp</div>
  <div class="reg-form-wrap">
+ <div class="reg-mode" role="group" aria-label="Pilih keperluan">
+ <button type="button" id="mode-daftar" class="active" aria-pressed="true" onclick="setModeForm('daftar')">Daftar Paket</button>
+ <button type="button" id="mode-cek" aria-pressed="false" onclick="setModeForm('cek')">Cek Coverage Saja</button>
+ </div>
  <form id="regForm" onsubmit="event.preventDefault(); kirimForm();">
  <label for="f-nama">Nama Lengkap</label>
  <input type="text" id="f-nama" required placeholder="Nama Lengkap">
@@ -1243,7 +1250,7 @@
  <optgroup label="Combo Internet + TV"><option value="Combo Joy Value 100 Mbps — Rp350.000/bln">Combo Joy Value 100 Mbps — Rp350.000/bln</option><option value="Combo Joy Pro 150 Mbps — Rp425.000/bln">Combo Joy Pro 150 Mbps — Rp425.000/bln</option><option value="Combo Joy Premium 200 Mbps — Rp675.000/bln">Combo Joy Premium 200 Mbps — Rp675.000/bln</option><option value="Combo Star Value 300 Mbps — Rp985.000/bln">Combo Star Value 300 Mbps — Rp985.000/bln</option><option value="Combo Star Pro 500 Mbps — Rp1.850.000/bln">Combo Star Pro 500 Mbps — Rp1.850.000/bln</option><option value="Combo Star Premium 1 Gbps — Rp4.500.000/bln">Combo Star Premium 1 Gbps — Rp4.500.000/bln</option></optgroup>
  <optgroup label="Promo Bayar di Muka"><option value="FTTH 50 Mbps — Rp650.000 (4 bln)">FTTH 50 Mbps — Rp650.000 (4 bln)</option><option value="FTTH 100 Mbps — Rp790.000 (4 bln)">FTTH 100 Mbps — Rp790.000 (4 bln)</option><option value="FTTH 100 Mbps — Rp650.000 (3 bln)">FTTH 100 Mbps — Rp650.000 (3 bln)</option></optgroup>
  <optgroup label="Promo Bayar X Dapat Y"><option value="Promo Bayar 10 Dapat 12 Basic Smart — Rp2.490.000">Promo Bayar 10 Dapat 12 Basic Smart — Rp2.490.000</option><option value="Promo Bayar 10 Dapat 12 Basic Family — Rp3.190.000">Promo Bayar 10 Dapat 12 Basic Family — Rp3.190.000</option><option value="Promo Bayar 10 Dapat 12 Basic Superuser — Rp3.690.000">Promo Bayar 10 Dapat 12 Basic Superuser — Rp3.690.000</option><option value="Promo Bayar 6 Dapat 8 Joy Value — Rp2.100.000">Promo Bayar 6 Dapat 8 Joy Value — Rp2.100.000</option><option value="Promo Bayar 6 Dapat 8 Joy Pro — Rp2.550.000">Promo Bayar 6 Dapat 8 Joy Pro — Rp2.550.000</option><option value="Promo Bayar 6 Dapat 8 Joy Premium — Rp4.050.000">Promo Bayar 6 Dapat 8 Joy Premium — Rp4.050.000</option><option value="Promo Bayar 9 Dapat 12 Joy Value — Rp3.150.000">Promo Bayar 9 Dapat 12 Joy Value — Rp3.150.000</option><option value="Promo Bayar 9 Dapat 12 Joy Pro — Rp3.850.000">Promo Bayar 9 Dapat 12 Joy Pro — Rp3.850.000</option><option value="Promo Bayar 9 Dapat 12 Joy Premium — Rp6.000.000">Promo Bayar 9 Dapat 12 Joy Premium — Rp6.000.000</option></optgroup>
- <option value="Cek Coverage — belum tahu paketnya">Belum tahu, mau cek coverage dulu</option>
+ 
  </select>
 
  <label for="f-tanggal">Rencana Tanggal Instalasi</label>
@@ -1511,17 +1518,52 @@
     if (dateInput) dateInput.min = today;
   })();
 
+  // ── Mode form: Daftar Paket vs Cek Coverage Saja ──
+  window.__modeForm = 'daftar';
+  function setModeForm(mode) {
+    const cek = (mode === 'cek');
+    window.__modeForm = cek ? 'cek' : 'daftar';
+    ['paket', 'tanggal'].forEach(function (k) {
+      const inp = document.getElementById('f-' + k);
+      const lbl = document.querySelector('label[for="f-' + k + '"]');
+      if (inp) { inp.style.display = cek ? 'none' : ''; inp.required = !cek; }
+      if (lbl) lbl.style.display = cek ? 'none' : '';
+    });
+    document.getElementById('mode-daftar').classList.toggle('active', !cek);
+    document.getElementById('mode-cek').classList.toggle('active', cek);
+    document.getElementById('mode-daftar').setAttribute('aria-pressed', String(!cek));
+    document.getElementById('mode-cek').setAttribute('aria-pressed', String(cek));
+    const sub = document.querySelector('#daftar .section-sub');
+    if (sub) sub.textContent = cek
+      ? 'Cukup isi nama, WhatsApp, dan lokasi. Tim kami cek jangkauan di alamatmu dan kabari paket yang tersedia, tanpa perlu daftar dulu'
+      : 'Isi data kamu, bagikan titik lokasi biar kami cek jangkauan sinyal, lalu lanjut chat WhatsApp';
+    document.getElementById('regSubmitBtn').innerHTML = cek ? 'Cek Coverage via WhatsApp' : 'Daftar &amp; Lanjut ke WhatsApp';
+  }
+
+  // Tombol "Cek Coverage": buka mode cek, scroll ke form, lalu langsung deteksi lokasi
+  function bukaCekCoverage() {
+    setModeForm('cek');
+    goToSection('daftar');
+    setTimeout(function () {
+      const alamat = document.getElementById('f-alamat');
+      if (alamat && !alamat.value.trim()) deteksiLokasi();
+      const nama = document.getElementById('f-nama');
+      if (nama && !nama.value) nama.focus({ preventScroll: true });
+    }, 700);
+  }
+
   // ── FORM KIRIM → Google Sheets + WA ──
   function kirimForm() {
     const nama   = document.getElementById('f-nama').value.trim();
     const wa     = document.getElementById('f-wa').value.trim();
     const alamat = document.getElementById('f-alamat').value.trim();
-    const paket  = document.getElementById('f-paket').value;
-    const tgl    = document.getElementById('f-tanggal').value;
+    const cekOnly = (window.__modeForm === 'cek');
+    const paket  = cekOnly ? 'Cek Coverage — belum tahu paketnya' : document.getElementById('f-paket').value;
+    const tgl    = cekOnly ? '-' : document.getElementById('f-tanggal').value;
     const mapLink = document.getElementById('maps-link');
     const mapsHref = (mapLink && mapLink.href && !mapLink.href.endsWith('#')) ? mapLink.href : '';
 
-    if (!nama || !wa || !alamat || !paket || !tgl) {
+    if (!nama || !wa || !alamat || (!cekOnly && (!paket || !tgl))) {
       alert('Mohon lengkapi semua field terlebih dahulu.');
       return;
     }
@@ -1532,8 +1574,8 @@
     if (nama.length > 100 || alamat.length > 300) { alert('Nama atau alamat terlalu panjang.'); return; }
     try { const last = +localStorage.getItem('lastSubmit') || 0; if (Date.now() - last < 30000) { alert('Tunggu 30 detik sebelum mengirim lagi.'); return; } localStorage.setItem('lastSubmit', Date.now()); } catch (e) {}
 
-    const [y, m, d] = tgl.split('-');
-    const tglFormatted = d + '/' + m + '/' + y;
+    let tglFormatted = '-';
+    if (!cekOnly) { const [y, m, d] = tgl.split('-'); tglFormatted = d + '/' + m + '/' + y; }
 
     // 1. Kirim ke Google Sheets
     const submitBtn = document.querySelector('.form-submit');
@@ -1565,7 +1607,13 @@
     });
 
     // 2. Buka WA
-    const pesan =
+    const pesan = cekOnly ?
+      'Halo, saya ingin cek ketersediaan jaringan XL SATU (Fiber/FWA) di alamat saya:%0A%0A' +
+      '*Nama:* '             + encodeURIComponent(nama)         + '%0A' +
+      '*No. WA:* '           + encodeURIComponent(wa)           + '%0A' +
+      '*Alamat:* '           + encodeURIComponent(alamat)       + '%0A' +
+      (mapsHref ? '*Lokasi Maps:* ' + encodeURIComponent(mapsHref) + '%0A' : '') +
+      '%0AMohon dicek coverage-nya dan paket apa yang tersedia di alamat ini. Terima kasih!' :
       'Halo, saya ingin mendaftar paket XL Home:%0A%0A' +
       '*Nama:* '             + encodeURIComponent(nama)         + '%0A' +
       '*No. WA:* '           + encodeURIComponent(wa)           + '%0A' +
@@ -1584,6 +1632,7 @@
       document.getElementById('f-alamat').value  = '';
       document.getElementById('f-paket').value   = '';
       document.getElementById('f-tanggal').value = '';
+      setModeForm('daftar');
       document.getElementById('maps-link-wrap').style.display = 'none';
     }, 800);
   }

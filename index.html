@@ -276,6 +276,14 @@
  .reg-form-wrap input[type="tel"]:focus,
  .reg-form-wrap input[type="date"]:focus,
  .reg-form-wrap select:focus { outline: none; border-color: var(--blue); }
+ .reg-form-wrap textarea#f-alamat {
+   width: 100%; min-height: 90px; box-sizing: border-box;
+   padding: 12px 16px; border: 1.5px solid #dbe6f5; border-radius: 10px 0 0 10px;
+   font-size: 15px; font-family: inherit; color: var(--dark);
+   background: var(--white); resize: vertical; line-height: 1.5;
+   border-right: none;
+ }
+ .reg-form-wrap textarea#f-alamat:focus { outline: none; border-color: var(--blue); }
  .loc-btn {
    width: 100%; padding: 14px 16px; border-radius: 10px; border: 1.5px dashed var(--blue-mid);
    background: var(--sky); color: var(--blue); font-weight: 600; font-size: 15px;
@@ -456,7 +464,7 @@
     display: flex;
     align-items: stretch;
   }
-  .alamat-wrap input {
+  .alamat-wrap input, .alamat-wrap textarea {
     flex: 1;
     min-width: 0;
     border-radius: 10px 0 0 10px !important;
@@ -468,25 +476,32 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 0 16px;
+    padding: 0 18px;
     background: var(--blue);
     color: var(--white);
     border: 1.5px solid var(--blue);
     border-radius: 0 10px 10px 0;
-    font-size: 12.5px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
     cursor: pointer;
     white-space: nowrap;
     font-family: inherit;
-    transition: background 0.2s;
+    transition: background 0.15s, transform 0.1s, box-shadow 0.1s;
+    animation: btnBounce 2s ease-in-out infinite;
+    box-shadow: 0 4px 12px rgba(0,51,160,0.25);
   }
-  .btn-lokasi:hover { background: var(--blue-mid); }
-  .btn-lokasi.loading { background: var(--gray-mid); border-color: var(--gray-mid); cursor: wait; }
-  .btn-lokasi.success { background: #16a34a; border-color: #16a34a; }
+  @keyframes btnBounce {
+    0%, 100% { transform: translateY(0); box-shadow: 0 4px 12px rgba(0,51,160,0.25); }
+    50% { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,51,160,0.35); }
+  }
+  .btn-lokasi:hover { background: var(--blue-mid); animation: none; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,51,160,0.35); }
+  .btn-lokasi:active { transform: scale(0.95) translateY(1px) !important; box-shadow: 0 1px 4px rgba(0,51,160,0.2) !important; animation: none; transition: transform 0.08s, box-shadow 0.08s; }
+  .btn-lokasi.loading { background: var(--gray-mid); border-color: var(--gray-mid); cursor: wait; animation: none; }
+  .btn-lokasi.success { background: #16a34a; border-color: #16a34a; animation: none; }
   @media (max-width: 520px) {
     .alamat-wrap { flex-direction: column-reverse; gap: 8px; }
-    .alamat-wrap input { border-radius: 10px !important; border-right: 1.5px solid #dbe6f5 !important; }
-    .btn-lokasi { justify-content: center; height: 48px; border-radius: 10px; font-size: 14px; }
+    .alamat-wrap input, .alamat-wrap textarea { border-radius: 10px !important; border-right: 1.5px solid #dbe6f5 !important; }
+    .btn-lokasi { justify-content: center; height: auto; min-height: 48px; border-radius: 10px; font-size: 14px; padding: 14px 18px; animation: none; }
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .spin { animation: spin 0.8s linear infinite; display: inline-block; }
@@ -1207,8 +1222,8 @@
 
  <label for="f-alamat">Alamat Lengkap Pemasangan</label>
  <div class="alamat-wrap">
- <input type="text" id="f-alamat" required placeholder="Atau ketik alamat lengkap manual">
- <button type="button" class="btn-lokasi" id="btn-lokasi" onclick="deteksiLokasi()"><span id="lokasi-label">📍 Pakai Lokasi Saya</span></button>
+ <textarea id="f-alamat" required placeholder="Ketik alamat lengkap pemasangan kamu di sini..." rows="3"></textarea>
+ <button type="button" class="btn-lokasi" id="btn-lokasi" onclick="deteksiLokasi()"><span id="lokasi-label">Pakai Lokasi Saya</span></button>
  </div>
  <div id="lokasi-error" style="display:none;color:#dc2626;font-size:12.5px;margin-top:6px;"></div>
  <div id="maps-link-wrap" style="display:none;margin-top:8px;">
@@ -1469,7 +1484,7 @@
             btn.classList.remove('loading');
             btn.classList.add('success');
             label.innerHTML = '✓ Alamat terisi';
-            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = '📍 Pakai Lokasi Saya'; }, 3000);
+            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = 'Pakai Lokasi Saya'; }, 3000);
           })
           .catch(() => {
             input.value = 'Koordinat: ' + lat + ', ' + lng;
@@ -1479,12 +1494,12 @@
             btn.classList.remove('loading');
             btn.classList.add('success');
             label.innerHTML = '✓ Alamat terisi';
-            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = '📍 Pakai Lokasi Saya'; }, 3000);
+            setTimeout(() => { btn.classList.remove('success'); label.innerHTML = 'Pakai Lokasi Saya'; }, 3000);
           });
       },
       function(err) {
         btn.classList.remove('loading');
-        label.innerHTML = '📍 Pakai Lokasi Saya';
+        label.innerHTML = 'Pakai Lokasi Saya';
         const msgs = { 1: 'Izin lokasi ditolak. Aktifkan izin lokasi di browser.', 2: 'Lokasi tidak terdeteksi. Coba lagi atau isi manual.', 3: 'Timeout. Coba lagi atau isi manual.' };
         errEl.textContent  = msgs[err.code] || 'Gagal mendeteksi lokasi.';
         errEl.style.display = 'block';

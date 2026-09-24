@@ -215,8 +215,22 @@
  .pkg-btn.teal { background: var(--teal); }
  .pkg-btn.teal:hover { background: #009088; }
 
- .tabs { flex-wrap: wrap; gap: 8px; }
- .tab { border-radius: 8px !important; padding: 10px 20px; }
+ .tabs { flex-wrap: wrap; gap: 8px; padding-top: 12px; }
+ .tab { position: relative; display: flex; flex-direction: column; align-items: center; line-height: 1.25; font-family: inherit; }
+ .tab-sub { font-size: 11px; font-weight: 500; opacity: .75; margin-top: 2px; }
+ .tab-badge { position: absolute; top: -10px; right: -6px; background: var(--teal); color: #fff; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 999px; letter-spacing: .04em; }
+ .tab-badge.promo { background: #e53e3e; }
+ .tab-hint { text-align: center; font-size: 14px; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
+ .tab-swipe { display: none; text-align: center; font-size: 12px; color: var(--gray-mid); margin: -22px 0 24px; }
+ @media (max-width: 700px) {
+ .tabs-wrap { position: relative; margin-bottom: 36px; }
+ .tabs-wrap .tabs { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-bottom: 0; padding-right: 40px; scrollbar-width: none; -webkit-mask-image: linear-gradient(to right, #000 85%, transparent); mask-image: linear-gradient(to right, #000 85%, transparent); }
+ .tabs-wrap .tabs.at-end { -webkit-mask-image: none; mask-image: none; }
+ .tabs-wrap .tabs::-webkit-scrollbar { display: none; }
+ .tab { flex: 0 0 auto; }
+ .tab-swipe { display: block; margin-top: 8px; }
+ }
+  .tab { border-radius: 8px !important; padding: 10px 20px; }
  .tab-content { display: none; }
  .tab-content.active { display: block; }
 
@@ -530,13 +544,17 @@
  <div class="section-title">Pilih Paket Internet Terbaik</div>
  <div class="section-sub">Tersedia untuk area Jabodetabek — pilih yang sesuai kebutuhan rumah kamu</div>
 
- <div class="tabs">
- <button class="tab active" onclick="switchTab('fwa', this)"> Fixed Wireless (FWA)</button>
- <button class="tab" onclick="switchTab('ftth', this)"> Fiber Optik (FTTH)</button>
- <button class="tab" onclick="switchTab('fmc', this)">FMC + Kuota HP</button>
- <button class="tab" onclick="switchTab('combo', this)">Combo TV</button>
- <button class="tab" onclick="switchTab('promo', this)">Promo Bayar di Muka</button>
+ <p class="tab-hint">👇 Klik kategori di bawah untuk lihat semua pilihan paket</p>
+ <div class="tabs-wrap">
+ <div class="tabs" id="tabsBar">
+ <button class="tab active" onclick="switchTab('fwa', this)"><span class="tab-title">Fixed Wireless (FWA)</span><span class="tab-sub">Mulai Rp219rb/bln</span></button>
+ <button class="tab" onclick="switchTab('ftth', this)"><span class="tab-title">Fiber Optik (FTTH)</span><span class="tab-sub">Mulai Rp185rb/bln</span></button>
+ <button class="tab" onclick="switchTab('fmc', this)"><span class="tab-title">FMC + Kuota HP</span><span class="tab-sub">+ Kuota HP sekeluarga</span></button>
+ <button class="tab" onclick="switchTab('combo', this)"><span class="tab-badge">BARU</span><span class="tab-title">Combo TV</span><span class="tab-sub">Internet + TV</span></button>
+ <button class="tab" onclick="switchTab('promo', this)"><span class="tab-badge promo">PROMO</span><span class="tab-title">Promo Bayar di Muka</span><span class="tab-sub">Hemat s/d 40%</span></button>
  </div>
+ </div>
+ <p class="tab-swipe">Geser untuk lihat kategori lain →</p>
 
  <!-- FWA TAB -->
  <div class="tab-content active" id="tab-fwa">
@@ -1315,6 +1333,7 @@
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + id).classList.add('active');
     btn.classList.add('active');
+    btn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
   }
 
   // ── Pages ──
@@ -1498,6 +1517,13 @@
       document.getElementById('maps-link-wrap').style.display = 'none';
     }, 800);
   }
+
+  (function() {
+    var bar = document.getElementById('tabsBar');
+    if (!bar) return;
+    function chk() { bar.classList.toggle('at-end', bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4); }
+    bar.addEventListener('scroll', chk); window.addEventListener('resize', chk); chk();
+  })();
 </script>
 </body>
 </html>

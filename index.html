@@ -808,7 +808,7 @@
  </div>
 
  </div>
- <div class="nudge"><span><b>Kini lebih ngebut lagi.</b> Dari 250 Mbps (Rp229rb) ke 300 Mbps cuma <b>+Rp10rb/bln</b> (Rp239rb).</span><button onclick="pilihPaket('FTTH 300 Mbps — Rp239.000/bln');track('nudge_click',{to:'ftth_300'})">Ambil 300 Mbps</button></div>
+ <div class="nudge"><span><b>Kini lebih ngebut lagi.</b> Dari 250 Mbps (Rp229rb) ke 300 Mbps cuma <b>+Rp10rb/bln</b> (Rp239rb).</span><button onclick="pilihPaket('FTTH 300 Mbps — Rp239.000/bln');trackEvt('nudge_click',{to:'ftth_300'})">Ambil 300 Mbps</button></div>
  <p style="text-align:center;font-size:13px;color:#8899AA;margin-top:24px;"> FTTH menggunakan kabel fiber optik langsung ke rumah — koneksi lebih stabil untuk kebutuhan jangka panjang.</p>
  <p style="text-align:center;font-size:12px;color:#8899AA;margin-top:8px;">Harga flat selama berlangganan, khusus pelanggan baru. Benefit speed upgrade berlaku 12 bulan dan dapat diperpanjang selama pembayaran lancar. Minimum berlangganan 12 bulan; berhenti sebelum 12 bulan dikenakan penalti Rp1.000.000. Paket 1 Gbps hanya tersedia di area tertentu. Ketersediaan paket mengikuti coverage di alamat kamu. Harga belum termasuk PPN 11%.</p>
  </div>
@@ -1534,11 +1534,13 @@
     const mapsHref = (mapLink && mapLink.href && !mapLink.href.endsWith('#')) ? mapLink.href : '';
 
     if (!nama || !wa || !alamat || !paket || !tgl) {
-      alert('\1
+      alert('Mohon lengkapi semua field terlebih dahulu.');
+      return;
+    }
     if (document.getElementById('f-website').value) return; // honeypot: bot
     if (Date.now() - PAGE_T0 < 4000) { alert('Mohon tunggu sebentar, lalu kirim lagi.'); return; }
     if (!document.getElementById('f-setuju').checked) { alert('Mohon centang persetujuan penggunaan data.'); return; }
-    if (!/^(\\+62|62|0)8\\d{8,12}$/.test(wa.replace(/[\\s-]/g, ''))) { alert('Nomor WhatsApp tidak valid. Contoh: 08123456789'); return; }
+    if (!/^(\+62|62|0)8\d{8,12}$/.test(wa.replace(/[\s-]/g, ''))) { alert('Nomor WhatsApp tidak valid. Contoh: 08123456789'); return; }
     if (nama.length > 100 || alamat.length > 300) { alert('Nama atau alamat terlalu panjang.'); return; }
     try { const last = +localStorage.getItem('lastSubmit') || 0; if (Date.now() - last < 30000) { alert('Tunggu 30 detik sebelum mengirim lagi.'); return; } localStorage.setItem('lastSubmit', Date.now()); } catch (e) {}
 
@@ -1623,7 +1625,7 @@
     const i = { fwa: 0, ftth: 1, fmc: 2, combo: 3, promo: 4 }[id];
     goToSection('paket');
     switchTab(id, document.querySelectorAll('#tabsBar .tab')[i]);
-    track('nudge_click', { to: id });
+    trackEvt('nudge_click', { to: id });
   }
 
   function cekKota() {
@@ -1637,7 +1639,7 @@
       out.innerHTML = '<p>Area ini belum ada di daftar FWA kami, tapi jaringan fiber menjangkau sekitar 126 kota/kabupaten. Alamat kamu mungkin tetap tercover fiber, jadi cek lewat alamat dan titik lokasi.</p>' +
         '<div class="cov-actions">' + cek + '<button class="alt" onclick="gotoTab(\'ftth\')">Lihat paket Fiber</button></div>';
     }
-    track('coverage_check', { city: v });
+    trackEvt('coverage_check', { city: v });
   }
 
   // ── Tracking: isi GA_ID (mis. 'G-XXXXXXXXXX') untuk mengaktifkan Google Analytics 4 ──
@@ -1649,13 +1651,13 @@
     g.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(g);
     gtag('js', new Date()); gtag('config', GA_ID);
   }
-  function track(name, params) { try { if (GA_ID) gtag('event', name, params || {}); } catch (e) {} }
+  function trackEvt(name, params) { try { if (GA_ID) gtag('event', name, params || {}); } catch (e) {} }
 
   const _pilih = pilihPaket, _kirim = kirimForm;
-  pilihPaket = function (p) { track('select_package', { package: p }); return _pilih.apply(this, arguments); };
-  kirimForm  = function () { track('generate_lead', { package: (document.getElementById('f-paket') || {}).value }); return _kirim.apply(this, arguments); };
+  pilihPaket = function (p) { trackEvt('select_package', { package: p }); return _pilih.apply(this, arguments); };
+  kirimForm  = function () { trackEvt('generate_lead', { package: (document.getElementById('f-paket') || {}).value }); return _kirim.apply(this, arguments); };
   document.querySelectorAll('.faq details').forEach(d => d.addEventListener('toggle', () => {
-    if (d.open) track('faq_open', { question: d.querySelector('summary').textContent });
+    if (d.open) trackEvt('faq_open', { question: d.querySelector('summary').textContent });
   }));
 </script>
 <script>

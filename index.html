@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://nominatim.openstreetmap.org https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://nominatim.openstreetmap.org https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>First Media Jadi XL SATU | Internet Rumah Terbaik untuk Keluarga</title>
 <meta name="description" content="First Media kini resmi menjadi XL SATU. Nikmati internet rumah FWA &amp; FTTH terbaik untuk keluarga di area Jabodetabek. Hubungi Rizky: 087810963528">
@@ -29,15 +29,6 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PXDTH8W4');</script>
-<!-- End Google Tag Manager -->
-
 <style>
  :root {
  --blue: #0033A0;
@@ -550,10 +541,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXDTH8W4"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 <!-- NAV -->
 <nav id="header">
@@ -1597,7 +1584,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spin">⟳</span>&nbsp; Mengirim...';
 
-    const clickId = (typeof getClickId === 'function') ? getClickId() : { gclid: '', gbraid: '', wbraid: '' };
     const payload = JSON.stringify({
       nama:    nama,
       wa:      wa,
@@ -1606,10 +1592,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       paket:   paket,
       tanggal: tglFormatted,
       hp:      document.getElementById('f-website').value,
-      t:       Date.now() - PAGE_T0,
-      gclid:   clickId.gclid,
-      gbraid:  clickId.gbraid,
-      wbraid:  clickId.wbraid
+      t:       Date.now() - PAGE_T0
     });
 
     fetch('https://script.google.com/macros/s/AKfycbx5mWTKa5qfot5a9iLoCqmRxBRvHG6bOViWQmGPPf4TMUTgEe5vyWF6aRI_dcC5HKcxCQ/exec', {
@@ -1691,55 +1674,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
   var PAGE_T0 = Date.now();
   if (window.top !== window.self) { try { window.top.location = window.self.location; } catch (e) { document.body.innerHTML = ''; } }
-
-  // ── Tangkap GCLID / GBRAID / WBRAID dari klik iklan Google Ads ──
-  // Disimpan 90 hari di localStorage supaya tetap kebawa walau user baru isi form beberapa hari kemudian.
-  (function captureClickId() {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      const ids = { gclid: params.get('gclid'), gbraid: params.get('gbraid'), wbraid: params.get('wbraid') };
-      const now = Date.now();
-      const TTL = 90 * 24 * 60 * 60 * 1000; // 90 hari, sesuai window klik Google Ads
-      Object.keys(ids).forEach(function (key) {
-        if (ids[key]) {
-          localStorage.setItem(key, ids[key]);
-          localStorage.setItem(key + '_t', now);
-        }
-      });
-      // Bersihkan kalau sudah kadaluarsa (>90 hari sejak klik)
-      ['gclid', 'gbraid', 'wbraid'].forEach(function (key) {
-        const t = +localStorage.getItem(key + '_t') || 0;
-        if (t && now - t > TTL) { localStorage.removeItem(key); localStorage.removeItem(key + '_t'); }
-      });
-    } catch (e) {}
-  })();
-  function getClickId() {
-    try {
-      return {
-        gclid:  localStorage.getItem('gclid')  || '',
-        gbraid: localStorage.getItem('gbraid') || '',
-        wbraid: localStorage.getItem('wbraid') || ''
-      };
-    } catch (e) { return { gclid: '', gbraid: '', wbraid: '' }; }
-  }
-
-  // ── DEBUG SEMENTARA: badge kecil buat cek gclid tanpa DevTools. Hapus setelah selesai testing. ──
-  (function debugBadge() {
-    try {
-      const c = getClickId();
-      const box = document.createElement('div');
-      box.style.cssText = 'position:fixed;bottom:12px;right:12px;z-index:999999;background:#0A1628;color:#0f0;font:11px/1.5 monospace;padding:10px 14px;border-radius:8px;max-width:280px;box-shadow:0 4px 16px rgba(0,0,0,.3);';
-      box.innerHTML =
-        '<b style="color:#fff">DEBUG GCLID</b><br>' +
-        'URL param: ' + (new URLSearchParams(location.search).get('gclid') || '(tidak ada di URL)') + '<br>' +
-        'localStorage gclid: ' + (c.gclid || '(kosong)') + '<br>' +
-        'localStorage gbraid: ' + (c.gbraid || '(kosong)') + '<br>' +
-        'localStorage wbraid: ' + (c.wbraid || '(kosong)');
-      document.body.appendChild(box);
-    } catch (e) {
-      alert('Debug badge error: ' + e.message);
-    }
-  })();
 </script>
 </body>
 </html>

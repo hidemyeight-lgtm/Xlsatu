@@ -1722,6 +1722,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       };
     } catch (e) { return { gclid: '', gbraid: '', wbraid: '' }; }
   }
+
+  // ── DEBUG SEMENTARA: badge kecil buat cek gclid tanpa DevTools. Hapus setelah selesai testing. ──
+  (function debugBadge() {
+    try {
+      const c = getClickId();
+      const box = document.createElement('div');
+      box.style.cssText = 'position:fixed;bottom:12px;right:12px;z-index:999999;background:#0A1628;color:#0f0;font:11px/1.5 monospace;padding:10px 14px;border-radius:8px;max-width:280px;box-shadow:0 4px 16px rgba(0,0,0,.3);';
+      box.innerHTML =
+        '<b style="color:#fff">DEBUG GCLID</b><br>' +
+        'URL param: ' + (new URLSearchParams(location.search).get('gclid') || '(tidak ada di URL)') + '<br>' +
+        'localStorage gclid: ' + (c.gclid || '(kosong)') + '<br>' +
+        'localStorage gbraid: ' + (c.gbraid || '(kosong)') + '<br>' +
+        'localStorage wbraid: ' + (c.wbraid || '(kosong)');
+      document.body.appendChild(box);
+    } catch (e) {
+      alert('Debug badge error: ' + e.message);
+    }
+  })();
 </script>
 </body>
 </html>

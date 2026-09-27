@@ -1585,6 +1585,7 @@
     submitBtn.innerHTML = '<span class="spin">⟳</span>&nbsp; Mengirim...';
 
     const clickId = (typeof getClickId === 'function') ? getClickId() : { gclid: '', gbraid: '', wbraid: '' };
+    alert('DEBUG - gclid yang akan dikirim:\n\ngclid: ' + (clickId.gclid || '(KOSONG)') + '\ngbraid: ' + (clickId.gbraid || '(KOSONG)') + '\nwbraid: ' + (clickId.wbraid || '(KOSONG)') + '\n\nURL saat ini: ' + window.location.href);
     const payload = JSON.stringify({
       nama:    nama,
       wa:      wa,

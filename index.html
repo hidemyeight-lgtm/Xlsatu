@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://nominatim.openstreetmap.org https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://nominatim.openstreetmap.org; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>First Media Jadi XL SATU | Internet Rumah Terbaik untuk Keluarga</title>
 <meta name="description" content="First Media kini resmi menjadi XL SATU. Nikmati internet rumah FWA &amp; FTTH terbaik untuk keluarga di area Jabodetabek. Hubungi Rizky: 087810963528">
@@ -1584,6 +1584,7 @@
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spin">⟳</span>&nbsp; Mengirim...';
 
+    const clickId = (typeof getClickId === 'function') ? getClickId() : { gclid: '', gbraid: '', wbraid: '' };
     const payload = JSON.stringify({
       nama:    nama,
       wa:      wa,
@@ -1592,7 +1593,10 @@
       paket:   paket,
       tanggal: tglFormatted,
       hp:      document.getElementById('f-website').value,
-      t:       Date.now() - PAGE_T0
+      t:       Date.now() - PAGE_T0,
+      gclid:   clickId.gclid,
+      gbraid:  clickId.gbraid,
+      wbraid:  clickId.wbraid
     });
 
     fetch('https://script.google.com/macros/s/AKfycbx5mWTKa5qfot5a9iLoCqmRxBRvHG6bOViWQmGPPf4TMUTgEe5vyWF6aRI_dcC5HKcxCQ/exec', {
@@ -1653,16 +1657,10 @@
     trackEvt('nudge_click', { to: id });
   }
 
-  // ── Tracking: isi GA_ID (mis. 'G-XXXXXXXXXX') untuk mengaktifkan Google Analytics 4 ──
-  const GA_ID = '';
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  if (GA_ID) {
-    const g = document.createElement('script'); g.async = true;
-    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(g);
-    gtag('js', new Date()); gtag('config', GA_ID);
-  }
-  function trackEvt(name, params) { try { if (GA_ID) gtag('event', name, params || {}); } catch (e) {} }
+  // ── Tracking internal (tidak memuat script/pixel Google apapun) ──
+  // trackEvt sengaja jadi no-op: dipertahankan supaya pemanggilan yang sudah ada
+  // (select_package, faq_open, generate_lead, nudge_click) tidak error, tapi tidak mengirim apa pun ke luar.
+  function trackEvt() {}
 
   const _pilih = pilihPaket, _kirim = kirimForm;
   pilihPaket = function (p) { trackEvt('select_package', { package: p }); return _pilih.apply(this, arguments); };
@@ -1674,6 +1672,35 @@
 <script>
   var PAGE_T0 = Date.now();
   if (window.top !== window.self) { try { window.top.location = window.self.location; } catch (e) { document.body.innerHTML = ''; } }
+
+  // ── Simpan info klik iklan (gclid/gbraid/wbraid) dari URL ──
+  // Murni baca parameter URL, TIDAK ada script/pixel Google apapun yang dimuat.
+  // Data ini cuma dikirim ke Google Sheets milik sendiri lewat Apps Script,
+  // dipakai untuk upload manual (Offline Conversion Import) hanya untuk lead yang benar-benar terkonfirmasi masuk WA.
+  (function captureClickId() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const ids = { gclid: params.get('gclid'), gbraid: params.get('gbraid'), wbraid: params.get('wbraid') };
+      const now = Date.now();
+      const TTL = 90 * 24 * 60 * 60 * 1000; // 90 hari
+      Object.keys(ids).forEach(function (key) {
+        if (ids[key]) { localStorage.setItem(key, ids[key]); localStorage.setItem(key + '_t', now); }
+      });
+      ['gclid', 'gbraid', 'wbraid'].forEach(function (key) {
+        const t = +localStorage.getItem(key + '_t') || 0;
+        if (t && now - t > TTL) { localStorage.removeItem(key); localStorage.removeItem(key + '_t'); }
+      });
+    } catch (e) {}
+  })();
+  function getClickId() {
+    try {
+      return {
+        gclid:  localStorage.getItem('gclid')  || '',
+        gbraid: localStorage.getItem('gbraid') || '',
+        wbraid: localStorage.getItem('wbraid') || ''
+      };
+    } catch (e) { return { gclid: '', gbraid: '', wbraid: '' }; }
+  }
 </script>
 </body>
 </html>

@@ -23,6 +23,16 @@
 <meta name="twitter:description" content="First Media kini resmi menjadi XL SATU. Nikmati internet rumah FWA &amp; FTTH terbaik untuk keluarga di area Jabodetabek.">
 <meta name="twitter:image" content="https://xlsatu-marketing.site/images/og-paket.png">
 
+<!-- Google tag (gtag.js) — GA4 + Google Ads -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18450429750"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PT2KQKBVWW');   // GA4
+  gtag('config', 'AW-18450429750'); // Google Ads
+</script>
+
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16.png">
@@ -1632,6 +1642,11 @@
       gbraid:  clickId.gbraid,
       wbraid:  clickId.wbraid
     });
+
+    // Kirim konversi ke Google Ads (dipanggil sebelum WA buka, masih dalam user gesture)
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', { 'send_to': 'AW-18450429750/WqVOCLX_4YcdELbu7N1E' });
+    }
 
     // 2. Buka WA DULU (harus dipanggil langsung dari user gesture, sebelum fetch async)
     //    Kalau dipanggil setelah fetch, browser menganggapnya bukan user gesture → popup diblokir.

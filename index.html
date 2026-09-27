@@ -541,6 +541,11 @@
 </style>
 </head>
 <body>
+<!-- PAGE_T0 harus dideklarasikan PERTAMA sebelum semua script lain,
+     supaya nilai Date.now() saat halaman dimuat tersedia saat kirimForm() dipanggil.
+     Kalau dideklarasikan terlambat (di bawah), nilai t yang dikirim ke Apps Script
+     menjadi NaN sehingga semua lead DITOLAK oleh cek !(Number(d.t) >= 4000). -->
+<script>var PAGE_T0 = Date.now();</script>
 
 <!-- NAV -->
 <nav id="header">
@@ -1553,6 +1558,35 @@
     }, 700);
   }
 
+  // ── Simpan info klik iklan (gclid/gbraid/wbraid) dari URL ──
+  // Dipindahkan ke sini (sebelum kirimForm) supaya getClickId() sudah terdefinisi
+  // saat kirimForm() dipanggil. Sebelumnya ada di bawah sehingga kirimForm selalu
+  // mendapat { gclid:'', gbraid:'', wbraid:'' } karena guard typeof gagal.
+  (function captureClickId() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const ids = { gclid: params.get('gclid'), gbraid: params.get('gbraid'), wbraid: params.get('wbraid') };
+      const now = Date.now();
+      const TTL = 90 * 24 * 60 * 60 * 1000; // 90 hari
+      Object.keys(ids).forEach(function (key) {
+        if (ids[key]) { localStorage.setItem(key, ids[key]); localStorage.setItem(key + '_t', now); }
+      });
+      ['gclid', 'gbraid', 'wbraid'].forEach(function (key) {
+        const t = +localStorage.getItem(key + '_t') || 0;
+        if (t && now - t > TTL) { localStorage.removeItem(key); localStorage.removeItem(key + '_t'); }
+      });
+    } catch (e) {}
+  })();
+  function getClickId() {
+    try {
+      return {
+        gclid:  localStorage.getItem('gclid')  || '',
+        gbraid: localStorage.getItem('gbraid') || '',
+        wbraid: localStorage.getItem('wbraid') || ''
+      };
+    } catch (e) { return { gclid: '', gbraid: '', wbraid: '' }; }
+  }
+
   // ── FORM KIRIM → Google Sheets + WA ──
   function kirimForm() {
     const nama   = document.getElementById('f-nama').value.trim();
@@ -1599,19 +1633,8 @@
       wbraid:  clickId.wbraid
     });
 
-    fetch('https://script.google.com/macros/s/AKfycbx5mWTKa5qfot5a9iLoCqmRxBRvHG6bOViWQmGPPf4TMUTgEe5vyWF6aRI_dcC5HKcxCQ/exec', {
-      method:  'POST',
-      mode:    'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body:    payload
-    })
-    .catch(() => {})
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = oriHTML;
-    });
-
-    // 2. Buka WA
+    // 2. Buka WA DULU (harus dipanggil langsung dari user gesture, sebelum fetch async)
+    //    Kalau dipanggil setelah fetch, browser menganggapnya bukan user gesture → popup diblokir.
     const pesan = cekOnly ?
       'Halo, saya ingin cek ketersediaan jaringan XL SATU (Fiber/FWA) di alamat saya:%0A%0A' +
       '*Nama:* '             + encodeURIComponent(nama)         + '%0A' +
@@ -1629,6 +1652,19 @@
       'Mohon konfirmasi jadwal instalasi. Terima kasih!';
 
     window.open('https://wa.me/6287810963528?text=' + pesan, '_blank', 'noopener,noreferrer');
+
+    // 1. Kirim ke Google Sheets (async, tidak blocking — WA sudah terbuka di atas)
+    fetch('https://script.google.com/macros/s/AKfycbx5mWTKa5qfot5a9iLoCqmRxBRvHG6bOViWQmGPPf4TMUTgEe5vyWF6aRI_dcC5HKcxCQ/exec', {
+      method:  'POST',
+      mode:    'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body:    payload
+    })
+    .catch(() => {})
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = oriHTML;
+    });
 
     // 3. Reset form
     setTimeout(() => {
@@ -1669,38 +1705,9 @@
     if (d.open) trackEvt('faq_open', { question: d.querySelector('summary').textContent });
   }));
 </script>
+<!-- anti-clickjack; dijalankan di awal body supaya efektif -->
 <script>
-  var PAGE_T0 = Date.now();
   if (window.top !== window.self) { try { window.top.location = window.self.location; } catch (e) { document.body.innerHTML = ''; } }
-
-  // ── Simpan info klik iklan (gclid/gbraid/wbraid) dari URL ──
-  // Murni baca parameter URL, TIDAK ada script/pixel Google apapun yang dimuat.
-  // Data ini cuma dikirim ke Google Sheets milik sendiri lewat Apps Script,
-  // dipakai untuk upload manual (Offline Conversion Import) hanya untuk lead yang benar-benar terkonfirmasi masuk WA.
-  (function captureClickId() {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      const ids = { gclid: params.get('gclid'), gbraid: params.get('gbraid'), wbraid: params.get('wbraid') };
-      const now = Date.now();
-      const TTL = 90 * 24 * 60 * 60 * 1000; // 90 hari
-      Object.keys(ids).forEach(function (key) {
-        if (ids[key]) { localStorage.setItem(key, ids[key]); localStorage.setItem(key + '_t', now); }
-      });
-      ['gclid', 'gbraid', 'wbraid'].forEach(function (key) {
-        const t = +localStorage.getItem(key + '_t') || 0;
-        if (t && now - t > TTL) { localStorage.removeItem(key); localStorage.removeItem(key + '_t'); }
-      });
-    } catch (e) {}
-  })();
-  function getClickId() {
-    try {
-      return {
-        gclid:  localStorage.getItem('gclid')  || '',
-        gbraid: localStorage.getItem('gbraid') || '',
-        wbraid: localStorage.getItem('wbraid') || ''
-      };
-    } catch (e) { return { gclid: '', gbraid: '', wbraid: '' }; }
-  }
 </script>
 </body>
 </html>

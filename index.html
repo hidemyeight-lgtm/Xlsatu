@@ -127,6 +127,22 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
  .carousel-slide { min-width: 100%; position: relative; }
  .carousel-slide img { width: 100%; aspect-ratio: 3 / 1; height: auto; object-fit: cover; display: block; }
+
+ /* Mobile: slide dibuat lebih tinggi (rasio 16:10). Banner tetap utuh (tidak ke-crop),
+    sisa ruang atas/bawah diisi versi blur dari banner itu sendiri.
+    Ubah --carousel-ratio untuk atur tinggi (4 / 3 = lebih tinggi lagi). */
+ @media (max-width: 700px) {
+ .carousel-wrap { --carousel-ratio: 16 / 10; }
+ .carousel-slide { aspect-ratio: var(--carousel-ratio); overflow: hidden; background: #0d2a5c; display: flex; align-items: center; }
+ .carousel-slide::before {
+ content: ""; position: absolute; inset: -20px; z-index: 0;
+ background: var(--bg) center / cover no-repeat; filter: blur(18px) saturate(1.2); transform: scale(1.1);
+ }
+ .carousel-slide img { position: relative; z-index: 1; aspect-ratio: 3 / 1; object-fit: contain; }
+ .carousel-btn { width: 32px; height: 32px; font-size: 16px; }
+ .carousel-btn.prev { left: 8px; }
+ .carousel-btn.next { right: 8px; }
+ }
  .carousel-dots {
  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
  display: flex; gap: 8px;
@@ -600,12 +616,12 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <!-- CAROUSEL -->
  <div class="carousel-wrap">
  <div class="carousel-track" id="track">
- <div class="carousel-slide"><img src="images/banner-1.webp" alt="XL SATU meraih penghargaan Opensignal sebagai jaringan broadband tetap paling andal di Indonesia" loading="eager" fetchpriority="high" width="1080" height="360"></div>
- <div class="carousel-slide"><img src="images/banner-2.webp" alt="First Media resmi berganti nama menjadi XL SATU, internet WiFi rumah untuk kebutuhan keluarga" loading="lazy" width="1080" height="360"></div>
- <div class="carousel-slide"><img src="images/banner-3.webp" alt="Promo XL SATU diskon hingga Rp45 ribu dan cashback Rp50 ribu via GoPay, Kredivo, SPayLater, dan OVO" loading="lazy" width="1080" height="360"></div>
- <div class="carousel-slide"><img src="images/banner-4.webp" alt="Promo Bayar Satu Dapat Lebih XL SATU - internet rumah lebih ngebut, instan, dan jangkauan lebih luas" loading="lazy" width="1080" height="360"></div>
- <div class="carousel-slide"><img src="images/banner-5.webp" alt="Cara bayar tagihan XL SATU Fiber lebih mudah dan praktis lewat website resmi XL SATU" loading="lazy" width="1080" height="360"></div>
- <div class="carousel-slide"><img src="images/banner-6.webp" alt="Waspada pencurian perangkat XL SATU - selalu konfirmasi ke CS resmi sebelum menyerahkan perangkat" loading="lazy" width="1080" height="360"></div>
+ <div class="carousel-slide" style="--bg:url('images/banner-1.webp')"><img src="images/banner-1.webp" alt="XL SATU meraih penghargaan Opensignal sebagai jaringan broadband tetap paling andal di Indonesia" loading="eager" fetchpriority="high" width="1080" height="360"></div>
+ <div class="carousel-slide" style="--bg:url('images/banner-2.webp')"><img src="images/banner-2.webp" alt="First Media resmi berganti nama menjadi XL SATU, internet WiFi rumah untuk kebutuhan keluarga" loading="lazy" width="1080" height="360"></div>
+ <div class="carousel-slide" style="--bg:url('images/banner-3.webp')"><img src="images/banner-3.webp" alt="Promo XL SATU diskon hingga Rp45 ribu dan cashback Rp50 ribu via GoPay, Kredivo, SPayLater, dan OVO" loading="lazy" width="1080" height="360"></div>
+ <div class="carousel-slide" style="--bg:url('images/banner-4.webp')"><img src="images/banner-4.webp" alt="Promo Bayar Satu Dapat Lebih XL SATU - internet rumah lebih ngebut, instan, dan jangkauan lebih luas" loading="lazy" width="1080" height="360"></div>
+ <div class="carousel-slide" style="--bg:url('images/banner-5.webp')"><img src="images/banner-5.webp" alt="Cara bayar tagihan XL SATU Fiber lebih mudah dan praktis lewat website resmi XL SATU" loading="lazy" width="1080" height="360"></div>
+ <div class="carousel-slide" style="--bg:url('images/banner-6.webp')"><img src="images/banner-6.webp" alt="Waspada pencurian perangkat XL SATU - selalu konfirmasi ke CS resmi sebelum menyerahkan perangkat" loading="lazy" width="1080" height="360"></div>
  </div>
  <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#8249;</button>
  <button class="carousel-btn next" onclick="moveCarousel(1)">&#8250;</button>

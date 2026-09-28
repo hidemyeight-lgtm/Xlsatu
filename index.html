@@ -584,6 +584,23 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
    .trust-item:last-child { grid-column: 1 / -1; }
    .nudge { flex-direction: column; align-items: flex-start; }
  }
+
+ /* MYXL APP */
+ .myxl { background: var(--sky); padding: 56px 32px; }
+ .myxl-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+ .myxl-img img { width: 100%; max-width: 460px; height: auto; display: block; margin: 0 auto; }
+ .myxl-text h2 { font-size: 30px; font-weight: 800; color: var(--dark); line-height: 1.25; margin-bottom: 14px; }
+ .myxl-text p { font-size: 16px; color: var(--gray-text); line-height: 1.7; margin-bottom: 22px; }
+ .myxl-text h3 { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 14px; }
+ .myxl-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+ .myxl-badges a { display: inline-flex; line-height: 0; }
+ .myxl-badges img { height: 48px; width: auto; display: block; }
+ @media (max-width: 720px) {
+ .myxl { padding: 40px 16px; }
+ .myxl-inner { grid-template-columns: 1fr; gap: 24px; }
+ .myxl-text h2 { font-size: 24px; }
+ .myxl-img img { max-width: 320px; }
+ }
 </style>
 </head>
 <body>
@@ -628,17 +645,6 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <div class="carousel-dots" id="dots"></div>
  </div>
 
- <!-- TRUST STRIP -->
- <div class="trust">
- <div class="trust-grid">
- <div class="trust-item"><b>~5,5 Juta</b><span>Homepass fiber</span></div>
- <div class="trust-item"><b>~1 Juta</b><span>Pelanggan XL SATU</span></div>
- <div class="trust-item"><b>126</b><span>Kota/Kab terjangkau fiber</span></div>
- <div class="trust-item"><b>Opensignal</b><span>The Most Reliable Broadband Network</span></div>
- <div class="trust-item"><b>Gratis Instalasi*</b><span>Instalasi cepat &amp; support 24/7</span></div>
- </div>
- <p class="trust-note">*Gratis instalasi berlaku untuk sebagian besar paket; paket Starter 20 Mbps dikenakan Rp100.000. Harga belum termasuk PPN 11%.</p>
- </div>
 
  <!-- PAKET SECTION -->
  <div id="paket">
@@ -1308,7 +1314,6 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13px;margin-top:14px;"><input type="checkbox" id="f-setuju" style="margin-top:3px;width:auto;"><span>Saya setuju data saya (nama, WhatsApp, alamat, dan lokasi) dipakai untuk cek coverage dan pendaftaran sesuai <a href="#page-privacy" onclick="showPage('privacy');return false;" style="color:var(--blue);font-weight:600;">Kebijakan Privasi</a>.</span></label>
  <button type="submit" class="form-submit reg-submit" id="regSubmitBtn">Daftar &amp; Lanjut ke WhatsApp</button>
  </form>
- <p class="reg-note">Data kamu hanya dipakai tim sales XL Home untuk cek coverage &amp; follow-up pendaftaran.</p>
  </div>
  </div>
 
@@ -1319,6 +1324,22 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <a class="cs-banner-wa" href="#daftar" onclick="goToSection('daftar');return false;" aria-label="Daftar sekarang"></a>
  </div>
  </div>
+
+ <!-- MYXL APP -->
+ <section class="myxl" id="myxl">
+ <div class="myxl-inner">
+ <div class="myxl-img"><img src="images/myxl-app.webp" alt="Tampilan aplikasi myXL: bayar tagihan, tambah layanan, kelola paket, dan promo spesial" loading="lazy" width="640" height="565"></div>
+ <div class="myxl-text">
+ <h2>Atur Semua Layanan Kamu Cuma Butuh myXL</h2>
+ <p>Bayar tagihan, kelola paket, tambah layanan, sampai cek promo spesial, semuanya bisa lewat aplikasi resmi myXL.</p>
+ <h3>Segera download di:</h3>
+ <div class="myxl-badges">
+ <a href="https://apps.apple.com/app/id683141076" target="_blank" rel="noopener noreferrer" aria-label="Download myXL di App Store"><img src="images/badge-app-store.webp" alt="Download on the App Store" loading="lazy" width="256" height="74"></a>
+ <a href="https://play.google.com/store/apps/details?id=com.apps.MyXL" target="_blank" rel="noopener noreferrer" aria-label="Download myXL di Google Play"><img src="images/badge-google-play.webp" alt="Get it on Google Play" loading="lazy" width="256" height="74"></a>
+ </div>
+ </div>
+ </div>
+ </section>
 
 </div><!-- end page-home -->
 
@@ -1368,35 +1389,30 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <div class="footer-inner">
  <div class="footer-brand">
  <div class="footer-logo"><a href="#header" onclick="goHome();return false;" aria-label="Kembali ke beranda"><img src="images/logo.png" alt="XL Home - Sales Resmi XL SATU Jabodetabek" loading="lazy" width="140" height="44"></a></div>
- <p>Sales &amp; Agen Resmi XL Home untuk wilayah Jabodetabek dan sekitarnya. Melayani pendaftaran paket internet Fixed Wireless Access (FWA) dan Fiber Optik (FTTH) dari XL SATU.</p>
+ <p>Mitra penyalur resmi layanan XL SATU (FWA &amp; Fiber Optik) untuk area Jabodetabek dan sekitarnya.</p>
  </div>
  <div class="footer-col">
  <h4>Navigasi</h4>
  <a href="#paket" onclick="goToSection('paket');return false;">Paket Internet</a>
  <a href="#daftar" onclick="goToSection('daftar');return false;">Daftar</a>
  <a href="#bantuan" onclick="goToSection('bantuan');return false;">Hubungi Kami</a>
- <a href="#page-privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
+ <a href="#page-privacy" onclick="showPage('privacy');return false;">Kebijakan Privasi</a>
  </div>
  <div class="footer-col">
  <h4>Kontak</h4>
- <p> <a href="https://wa.me/6287810963528">087810963528</a></p>
- <p> <a href="mailto:Donmarcosguevara@gmail.com">Donmarcosguevara@gmail.com</a></p>
- <p> Area Jakarta</p>
- <p> Rizky Sepliansyah</p>
+ <p><a href="https://wa.me/6287810963528">087810963528</a></p>
+ <p><a href="mailto:Donmarcosguevara@gmail.com">Donmarcosguevara@gmail.com</a></p>
+ <p>Area Jabodetabek</p>
  </div>
  </div>
 
  <div class="footer-disclaimer">
- <strong>Disclaimer &amp; Transparansi:</strong> Halaman ini dikelola oleh <strong>Rizky Sepliansyah</strong> selaku <strong>Sales/Agen Resmi XL Home</strong> dari vendor <strong>PT Cahaya Bumi Nasional (CBN)</strong>, yang ditempatkan di <strong>PT XLSmart Telecom Tbk (XL SATU)</strong>. Kami bukan situs resmi XLSmart atau XL Home. Harga yang tercantum adalah harga dasar dan dapat berubah sewaktu-waktu sesuai kebijakan perusahaan. Untuk informasi resmi, kunjungi <a href="https://xlsatu.co.id/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.6)">xlsatu.co.id</a>.
- </div>
-
- <div class="footer-disclaimer" style="margin-top:8px;">
- Situs web ini dioperasikan oleh mitra penyalur resmi PT CBN untuk pemasaran layanan XL Smart / XL SATU.
+ <strong>Transparansi:</strong> Situs ini dikelola oleh <strong>Rizky Sepliansyah</strong>, mitra penyalur resmi XL SATU. Ini bukan situs resmi XLSmart / XL SATU. Harga dapat berubah sewaktu-waktu. Informasi resmi ada di <a href="https://xlsatu.co.id/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.6)">xlsatu.co.id</a>.
  </div>
 
  <div class="footer-bottom">
- <span>© 2026 Rizky Sepliansyah — Sales Resmi XL Home (PT Cahaya Bumi Nasional / XL SATU)</span>
- <a href="#page-privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
+ <span>© 2026 Mitra Penyalur Resmi XL SATU</span>
+ <a href="#page-privacy" onclick="showPage('privacy');return false;">Kebijakan Privasi</a>
  </div>
 </footer>
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://www.facebook.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://nominatim.openstreetmap.org https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://www.facebook.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; worker-src blob:; child-src blob:; img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://www.facebook.com https://maps.googleapis.com https://maps.gstatic.com https://*.googleapis.com https://*.gstatic.com https://*.ggpht.com; connect-src 'self' https://maps.googleapis.com https://script.google.com https://script.googleusercontent.com https://nominatim.openstreetmap.org https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://www.facebook.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>First Media Jadi XL SATU | Internet Rumah Terbaik untuk Keluarga</title>
 <meta name="description" content="First Media kini resmi menjadi XL SATU. Nikmati internet rumah FWA &amp; FTTH terbaik untuk keluarga di area Jabodetabek. Hubungi Rizky: 087810963528">
@@ -549,6 +549,25 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
     .alamat-wrap input, .alamat-wrap textarea { border-radius: 10px !important; border-right: 1.5px solid #dbe6f5 !important; }
     .btn-lokasi { justify-content: center; height: auto; min-height: 48px; border-radius: 10px; font-size: 14px; padding: 14px 18px; animation: none; }
   }
+
+  /* ── POPUP PILIH TITIK LOKASI ── */
+  #peta-overlay { position: fixed; inset: 0; background: rgba(10,20,40,0.55); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  #peta-overlay.open { display: flex; }
+  .peta-modal { background: #fff; border-radius: 24px; width: 100%; max-width: 640px; max-height: 96vh; overflow-y: auto; padding: 28px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .peta-close { position: absolute; top: 18px; right: 20px; background: none; border: none; font-size: 28px; line-height: 1; cursor: pointer; color: #111; }
+  .peta-modal h3 { font-size: 22px; font-weight: 800; color: #111; margin: 0 40px 6px 0; }
+  .peta-modal .peta-sub { font-size: 14px; color: var(--gray-text); margin-bottom: 14px; }
+  .peta-box { position: relative; height: 380px; border-radius: 16px; overflow: hidden; background: #e8eef7; }
+  #peta-canvas { position: absolute; inset: 0; }
+  .peta-search { position: absolute; top: 12px; left: 12px; right: 12px; z-index: 5; display: flex; align-items: center; gap: 8px; background: #fff; border-radius: 14px; padding: 4px 6px 4px 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.18); }
+  .peta-search input { flex: 1; min-width: 0; border: none !important; outline: none; font-size: 14px; font-family: inherit; padding: 11px 0 !important; background: transparent; box-shadow: none !important; }
+  .peta-search button { border: none; background: var(--blue); color: #fff; border-radius: 10px; padding: 9px 14px; font-weight: 700; font-size: 13px; cursor: pointer; font-family: inherit; }
+  .peta-locate { position: absolute; right: 12px; bottom: 28px; z-index: 5; width: 46px; height: 46px; border-radius: 50%; border: none; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.25); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .peta-hint { font-size: 12.5px; color: var(--gray-text); margin: 10px 0 14px; }
+  .peta-err { display: none; color: #dc2626; font-size: 12.5px; margin-bottom: 10px; }
+  .peta-confirm { width: 100%; padding: 15px; border: none; border-radius: 12px; background: var(--blue); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .peta-confirm:disabled { background: var(--gray-mid); cursor: not-allowed; }
+  @media (max-width: 520px) { .peta-modal { padding: 20px 16px; border-radius: 20px; } .peta-box { height: 340px; } }
   @keyframes spin { to { transform: rotate(360deg); } }
   .spin { animation: spin 0.8s linear infinite; display: inline-block; }
 
@@ -1256,9 +1275,9 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <div class="section faq" id="faq">
  <div class="section-title">Pertanyaan yang Sering Ditanyakan</div>
  <div class="section-sub">Jawaban singkat sebelum kamu daftar</div>
- <details><summary>Apa bedanya Fiber (FTTH) dan FWA?</summary><p>FTTH memakai kabel fiber optik sampai ke rumah dengan kecepatan 20 Mbps sampai 1 Gbps, dan paling stabil untuk jangka panjang. FWA memakai jaringan nirkabel dengan kecepatan 50 atau 100 Mbps, dan ditawarkan bila alamat kamu belum tercover fiber. Keduanya dipasang teknisi di lokasi.</p></details><details><summary>Alamat saya tercover yang mana?</summary><p>Ketersediaan paket mengikuti coverage di alamat kamu. Kalau alamat tercover fiber, yang ditawarkan adalah paket Fiber. Kalau hanya tercover FWA, kamu bisa ambil FWA 100 Mbps. Isi form pendaftaran dan bagikan titik lokasi, lalu kami cek untuk kamu.</p></details><details><summary>Bagaimana cara aktivasi bonus Vidio Lite & CatchPlay+?</summary><p>Bonus 3 bulan berlaku untuk paket bayar di muka. Nomor HP yang kamu daftarkan dipakai sebagai akun login, dan bonus aktif paling lambat 3 hari setelah instalasi selesai. Pastikan nomor HP di form sudah benar. Panduan lengkap: <a href="https://bit.ly/OTTXLSatu" target="_blank" rel="noopener">bit.ly/OTTXLSatu</a>.</p></details><details><summary>Bagaimana cara bayarnya? Aman nggak?</summary><p>Paket bayar di muka wajib lunas sebelum instalasi. Jangan membayar tagihan dalam bentuk apa pun kepada teknisi atau perwakilan di lokasi pemasangan. Kalau ada permintaan pengambilan perangkat dari petugas, konfirmasi dulu ke CS XL 820 atau 0817 0123 442 (non XL).</p></details><details><summary>Apa itu FUP pada FWA Outdoor?</summary><p>Batas penggunaan wajar FWA Outdoor adalah 1.024 GB per periode tagihan. Jika tercapai, kualitas kecepatan disesuaikan sampai periode tagihan berikutnya. Kamu bisa membeli paket booster lewat aplikasi myXL, customer service, atau kanal resmi lainnya.</p></details><details><summary>Setelah masa bayar di muka habis, bagaimana tagihannya?</summary><p>Layanan otomatis lanjut ke tagihan bulanan dengan harga normal, yaitu FWA 50 Mbps Rp199.000 dan FWA 100 Mbps Rp219.000 per bulan (belum termasuk PPN). Selama masa bayar di muka, paket basic belum bisa diganti. Benefit speed upgrade pada paket Fiber berlaku 12 bulan dan bisa diperpanjang selama pembayaran lancar.</p></details>
+ <details><summary>Apa bedanya Fiber (FTTH) dan FWA?</summary><p>FTTH memakai kabel fiber optik sampai ke rumah dengan kecepatan 20 Mbps sampai 1 Gbps, dan paling stabil untuk jangka panjang. FWA memakai jaringan nirkabel dengan kecepatan 50 atau 100 Mbps, dan ditawarkan bila alamat kamu belum tercover fiber. Keduanya dipasang teknisi di lokasi.</p></details><details><summary>Alamat saya tercover yang mana?</summary><p>Ketersediaan paket mengikuti coverage di alamat kamu. Kalau alamat tercover fiber, yang ditawarkan adalah paket Fiber. Kalau hanya tercover FWA, kamu bisa ambil FWA 100 Mbps. Isi form pendaftaran dan bagikan titik lokasi, lalu kami cek untuk kamu.</p></details><details><summary>Bagaimana cara aktivasi bonus Vidio Lite & CatchPlay+?</summary><p>Bonus 3 bulan berlaku untuk paket bayar di muka. Nomor HP yang kamu daftarkan dipakai sebagai akun login, dan bonus aktif paling lambat 3 hari setelah instalasi selesai. Pastikan nomor HP di form sudah benar. Panduan lengkap: <a href="https://bit.ly/OTTXLSatu" target="_blank" rel="noopener">bit.ly/OTTXLSatu</a>.</p></details><details><summary>Bagaimana cara bayarnya? Aman nggak?</summary><p>Paket bayar di muka wajib lunas sebelum instalasi. Jangan membayar tagihan dalam bentuk apa pun kepada teknisi atau perwakilan di lokasi pemasangan. Kalau ada permintaan pengambilan perangkat dari petugas, konfirmasi dulu ke CS XL 820 atau 0817 0123 442 (non XL).</p></details><details><summary>Setelah masa bayar di muka habis, bagaimana tagihannya?</summary><p>Layanan otomatis lanjut ke tagihan bulanan dengan harga normal, yaitu FWA 50 Mbps Rp199.000 dan FWA 100 Mbps Rp219.000 per bulan (belum termasuk PPN). Selama masa bayar di muka, paket basic belum bisa diganti. Benefit speed upgrade pada paket Fiber berlaku 12 bulan dan bisa diperpanjang selama pembayaran lancar.</p></details>
  </div>
- <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Apa bedanya Fiber (FTTH) dan FWA?", "acceptedAnswer": {"@type": "Answer", "text": "FTTH memakai kabel fiber optik sampai ke rumah dengan kecepatan 20 Mbps sampai 1 Gbps, dan paling stabil untuk jangka panjang. FWA memakai jaringan nirkabel dengan kecepatan 50 atau 100 Mbps, dan ditawarkan bila alamat kamu belum tercover fiber. Keduanya dipasang teknisi di lokasi."}}, {"@type": "Question", "name": "Alamat saya tercover yang mana?", "acceptedAnswer": {"@type": "Answer", "text": "Ketersediaan paket mengikuti coverage di alamat kamu. Kalau alamat tercover fiber, yang ditawarkan adalah paket Fiber. Kalau hanya tercover FWA, kamu bisa ambil FWA 100 Mbps. Isi form pendaftaran dan bagikan titik lokasi, lalu kami cek untuk kamu."}}, {"@type": "Question", "name": "Bagaimana cara aktivasi bonus Vidio Lite & CatchPlay+?", "acceptedAnswer": {"@type": "Answer", "text": "Bonus 3 bulan berlaku untuk paket bayar di muka. Nomor HP yang kamu daftarkan dipakai sebagai akun login, dan bonus aktif paling lambat 3 hari setelah instalasi selesai. Pastikan nomor HP di form sudah benar. Panduan lengkap: bit.ly/OTTXLSatu."}}, {"@type": "Question", "name": "Bagaimana cara bayarnya? Aman nggak?", "acceptedAnswer": {"@type": "Answer", "text": "Paket bayar di muka wajib lunas sebelum instalasi. Jangan membayar tagihan dalam bentuk apa pun kepada teknisi atau perwakilan di lokasi pemasangan. Kalau ada permintaan pengambilan perangkat dari petugas, konfirmasi dulu ke CS XL 820 atau 0817 0123 442 (non XL)."}}, {"@type": "Question", "name": "Apa itu FUP pada FWA Outdoor?", "acceptedAnswer": {"@type": "Answer", "text": "Batas penggunaan wajar FWA Outdoor adalah 1.024 GB per periode tagihan. Jika tercapai, kualitas kecepatan disesuaikan sampai periode tagihan berikutnya. Kamu bisa membeli paket booster lewat aplikasi myXL, customer service, atau kanal resmi lainnya."}}, {"@type": "Question", "name": "Setelah masa bayar di muka habis, bagaimana tagihannya?", "acceptedAnswer": {"@type": "Answer", "text": "Layanan otomatis lanjut ke tagihan bulanan dengan harga normal, yaitu FWA 50 Mbps Rp199.000 dan FWA 100 Mbps Rp219.000 per bulan (belum termasuk PPN). Selama masa bayar di muka, paket basic belum bisa diganti. Benefit speed upgrade pada paket Fiber berlaku 12 bulan dan bisa diperpanjang selama pembayaran lancar."}}]}</script>
+ <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Apa bedanya Fiber (FTTH) dan FWA?", "acceptedAnswer": {"@type": "Answer", "text": "FTTH memakai kabel fiber optik sampai ke rumah dengan kecepatan 20 Mbps sampai 1 Gbps, dan paling stabil untuk jangka panjang. FWA memakai jaringan nirkabel dengan kecepatan 50 atau 100 Mbps, dan ditawarkan bila alamat kamu belum tercover fiber. Keduanya dipasang teknisi di lokasi."}}, {"@type": "Question", "name": "Alamat saya tercover yang mana?", "acceptedAnswer": {"@type": "Answer", "text": "Ketersediaan paket mengikuti coverage di alamat kamu. Kalau alamat tercover fiber, yang ditawarkan adalah paket Fiber. Kalau hanya tercover FWA, kamu bisa ambil FWA 100 Mbps. Isi form pendaftaran dan bagikan titik lokasi, lalu kami cek untuk kamu."}}, {"@type": "Question", "name": "Bagaimana cara aktivasi bonus Vidio Lite & CatchPlay+?", "acceptedAnswer": {"@type": "Answer", "text": "Bonus 3 bulan berlaku untuk paket bayar di muka. Nomor HP yang kamu daftarkan dipakai sebagai akun login, dan bonus aktif paling lambat 3 hari setelah instalasi selesai. Pastikan nomor HP di form sudah benar. Panduan lengkap: bit.ly/OTTXLSatu."}}, {"@type": "Question", "name": "Bagaimana cara bayarnya? Aman nggak?", "acceptedAnswer": {"@type": "Answer", "text": "Paket bayar di muka wajib lunas sebelum instalasi. Jangan membayar tagihan dalam bentuk apa pun kepada teknisi atau perwakilan di lokasi pemasangan. Kalau ada permintaan pengambilan perangkat dari petugas, konfirmasi dulu ke CS XL 820 atau 0817 0123 442 (non XL)."}}, {"@type": "Question", "name": "Setelah masa bayar di muka habis, bagaimana tagihannya?", "acceptedAnswer": {"@type": "Answer", "text": "Layanan otomatis lanjut ke tagihan bulanan dengan harga normal, yaitu FWA 50 Mbps Rp199.000 dan FWA 100 Mbps Rp219.000 per bulan (belum termasuk PPN). Selama masa bayar di muka, paket basic belum bisa diganti. Benefit speed upgrade pada paket Fiber berlaku 12 bulan dan bisa diperpanjang selama pembayaran lancar."}}]}</script>
 
  <!-- FORMULIR PENDAFTARAN -->
  <div class="section reg-section" id="daftar">
@@ -1279,7 +1298,7 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <label for="f-alamat">Alamat Lengkap Pemasangan</label>
  <div class="alamat-wrap">
  <textarea id="f-alamat" required placeholder="Ketik alamat lengkap pemasangan kamu di sini..." rows="3"></textarea>
- <button type="button" class="btn-lokasi" id="btn-lokasi" onclick="deteksiLokasi()"><span id="lokasi-label">Pakai Lokasi Saya</span></button>
+ <button type="button" class="btn-lokasi" id="btn-lokasi" onclick="bukaPetaLokasi()"><span id="lokasi-label">Pakai Lokasi Saya</span></button>
  </div>
  <div id="lokasi-error" style="display:none;color:#dc2626;font-size:12.5px;margin-top:6px;"></div>
  <div id="maps-link-wrap" style="display:none;margin-top:8px;">
@@ -1310,7 +1329,7 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <input type="date" id="f-tanggal" required>
 
  <div style="position:absolute;left:-9999px;" aria-hidden="true"><label for="f-website">Website</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
- <label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13px;margin-top:14px;"><input type="checkbox" id="f-setuju" style="margin-top:3px;width:auto;"><span>Saya setuju data saya (nama, WhatsApp, alamat, dan lokasi) dipakai untuk cek coverage dan pendaftaran sesuai <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;">Kebijakan Privasi</a>.</span></label>
+ <label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13px;margin-top:14px;"><input type="checkbox" id="f-setuju" style="margin-top:3px;width:auto;"><span>Saya setuju dengan <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;">kebijakan privasi</a></span></label>
  <button type="submit" class="form-submit reg-submit" id="regSubmitBtn">Daftar &amp; Lanjut ke WhatsApp</button>
  </form>
  </div>
@@ -1342,6 +1361,28 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
 
 </div><!-- end page-home -->
 
+<!-- POPUP PILIH TITIK LOKASI -->
+<div id="peta-overlay" role="dialog" aria-modal="true" aria-labelledby="peta-title" onclick="if(event.target===this)tutupPeta()">
+  <div class="peta-modal">
+    <button type="button" class="peta-close" onclick="tutupPeta()" aria-label="Tutup">&times;</button>
+    <h3 id="peta-title">Tentukan Titik Lokasi Pemasangan</h3>
+    <div class="peta-sub">Geser pin atau tap di peta untuk menentukan lokasi yang tepat.</div>
+    <div class="peta-box">
+      <div class="peta-search">
+        <input type="text" id="peta-search-input" placeholder="Cari alamat atau nama tempat..." autocomplete="off">
+        <button type="button" onclick="cariAlamatPeta()">Cari</button>
+      </div>
+      <div id="peta-canvas"></div>
+      <button type="button" class="peta-locate" onclick="petaLokasiSaya()" aria-label="Lokasi saya">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0033A0" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg>
+      </button>
+    </div>
+    <div class="peta-hint">Pastikan pin tepat di lokasi pemasangan agar pengecekan jaringan akurat.</div>
+    <div class="peta-err" id="peta-err"></div>
+    <button type="button" class="peta-confirm" id="peta-confirm" onclick="konfirmasiPeta()" disabled>Konfirmasi Lokasi</button>
+  </div>
+</div>
+
 <!-- PRIVACY PAGE -->
 <div id="page-privacy">
  <a href="#header" onclick="showPage('home');return false;" style="display:inline-block;margin-bottom:32px;color:var(--blue);font-weight:600;text-decoration:none;">← Kembali ke Beranda</a>
@@ -1356,7 +1397,7 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <li>Nama lengkap</li>
  <li>Nomor telepon / WhatsApp</li>
  <li>Alamat pemasangan yang diinginkan</li>
- <li>Paket yang diminati, rencana tanggal instalasi, dan titik lokasi (hanya bila Anda menekan tombol Pakai Lokasi Saya)</li>
+ <li>Paket yang diminati, rencana tanggal instalasi, dan titik lokasi (hanya bila Anda menekan tombol Pakai Lokasi Saya dan memilih titik di peta)</li>
  </ul>
 
  <h2>3. Bagaimana Kami Menggunakan Informasi Anda</h2>
@@ -1368,7 +1409,7 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  </ul>
 
  <h2>4. Penyimpanan &amp; Keamanan Data</h2>
- <p>Data dari formulir dikirim ke spreadsheet Google (Google Sheets) milik pengelola halaman ini dan ke WhatsApp pengelola saat Anda menekan tombol kirim. Bila Anda memakai tombol Pakai Lokasi Saya, koordinat Anda dikirim ke layanan OpenStreetMap Nominatim untuk diubah menjadi alamat. Bila analitik diaktifkan, kami hanya mencatat interaksi umum (misalnya paket yang diklik) tanpa nama, nomor, atau alamat. Akses spreadsheet dibatasi untuk pengelola, dan data dihapus setelah proses pendaftaran selesai atau tidak dilanjutkan. Untuk data yang diproses dalam sistem PT XLSmart Telecom Tbk (XL SATU) / PT Cahaya Bumi Nasional (CBN), berlaku kebijakan privasi resmi perusahaan tersebut.</p>
+ <p>Data dari formulir dikirim ke spreadsheet Google (Google Sheets) milik pengelola halaman ini dan ke WhatsApp pengelola saat Anda menekan tombol kirim. Bila Anda memakai tombol Pakai Lokasi Saya, peta ditampilkan oleh Google Maps dan koordinat titik yang Anda pilih dikirim ke layanan Google Maps untuk diubah menjadi alamat. Bila Google Maps tidak dapat dimuat, koordinat Anda dikirim ke layanan OpenStreetMap Nominatim untuk keperluan yang sama. Bila analitik diaktifkan, kami hanya mencatat interaksi umum (misalnya paket yang diklik) tanpa nama, nomor, atau alamat. Akses spreadsheet dibatasi untuk pengelola, dan data dihapus setelah proses pendaftaran selesai atau tidak dilanjutkan. Untuk data yang diproses dalam sistem PT XLSmart Telecom Tbk (XL SATU) / PT Cahaya Bumi Nasional (CBN), berlaku kebijakan privasi resmi perusahaan tersebut.</p>
 
  <h2>5. Tidak Ada Penjualan Data</h2>
  <p>Kami tidak menjual, menyewakan, atau membagikan data pribadi Anda kepada pihak lain manapun selain dalam rangka proses pendaftaran layanan XL Home yang Anda ajukan.</p>
@@ -1510,6 +1551,125 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
     }, 650);
   }
 
+  // ── Popup peta: tentukan titik lokasi (Google Maps) ──
+  // Isi API key Google Maps (aktifkan Maps JavaScript API + Geocoding API).
+  // Kalau kosong, tombol "Pakai Lokasi Saya" otomatis memakai deteksi GPS biasa.
+  const GMAPS_API_KEY = 'ISI_API_KEY_GOOGLE_MAPS_DI_SINI';
+  const __pm = { map: null, marker: null, geocoder: null, lat: null, lng: null, addr: '', loading: null };
+
+  function petaError(msg) {
+    const el = document.getElementById('peta-err');
+    el.textContent = msg || '';
+    el.style.display = msg ? 'block' : 'none';
+  }
+
+  function muatGoogleMaps() {
+    if (window.google && google.maps && google.maps.Map) return Promise.resolve();
+    if (__pm.loading) return __pm.loading;
+    __pm.loading = new Promise(function (resolve, reject) {
+      window.__gmapsReady = resolve;
+      window.gm_authFailure = function () { petaError('API key Google Maps tidak valid atau belum diaktifkan.'); };
+      const sc = document.createElement('script');
+      sc.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(GMAPS_API_KEY) + '&callback=__gmapsReady&loading=async&language=id&region=ID';
+      sc.async = true;
+      sc.onerror = function () { __pm.loading = null; reject(new Error('gmaps')); };
+      document.head.appendChild(sc);
+    });
+    return __pm.loading;
+  }
+
+  function bukaPetaLokasi() {
+    if (!GMAPS_API_KEY || GMAPS_API_KEY.indexOf('ISI_') === 0) { deteksiLokasi(); return; }
+    petaError('');
+    document.getElementById('peta-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    muatGoogleMaps().then(initPeta).catch(function () {
+      tutupPeta();
+      deteksiLokasi(); // fallback kalau Google Maps gagal dimuat
+    });
+  }
+
+  function tutupPeta() {
+    document.getElementById('peta-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function initPeta() {
+    if (!__pm.map) {
+      const start = { lat: -6.2088, lng: 106.8456 }; // Jakarta
+      __pm.geocoder = new google.maps.Geocoder();
+      __pm.map = new google.maps.Map(document.getElementById('peta-canvas'), {
+        center: start, zoom: 12, disableDefaultUI: true, zoomControl: true,
+        gestureHandling: 'greedy', clickableIcons: false
+      });
+      __pm.marker = new google.maps.Marker({ map: __pm.map, position: start, draggable: true, visible: false });
+      __pm.map.addListener('click', function (e) { setPinPeta(e.latLng, false); });
+      __pm.marker.addListener('dragend', function (e) { setPinPeta(e.latLng, false); });
+      document.getElementById('peta-search-input').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); cariAlamatPeta(); }
+      });
+    } else {
+      google.maps.event.trigger(__pm.map, 'resize');
+      if (__pm.lat !== null) __pm.map.setCenter({ lat: __pm.lat, lng: __pm.lng });
+    }
+    if (__pm.lat === null) petaLokasiSaya(true);
+  }
+
+  function setPinPeta(latLng, pan) {
+    __pm.lat = latLng.lat();
+    __pm.lng = latLng.lng();
+    __pm.marker.setPosition(latLng);
+    __pm.marker.setVisible(true);
+    if (pan) { __pm.map.panTo(latLng); if (__pm.map.getZoom() < 17) __pm.map.setZoom(17); }
+    document.getElementById('peta-confirm').disabled = false;
+    petaError('');
+    __pm.addr = __pm.lat.toFixed(6) + ', ' + __pm.lng.toFixed(6);
+    const box = document.getElementById('peta-search-input');
+    box.value = __pm.addr;
+    __pm.geocoder.geocode({ location: latLng, language: 'id' }, function (res, status) {
+      if (status === 'OK' && res && res[0]) {
+        __pm.addr = res[0].formatted_address;
+        box.value = __pm.addr;
+      }
+    });
+  }
+
+  function petaLokasiSaya(silent) {
+    if (!navigator.geolocation) { if (!silent) petaError('Browser kamu tidak mendukung GPS.'); return; }
+    navigator.geolocation.getCurrentPosition(
+      function (pos) { setPinPeta(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude), true); },
+      function () { if (!silent) petaError('Lokasi tidak terdeteksi. Cari alamat atau tap di peta untuk memilih titik.'); },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  }
+
+  function cariAlamatPeta() {
+    const q = document.getElementById('peta-search-input').value.trim();
+    if (!q || !__pm.geocoder) return;
+    __pm.geocoder.geocode({ address: q, region: 'ID', language: 'id' }, function (res, status) {
+      if (status === 'OK' && res && res[0]) setPinPeta(res[0].geometry.location, true);
+      else petaError('Alamat tidak ditemukan. Coba kata kunci lain atau tap langsung di peta.');
+    });
+  }
+
+  function konfirmasiPeta() {
+    if (__pm.lat === null) return;
+    document.getElementById('f-alamat').value = __pm.addr;
+    const mapLink = document.getElementById('maps-link');
+    mapLink.href = 'https://www.google.com/maps?q=' + __pm.lat.toFixed(6) + ',' + __pm.lng.toFixed(6);
+    document.getElementById('maps-link-wrap').style.display = 'block';
+    document.getElementById('lokasi-error').style.display = 'none';
+    const btn = document.getElementById('btn-lokasi'), label = document.getElementById('lokasi-label');
+    btn.classList.add('success');
+    label.innerHTML = '✓ Lokasi terpilih';
+    setTimeout(function () { btn.classList.remove('success'); label.innerHTML = 'Pakai Lokasi Saya'; }, 3000);
+    tutupPeta();
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && document.getElementById('peta-overlay').classList.contains('open')) tutupPeta();
+  });
+
   // ── Deteksi Lokasi GPS ──
   function deteksiLokasi() {
     const btn     = document.getElementById('btn-lokasi');
@@ -1613,7 +1773,7 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
     goToSection('daftar');
     setTimeout(function () {
       const alamat = document.getElementById('f-alamat');
-      if (alamat && !alamat.value.trim()) deteksiLokasi();
+      if (alamat && !alamat.value.trim()) bukaPetaLokasi();
       const nama = document.getElementById('f-nama');
       if (nama && !nama.value) nama.focus({ preventScroll: true });
     }, 700);

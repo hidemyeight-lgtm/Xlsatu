@@ -126,19 +126,24 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  .carousel-wrap { position: relative; overflow: hidden; width: 100%; }
  .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
  .carousel-slide { min-width: 100%; position: relative; }
+ .carousel-slide picture { display: block; width: 100%; position: relative; z-index: 1; }
  .carousel-slide img { width: 100%; aspect-ratio: 3 / 1; height: auto; object-fit: cover; display: block; }
 
- /* Mobile: slide dibuat lebih tinggi (rasio 16:10). Banner tetap utuh (tidak ke-crop),
-    sisa ruang atas/bawah diisi versi blur dari banner itu sendiri.
-    Ubah --carousel-ratio untuk atur tinggi (4 / 3 = lebih tinggi lagi). */
+ /* Mobile: slide dibuat tinggi (4:3).
+    - Slide dengan class "has-mobile" memakai gambar khusus mobile -> tajam, utuh, TANPA blur.
+    - Slide lama yang belum punya gambar mobile tetap pakai fallback blur,
+      hilang otomatis begitu kamu tambahkan <picture> + class has-mobile. */
  @media (max-width: 700px) {
- .carousel-wrap { --carousel-ratio: 16 / 10; }
+ .carousel-wrap { --carousel-ratio: 4 / 3; }
  .carousel-slide { aspect-ratio: var(--carousel-ratio); overflow: hidden; background: #0d2a5c; display: flex; align-items: center; }
  .carousel-slide::before {
  content: ""; position: absolute; inset: -20px; z-index: 0;
  background: var(--bg) center / cover no-repeat; filter: blur(18px) saturate(1.2); transform: scale(1.1);
  }
  .carousel-slide img { position: relative; z-index: 1; aspect-ratio: 3 / 1; object-fit: contain; }
+ .carousel-slide.has-mobile::before { content: none; }
+ .carousel-slide.has-mobile picture { height: 100%; }
+ .carousel-slide.has-mobile img { height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
  .carousel-btn { width: 32px; height: 32px; font-size: 16px; }
  .carousel-btn.prev { left: 8px; }
  .carousel-btn.next { right: 8px; }
@@ -690,13 +695,15 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <!-- CAROUSEL -->
  <div class="carousel-wrap">
  <div class="carousel-track" id="track">
- <div class="carousel-slide" style="--bg:url('images/banner-1.webp')"><img src="images/banner-1.webp" alt="XL SATU meraih penghargaan Opensignal sebagai jaringan broadband tetap paling andal di Indonesia" loading="eager" fetchpriority="high" width="1080" height="360"></div>
- <div class="carousel-slide" style="--bg:url('images/banner-2.webp')"><img src="images/banner-2.webp" alt="First Media resmi berganti nama menjadi XL SATU, internet WiFi rumah untuk kebutuhan keluarga" loading="lazy" width="1080" height="360"></div>
- <div class="carousel-slide" style="--bg:url('images/banner-3.webp')"><img src="images/banner-3.webp" alt="Promo XL SATU diskon hingga Rp45 ribu dan cashback Rp50 ribu via GoPay, Kredivo, SPayLater, dan OVO" loading="lazy" width="1080" height="360"></div>
- <div class="carousel-slide" style="--bg:url('images/banner-4.webp')"><img src="images/banner-4.webp" alt="Promo Bayar Satu Dapat Lebih XL SATU - internet rumah lebih ngebut, instan, dan jangkauan lebih luas" loading="lazy" width="1080" height="360"></div>
- <div class="carousel-slide" style="--bg:url('images/banner-5.webp')"><img src="images/banner-5.webp" alt="Cara bayar tagihan XL SATU Fiber lebih mudah dan praktis lewat website resmi XL SATU" loading="lazy" width="1080" height="360"></div>
- <div class="carousel-slide" style="--bg:url('images/banner-6.webp')"><img src="images/banner-6.webp" alt="Waspada pencurian perangkat XL SATU - selalu konfirmasi ke CS resmi sebelum menyerahkan perangkat" loading="lazy" width="1080" height="360"></div>
- </div>
+ <div class="carousel-slide has-mobile"><picture><source media="(max-width: 700px)" srcset="images/xl-satu-raih-penghargaan-opensignal-jaringan-broadband-tetap-paling-andal-mobile.webp" width="800" height="600"><img src="images/xl-satu-raih-penghargaan-opensignal-jaringan-broadband-tetap-paling-andal.webp" alt="XL SATU raih penghargaan Opensignal sebagai jaringan broadband tetap paling andal di Indonesia" loading="eager" fetchpriority="high" width="1086" height="362"></picture></div>
+ <div class="carousel-slide has-mobile"><picture><source media="(max-width: 700px)" srcset="images/first-media-jadi-xl-satu-internet-wifi-rumah-keluarga-mobile.webp" width="800" height="600"><img src="images/first-media-jadi-xl-satu-internet-wifi-rumah-keluarga.webp" alt="First Media resmi berganti nama menjadi XL SATU, internet WiFi rumah untuk kebutuhan keluarga" loading="lazy" width="1086" height="362"></picture></div>
+ <div class="carousel-slide has-mobile"><picture><source media="(max-width: 700px)" srcset="images/promo-kemerdekaan-xl-satu-diskon-45-ribu-cashback-50-ribu-gopay-kredivo-ovo-mobile.webp" width="800" height="600"><img src="images/promo-kemerdekaan-xl-satu-diskon-45-ribu-cashback-50-ribu-gopay-kredivo-ovo.webp" alt="Promo kemerdekaan XL SATU diskon hingga Rp45 ribu dan cashback Rp50 ribu via GoPay, Kredivo, SPayLater, dan OVO" loading="lazy" width="1086" height="362"></picture></div>
+ <div class="carousel-slide has-mobile"><picture><source media="(max-width: 700px)" srcset="images/promo-bayar-satu-dapat-lebih-xl-satu-internet-rumah-ngebut-instan-luas-mobile.webp" width="800" height="600"><img src="images/promo-bayar-satu-dapat-lebih-xl-satu-internet-rumah-ngebut-instan-luas.webp" alt="Promo Bayar Satu Dapat Lebih XL SATU: internet rumah lebih ngebut, instan, dan jangkauan lebih luas" loading="lazy" width="1086" height="362"></picture></div>
+ <div class="carousel-slide has-mobile"><picture><source media="(max-width: 700px)" srcset="images/cara-bayar-tagihan-xl-satu-fiber-lewat-website-bca-bri-mandiri-bni-mobile.webp" width="800" height="600"><img src="images/cara-bayar-tagihan-xl-satu-fiber-lewat-website-bca-bri-mandiri-bni.webp" alt="Cara bayar tagihan XL SATU Fiber lebih mudah dan praktis lewat website resmi, tersedia BCA, BRI, Mandiri, BNI, Shopee, DANA, Visa, Mastercard" loading="lazy" width="1086" height="362"></picture></div>
+ <div class="carousel-slide has-mobile"><picture><source media="(max-width: 700px)" srcset="images/waspada-pencurian-perangkat-xl-satu-konfirmasi-cs-820-mobile.webp" width="800" height="600"><img src="images/waspada-pencurian-perangkat-xl-satu-konfirmasi-cs-820.webp" alt="Waspada pencurian perangkat XL SATU: selalu konfirmasi ke CS resmi 820 atau 0817 0123 442 sebelum menyerahkan perangkat" loading="lazy" width="1086" height="362"></picture></div>
+  <div class="carousel-slide has-mobile"><picture><source media="(max-width: 700px)" srcset="images/xl-home-wifi-rumah-paling-andal-100mbps-rp219rb-mobile.webp" width="960" height="720"><img src="images/xl-home-wifi-rumah-paling-andal-100mbps-rp219rb.webp" alt="XL HOME WiFi rumah paling andal di Indonesia, kecepatan hingga 100 Mbps hanya Rp219.000 per bulan, pemenang Opensignal Award" loading="lazy" width="1600" height="533"></picture></div>
+ <div class="carousel-slide has-mobile"><picture><source media="(max-width: 700px)" srcset="images/xl-home-paket-internet-rumah-100mbps-50mbps-sekali-bayar-4-bulan-mobile.webp" width="960" height="720"><img src="images/xl-home-paket-internet-rumah-100mbps-50mbps-sekali-bayar-4-bulan.webp" alt="Paket internet rumah XL HOME 100 Mbps dan 50 Mbps, bayar sekali 4 bulan lebih hemat hingga 40 persen, bonus nonton Vidio Lite dan CATCHPLAY+" loading="lazy" width="1600" height="533"></picture></div>
+</div>
  <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#8249;</button>
  <button class="carousel-btn next" onclick="moveCarousel(1)">&#8250;</button>
  <div class="carousel-dots" id="dots"></div>

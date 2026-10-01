@@ -663,6 +663,27 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  .myxl-text h2 { font-size: 24px; }
  .myxl-img img { max-width: 320px; }
  }
+
+/* VIDEO XL HOME (lazy) */
+.vid-section { padding: 60px 32px; background: var(--gray-light); }
+.vid-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 56px; }
+.vid-text { flex: 1 1 340px; max-width: 460px; }
+.vid-text .section-title { margin-bottom: 10px; }
+.vid-text p { color: var(--gray-text); font-size: 16px; line-height: 1.65; margin: 0 0 20px; }
+.vid-cta { display: inline-block; background: var(--blue); color: var(--white); text-decoration: none; font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 999px; }
+.vid-cta:hover { background: var(--blue-mid); }
+.vid-frame { position: relative; flex: 0 0 auto; width: 100%; max-width: 300px; aspect-ratio: 9 / 16; border-radius: 20px; overflow: hidden; background: var(--dark); box-shadow: var(--shadow); }
+.vid-frame video, .vid-frame .vid-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.vid-play { position: absolute; inset: 0; width: 100%; border: 0; padding: 0; background: rgba(10,22,40,0.28); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.vid-play span { width: 68px; height: 68px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 18px rgba(0,0,0,0.3); }
+.vid-play svg { width: 28px; height: 28px; margin-left: 4px; fill: var(--blue); }
+.vid-frame.is-loading .vid-play span { opacity: .6; }
+.vid-frame.is-playing .vid-play, .vid-frame.is-playing .vid-poster { display: none; }
+@media (max-width: 768px) {
+  .vid-section { padding: 40px 20px; }
+  .vid-inner { flex-direction: column; gap: 28px; text-align: center; }
+  .vid-text { max-width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -1381,6 +1402,22 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  </div>
  </div>
 
+
+ <!-- VIDEO XL HOME (lazy: video baru diunduh saat tombol play ditekan) -->
+ <section class="vid-section" id="video" aria-labelledby="vid-title">
+  <div class="vid-inner">
+   <div class="vid-text">
+    <div class="section-title" id="vid-title">Kenalan dengan XL HOME</div>
+    <p>Lihat sekilas layanan internet rumah XL HOME: koneksi fiber stabil untuk streaming, kerja, dan belajar seisi rumah.</p>
+    <a class="vid-cta" href="#daftar" onclick="goToSection('daftar');return false;">Daftar Sekarang</a>
+   </div>
+   <div class="vid-frame" id="vidFrame" data-src="video/xl-home.mp4">
+    <img class="vid-poster" src="video/xl-home-poster.jpg" alt="Video tentang XL HOME" width="360" height="640" loading="lazy" decoding="async">
+    <button type="button" class="vid-play" id="vidPlay" aria-label="Putar video XL HOME"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></button>
+   </div>
+  </div>
+ </section>
+
  <!-- BANTUAN + HUBUNGI KAMI -->
  <div class="cs-section" id="bantuan">
   <div class="help-inner">
@@ -2009,6 +2046,33 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
 <!-- anti-clickjack; dijalankan di awal body supaya efektif -->
 <script>
   if (window.top !== window.self) { try { window.top.location = window.self.location; } catch (e) { document.body.innerHTML = ''; } }
+</script>
+<script>
+// Lazy video XL HOME: file video tidak diunduh sampai tombol play ditekan
+(function(){
+  var f=document.getElementById('vidFrame'),b=document.getElementById('vidPlay');
+  if(!f||!b)return;
+  var v=null;
+  b.addEventListener('click',function(){
+    if(v){v.play();return;}
+    f.classList.add('is-loading');
+    v=document.createElement('video');
+    v.setAttribute('playsinline','');
+    v.controls=true;
+    v.preload='auto';
+    v.src=f.getAttribute('data-src');
+    v.addEventListener('playing',function(){f.classList.remove('is-loading');f.classList.add('is-playing');});
+    v.addEventListener('ended',function(){f.classList.remove('is-playing');v.remove();v=null;});
+    f.appendChild(v);
+    v.play().catch(function(){f.classList.remove('is-loading');});
+  });
+  // Hentikan video saat keluar layar supaya hemat kuota & baterai
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){
+      if(!e[0].isIntersecting&&v&&!v.paused)v.pause();
+    },{threshold:0.2}).observe(f);
+  }
+})();
 </script>
 </body>
 </html>

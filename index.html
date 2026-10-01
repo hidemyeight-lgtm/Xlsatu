@@ -684,6 +684,25 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
   .vid-inner { flex-direction: column; gap: 28px; text-align: center; }
   .vid-text { max-width: 100%; }
 }
+
+/* QUICK LINKS (di bawah carousel) */
+.quick-links { max-width: 1200px; margin: 0 auto; padding: 28px 32px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.ql-card { display: flex; align-items: center; gap: 18px; padding: 22px 26px; background: var(--white); border: 1px solid #e8edf5; border-radius: 20px; text-decoration: none; color: var(--dark); box-shadow: 0 2px 12px rgba(0,51,160,0.04); transition: transform .2s, box-shadow .2s, border-color .2s; }
+.ql-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: #cfe0f5; }
+.ql-icon { flex: none; width: 52px; height: 52px; }
+.ql-icon svg { width: 100%; height: 100%; display: block; }
+.ql-title { display: block; font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+.ql-link { display: inline-flex; align-items: center; gap: 6px; font-size: 17px; font-weight: 700; color: var(--teal); }
+.ql-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
+.ql-card:hover .ql-link svg { transform: translateX(3px); }
+@media (max-width: 768px) {
+  .quick-links { grid-template-columns: 1fr; gap: 12px; padding: 20px 16px 0; }
+  .ql-card { padding: 16px 18px; gap: 14px; border-radius: 16px; }
+  .ql-icon { width: 44px; height: 44px; }
+  .ql-title { font-size: 16px; }
+  .ql-link { font-size: 15px; }
+}
+.lokasi-note { font-size: 12.5px; color: var(--gray-text); background: var(--sky); border-radius: 10px; padding: 10px 12px; margin-top: 8px; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -730,6 +749,23 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <div class="carousel-dots" id="dots"></div>
  </div>
 
+
+
+ <!-- QUICK LINKS -->
+ <nav class="quick-links" aria-label="Akses cepat">
+  <a class="ql-card" href="#daftar" onclick="setModeForm('daftar');goToSection('daftar');return false;">
+   <span class="ql-icon"><svg viewBox="0 0 52 52" fill="none" stroke="#0B3D91" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="10" width="40" height="36" rx="6"/><path d="M6 20h40M16 5v9M36 5v9"/><path d="M19 33a7 7 0 0 1 12-4M33 33a7 7 0 0 1-12 4" stroke="#1F7AE0"/><path d="M31 25v4h-4M21 41v-4h4" stroke="#1F7AE0"/></svg></span>
+   <span><span class="ql-title">Mau Berlangganan?</span><span class="ql-link">Daftar Sekarang <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M5 2l5 5-5 5"/></svg></span></span>
+  </a>
+  <a class="ql-card" href="#paket" onclick="goToSection('paket');return false;">
+   <span class="ql-icon"><svg viewBox="0 0 52 52" fill="none" stroke="#1F7AE0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="26" cy="19" r="4.5" stroke="#0B3D91"/><path d="M26 24v22M20 46h12" stroke="#0B3D91"/><path d="M17 12a12 12 0 0 0 0 14M35 12a12 12 0 0 1 0 14M10 7a21 21 0 0 0 0 24M42 7a21 21 0 0 1 0 24"/></svg></span>
+   <span><span class="ql-title">Cari Paket Internet?</span><span class="ql-link">Lihat Paket <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M5 2l5 5-5 5"/></svg></span></span>
+  </a>
+  <a class="ql-card" id="ql-lacak" href="https://wa.me/6287810963528?text=Halo%2C%20saya%20ingin%20menanyakan%20status%20pesanan%20pemasangan%20XL%20HOME.%0A%0A*Nama%3A*%20%0A*No.%20WA%20yang%20didaftarkan%3A*%20" target="_blank" rel="noopener noreferrer" onclick="if(typeof gtag==='function')gtag('event','lacak_pesanan_click');">
+   <span class="ql-icon"><svg viewBox="0 0 52 52" fill="none" stroke="#0B3D91" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="23" cy="23" r="12"/><path d="M32 32l13 13" stroke-width="5"/><path d="M17 23a6 6 0 0 1 6-6" stroke="#1F7AE0"/></svg></span>
+   <span><span class="ql-title">Status Pesanan</span><span class="ql-link">Lacak Sekarang <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M5 2l5 5-5 5"/></svg></span></span>
+  </a>
+ </nav>
 
  <!-- PAKET SECTION -->
  <div id="paket">
@@ -1349,7 +1385,7 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <!-- FORMULIR PENDAFTARAN -->
  <div class="section reg-section" id="daftar">
  <div class="section-title">Daftar & Cek Ketersediaan Jaringan</div>
- <div class="section-sub">Isi data kamu, bagikan titik lokasi biar kami cek jangkauan sinyal, lalu lanjut chat WhatsApp</div>
+ <div class="section-sub">Isi data dan alamat pemasangan kamu, lalu lanjut chat WhatsApp. Membagikan titik lokasi bersifat opsional</div>
  <div class="reg-form-wrap">
  <div class="reg-mode" role="group" aria-label="Pilih keperluan">
  <button type="button" id="mode-daftar" class="active" aria-pressed="true" onclick="setModeForm('daftar')">Daftar Paket</button>
@@ -1367,6 +1403,7 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <textarea id="f-alamat" required placeholder="Ketik alamat lengkap pemasangan kamu di sini..." rows="3"></textarea>
  <button type="button" class="btn-lokasi" id="btn-lokasi" onclick="bukaPetaLokasi()"><span id="lokasi-label">Pakai Lokasi Saya</span></button>
  </div>
+ <div class="lokasi-note">Berbagi lokasi <strong>tidak wajib</strong>. Cukup ketik alamat lengkap, tim kami tetap bisa cek jaringan. Tombol "Pakai Lokasi Saya" hanya bekerja kalau kamu menekannya sendiri.</div>
  <div id="lokasi-error" style="display:none;color:#dc2626;font-size:12.5px;margin-top:6px;"></div>
  <div id="maps-link-wrap" style="display:none;margin-top:8px;">
  <a id="maps-link" href="#" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--blue);font-weight:600;">Lihat titik lokasi di Google Maps</a>
@@ -1569,7 +1606,7 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
 </footer>
 
 <!-- WA FLOATING BUTTON -->
-<a href="#daftar" class="wa-float" onclick="pilihPaket('');return false;" aria-label="Daftar Paket XL SATU">
+<a href="https://wa.me/6287810963528?text=Halo%2C%20saya%20tertarik%20dengan%20paket%20XL%20HOME.%20Boleh%20minta%20info%20promo%20dan%20ketersediaan%20di%20area%20saya%3F" target="_blank" rel="noopener noreferrer" class="wa-float" onclick="if(typeof gtag==='function')gtag('event','wa_float_click');" aria-label="Chat WhatsApp Sales XL HOME">
  <span class="wa-float-icon">
  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 800 800" width="46" height="46"><defs><clipPath id="waClip"><rect width="800" height="800"/></clipPath></defs><g clip-path="url(#waClip)"><path d=" M 787.59 800 L 12.41 800 C 5.556 800 0 793.332 0 785.108 L 0 14.892 C 0 6.667 5.556 0 12.41 0 L 787.59 0 C 794.444 0 800 6.667 800 14.892 L 800 785.108 C 800 793.332 794.444 800 787.59 800 Z " fill="rgb(37,211,102)"/><path d=" M 508.558 450.429 C 502.67 447.483 473.723 433.24 468.325 431.273 C 462.929 429.308 459.003 428.328 455.078 434.22 C 451.153 440.114 439.869 453.377 436.434 457.307 C 433 461.236 429.565 461.729 423.677 458.78 C 417.79 455.834 398.818 449.617 376.328 429.556 C 358.825 413.943 347.008 394.663 343.574 388.768 C 340.139 382.873 343.207 379.687 346.155 376.752 C 348.804 374.113 352.044 369.874 354.987 366.436 C 357.931 362.999 358.912 360.541 360.875 356.614 C 362.837 352.683 361.857 349.246 360.383 346.299 C 358.912 343.352 347.136 314.369 342.231 302.579 C 337.451 291.099 332.597 292.654 328.983 292.472 C 325.552 292.301 321.622 292.265 317.698 292.265 C 313.773 292.265 307.394 293.739 301.996 299.632 C 296.6 305.527 281.389 319.772 281.389 348.752 C 281.389 377.735 302.487 405.731 305.431 409.661 C 308.376 413.592 346.949 473.062 406.015 498.566 C 420.062 504.634 431.03 508.256 439.581 510.969 C 453.685 515.451 466.521 514.818 476.666 513.302 C 487.978 511.613 511.502 499.06 516.409 485.307 C 521.315 471.55 521.315 459.762 519.842 457.307 C 518.371 454.851 514.446 453.377 508.558 450.429 Z  M 401.126 597.117 L 401.047 597.117 C 365.902 597.104 331.431 587.661 301.36 569.817 L 294.208 565.572 L 220.08 585.017 L 239.866 512.743 L 235.21 505.332 C 215.604 474.149 205.248 438.108 205.264 401.1 C 205.307 293.113 293.17 205.257 401.204 205.257 C 453.518 205.275 502.693 225.674 539.673 262.696 C 576.651 299.716 597.004 348.925 596.983 401.258 C 596.939 509.254 509.078 597.117 401.126 597.117 Z  M 567.816 234.565 C 523.327 190.024 464.161 165.484 401.124 165.458 C 271.24 165.458 165.529 271.161 165.477 401.085 C 165.46 442.617 176.311 483.154 196.932 518.892 L 163.502 641 L 288.421 608.232 C 322.839 627.005 361.591 636.901 401.03 636.913 L 401.126 636.913 L 401.127 636.913 C 530.998 636.913 636.717 531.2 636.77 401.274 C 636.794 338.309 612.306 279.105 567.816 234.565" fill-rule="evenodd" fill="rgb(255,255,255)"/></g></svg>
  </span>
@@ -1724,7 +1761,7 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
       google.maps.event.trigger(__pm.map, 'resize');
       if (__pm.lat !== null) __pm.map.setCenter({ lat: __pm.lat, lng: __pm.lng });
     }
-    if (__pm.lat === null) petaLokasiSaya(true);
+    // Tidak lagi meminta GPS otomatis; lokasi hanya diminta saat user menekan tombol "Lokasi saya"
   }
 
   function setPinPeta(latLng, pan) {
@@ -1874,18 +1911,16 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
     document.getElementById('mode-cek').setAttribute('aria-pressed', String(cek));
     const sub = document.querySelector('#daftar .section-sub');
     if (sub) sub.textContent = cek
-      ? 'Cukup isi nama, WhatsApp, dan lokasi. Tim kami cek jangkauan di alamatmu dan kabari paket yang tersedia, tanpa perlu daftar dulu'
-      : 'Isi data kamu, bagikan titik lokasi biar kami cek jangkauan sinyal, lalu lanjut chat WhatsApp';
+      ? 'Cukup isi nama, WhatsApp, dan alamat. Tim kami cek jangkauan di alamatmu dan kabari paket yang tersedia, tanpa perlu daftar dulu'
+      : 'Isi data dan alamat pemasangan kamu, lalu lanjut chat WhatsApp. Membagikan titik lokasi bersifat opsional';
     document.getElementById('regSubmitBtn').innerHTML = cek ? 'Cek Coverage via WhatsApp' : 'Daftar &amp; Lanjut ke WhatsApp';
   }
 
-  // Tombol "Cek Coverage": buka mode cek, scroll ke form, lalu langsung deteksi lokasi
+  // Tombol "Cek Coverage": buka mode cek dan scroll ke form (lokasi TIDAK diminta otomatis)
   function bukaCekCoverage() {
     setModeForm('cek');
     goToSection('daftar');
     setTimeout(function () {
-      const alamat = document.getElementById('f-alamat');
-      if (alamat && !alamat.value.trim()) bukaPetaLokasi();
       const nama = document.getElementById('f-nama');
       if (nama && !nama.value) nama.focus({ preventScroll: true });
     }, 700);

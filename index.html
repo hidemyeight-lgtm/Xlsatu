@@ -353,28 +353,51 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  .reg-mode button.active { background: var(--white); color: var(--blue); box-shadow: 0 2px 8px rgba(0,51,160,0.12); }
  .reg-note { text-align: center; font-size: 12.5px; color: var(--gray-text); margin-top: 16px; }
 
- /* CS SECTION */
- .cs-section {
-   background: linear-gradient(135deg, var(--sky) 0%, #dceeff 100%);
-   padding: 0;
-   overflow: hidden;
+ /* CS SECTION: Bantuan (FAQ) + Hubungi Kami */
+ .cs-section { background: var(--white); padding: 56px 32px; }
+ .help-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+ .help-title { font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 24px; }
+ .faq-item { border-bottom: 1px solid #E3E8EF; }
+ .faq-item summary {
+   list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+   gap: 16px; padding: 20px 0; font-size: 17px; line-height: 1.45; color: var(--dark);
  }
- /* Banner foto CS full-width seperti carousel. height:auto menjaga rasio asli
-    gambar (3:1) di SEMUA ukuran layar sehingga tidak pernah kepotong. */
- .cs-banner { position: relative; width: 100%; line-height: 0; }
- .cs-banner img { width: 100%; height: auto; display: block; }
- /* Area klik transparan tepat di atas tombol "Chat WA Sales" pada gambar,
-    posisi pakai persen supaya selalu pas walau gambar responsif */
- .cs-banner-wa {
-   position: absolute;
-   left: 34.6%; top: 48.8%; width: 25.3%; height: 18.9%;
-   cursor: pointer;
-   border-radius: 12px;
-   transition: box-shadow 0.2s;
+ .faq-item summary::-webkit-details-marker { display: none; }
+ .faq-item summary::after {
+   content: ''; flex: none; width: 9px; height: 9px; border-right: 2.5px solid var(--blue); border-bottom: 2.5px solid var(--blue);
+   transform: rotate(-45deg); transition: transform 0.2s; margin-right: 4px;
  }
- .cs-banner-wa:hover, .cs-banner-wa:focus-visible {
-   box-shadow: 0 0 0 3px rgba(255,255,255,0.7);
-   outline: none;
+ .faq-item[open] summary::after { transform: rotate(45deg); }
+ .faq-item p { padding: 0 32px 20px 0; font-size: 15px; color: var(--gray-text); line-height: 1.7; }
+ .faq-more { display: inline-block; margin-top: 24px; font-weight: 700; color: var(--blue); text-decoration: none; }
+ .faq-more:hover { text-decoration: underline; }
+
+ .help-card {
+   position: relative; overflow: hidden; border-radius: 20px; padding: 36px 40px;
+   background: linear-gradient(160deg, #cfe3f2 0%, #e4eef6 55%, #f3f8fb 100%);
+   min-height: 560px;
+ }
+ .help-card h3 { font-size: 38px; line-height: 1.15; font-weight: 800; color: #1B4A9C; margin-bottom: 12px; }
+ .help-card .help-desc { font-size: 18px; color: var(--dark); line-height: 1.5; max-width: 480px; margin-bottom: 22px; }
+ .help-label { font-size: 18px; color: var(--dark); margin: 16px 0 8px; }
+ .help-btns { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; width: 310px; max-width: 100%; }
+ .help-btn {
+   display: flex; align-items: center; gap: 14px; padding: 10px 18px; border-radius: 999px;
+   color: #fff; text-decoration: none; line-height: 1.1; min-height: 62px; transition: transform 0.15s, filter 0.15s;
+ }
+ .help-btn:hover { transform: translateY(-1px); filter: brightness(1.06); }
+ .help-btn svg { flex: none; width: 40px; height: 40px; }
+ .help-btn small { display: block; font-size: 14px; font-weight: 600; }
+ .help-btn strong { display: block; font-size: 24px; font-weight: 800; letter-spacing: -0.01em; }
+ .help-btn.xl { background: #00A878; }
+ .help-btn.non { background: #1A8BCB; }
+ .help-btn.chat { background: #0B2A7A; }
+ .help-btn.chat span { font-size: 17px; font-weight: 700; }
+ .help-agent {
+   position: absolute; right: 0; bottom: 0; height: 330px; width: auto; display: block; z-index: 1;
+   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%), linear-gradient(to right, transparent 0, #000 16%);
+   -webkit-mask-composite: source-in; mask-composite: intersect;
+   mask-image: linear-gradient(to bottom, transparent 0, #000 14%), linear-gradient(to right, transparent 0, #000 16%);
  }
 
  /* FOOTER */
@@ -472,7 +495,22 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  .tab { padding: 9px 16px; font-size: 13px; }
  .pkg-grid { grid-template-columns: 1fr; }
  .reg-form-wrap { padding: 24px 20px; border-radius: 16px; }
- .cs-section { padding: 0; }
+ .cs-section { padding: 36px 16px; }
+ .help-inner { grid-template-columns: 1fr; gap: 36px; }
+ .help-title { font-size: 20px; margin-bottom: 12px; }
+ .faq-item summary { font-size: 16px; padding: 16px 0; }
+ .help-card { padding: 28px 20px 0; min-height: 0; border-radius: 18px; display: flex; flex-direction: column; }
+ .help-card h3 { font-size: 30px; }
+ .help-card .help-desc { font-size: 16px; }
+ .help-btns { width: 100%; }
+ .help-btn { min-height: 64px; }
+ /* Foto CS di mobile dibuat tinggi (bukan strip pendek) */
+ .help-agent {
+   position: relative; right: auto; bottom: auto; align-self: center;
+   width: 100%; max-width: 360px; height: 420px; object-fit: cover; object-position: center top; margin-top: 12px;
+   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10%); mask-image: linear-gradient(to bottom, transparent 0, #000 10%);
+   -webkit-mask-composite: source-over; mask-composite: add;
+ }
  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 
@@ -1336,12 +1374,40 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  </div>
  </div>
 
- <!-- CS BANNER -->
+ <!-- BANTUAN + HUBUNGI KAMI -->
  <div class="cs-section" id="bantuan">
- <div class="cs-banner">
- <img src="images/cs-banner.webp" alt="Customer service XL SATU siap membantu lewat Sales Center 8200 dan Chat WA Sales" loading="lazy" width="1080" height="340">
- <a class="cs-banner-wa" href="#daftar" onclick="goToSection('daftar');return false;" aria-label="Daftar sekarang"></a>
- </div>
+  <div class="help-inner">
+   <div class="help-faq">
+    <h2 class="help-title">Bantuan</h2>
+    <details class="faq-item"><summary>Apakah merger antara XL dan Smartfren akan berdampak pada pelanggan atau layanan XL HOME?</summary><p>Layanan XL HOME kamu tetap berjalan seperti biasa. Untuk informasi terbaru terkait penggabungan, hubungi Customer Service di nomor yang tersedia di samping.</p></details>
+    <details class="faq-item"><summary>Apa arti dari First Media Jadi XL HOME?</summary><p>First Media kini bergabung menjadi bagian dari XL SATU, dengan layanan internet rumah yang kini hadir dengan nama XL HOME.</p></details>
+    <details class="faq-item"><summary>Apa itu XL HOME?</summary><p>XL HOME adalah layanan internet WiFi rumah dari XL untuk kebutuhan keluarga, tersedia dalam pilihan FWA dan FTTH sesuai ketersediaan di alamat kamu.</p></details>
+    <details class="faq-item"><summary>Mengapa XL SATU berubah nama menjadi XL HOME?</summary><p>Perubahan nama dilakukan agar layanan internet rumah lebih mudah dikenali sebagai bagian dari ekosistem XL.</p></details>
+    <details class="faq-item"><summary>Siapa saja yang dapat berlangganan XL HOME?</summary><p>Siapa saja yang berada di area yang sudah terjangkau jaringan XL HOME dapat berlangganan. Cek ketersediaan lewat form pendaftaran di atas.</p></details>
+    <details class="faq-item"><summary>Apakah saya harus punya nomor XL prabayar atau XL Prioritas untuk menikmati Kuota HP Sekeluarga nya?</summary><p>Untuk detail syarat Kuota HP Sekeluarga, silakan hubungi Sales Center atau tim kami lewat WhatsApp.</p></details>
+    <details class="faq-item"><summary>Apa saja yang dapat mempengaruhi kecepatan internet XL HOME?</summary><p>Kecepatan dipengaruhi oleh jarak perangkat ke modem/router, jumlah perangkat yang terhubung, kondisi sinyal di lokasi, dan jenis perangkat yang dipakai.</p></details>
+    <a class="faq-more" href="https://home.xl.co.id" target="_blank" rel="noopener noreferrer">Lihat Pertanyaan Lainnya!</a>
+   </div>
+   <div>
+    <h2 class="help-title">Hubungi Kami</h2>
+    <div class="help-card">
+     <h3>Butuh Bantuan?</h3>
+     <p class="help-desc">Kami siap bantu kamu untuk semua informasi tentang XL HOME</p>
+     <div class="help-label">Sales Center</div>
+     <div class="help-btns">
+      <a class="help-btn xl" href="tel:8200"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 8h5l3 8-4 3a22 22 0 0 0 10 10l3-4 8 3v5a4 4 0 0 1-4 4C22 37 11 26 11 12a4 4 0 0 1 4-4z"/><path d="M30 8a10 10 0 0 1 10 10M30 14a4 4 0 0 1 4 4"/></svg><span><small>Pengguna XL</small><strong>8200</strong></span></a>
+      <a class="help-btn non" href="tel:0818123820"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 8h5l3 8-4 3a22 22 0 0 0 10 10l3-4 8 3v5a4 4 0 0 1-4 4C22 37 11 26 11 12a4 4 0 0 1 4-4z"/><path d="M30 8a10 10 0 0 1 10 10M30 14a4 4 0 0 1 4 4"/></svg><span><small>Pengguna Non-XL</small><strong>0818 123 820</strong></span></a>
+     </div>
+     <div class="help-label">Customer Service</div>
+     <div class="help-btns">
+      <a class="help-btn xl" href="tel:820"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 8h5l3 8-4 3a22 22 0 0 0 10 10l3-4 8 3v5a4 4 0 0 1-4 4C22 37 11 26 11 12a4 4 0 0 1 4-4z"/><path d="M30 8a10 10 0 0 1 10 10M30 14a4 4 0 0 1 4 4"/></svg><span><small>Pengguna XL</small><strong>820</strong></span></a>
+      <a class="help-btn non" href="tel:08170123442"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 8h5l3 8-4 3a22 22 0 0 0 10 10l3-4 8 3v5a4 4 0 0 1-4 4C22 37 11 26 11 12a4 4 0 0 1 4-4z"/><path d="M30 8a10 10 0 0 1 10 10M30 14a4 4 0 0 1 4 4"/></svg><span><small>Pengguna Non-XL</small><strong>0817 0123 442</strong></span></a>
+      <a class="help-btn chat" href="#daftar" onclick="goToSection('daftar');return false;"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#25D366"/><path d="M14 35l1.8-6.2A10.5 10.5 0 1 1 20 33l-6 2z" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 19c0 5 4 9 9 9l1.5-2-3-1.5-1.2 1c-1.5-.6-2.6-1.7-3.2-3.2l1-1.2-1.5-3z" fill="#fff"/></svg><span>Chat WA Sales</span></a>
+     </div>
+     <img class="help-agent" src="images/cs-agent.webp" alt="Customer Service XL HOME siap membantu" loading="lazy" width="260" height="310">
+    </div>
+   </div>
+  </div>
  </div>
 
  <!-- MYXL APP -->

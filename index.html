@@ -1409,25 +1409,12 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
  <a id="maps-link" href="#" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--blue);font-weight:600;">Lihat titik lokasi di Google Maps</a>
  </div>
 
- <label for="f-paket">Paket yang Diminati</label>
- <select id="f-paket" required>
- <option value="">Pilih paket yang diminati</option>
- <option value="FWA 100 Mbps — Rp219.000/bln">FWA 100 Mbps — Rp219.000/bln (Bulanan)</option>
- <option value="FWA 50 Mbps — Rp650.000 (4 bln)">FWA 50 Mbps — Rp650.000 (Hemat 4 Bulan)</option>
- <option value="FWA 100 Mbps — Rp790.000 (4 bln)">FWA 100 Mbps — Rp790.000 (Hemat 4 Bulan)</option>
- <option value="FWA 100 Mbps — Rp650.000 (3 bln)">FWA 100 Mbps — Rp650.000 (Hemat 3 Bulan)</option>
- <option value="FTTH 20 Mbps — Rp185.000/bln">FTTH 20 Mbps — Rp185.000/bln</option>
- <option value="FTTH 250 Mbps — Rp229.000/bln">FTTH 250 Mbps — Rp229.000/bln</option>
- <option value="FTTH 300 Mbps — Rp239.000/bln">FTTH 300 Mbps — Rp239.000/bln</option>
- <option value="FTTH 400 Mbps — Rp299.000/bln">FTTH 400 Mbps — Rp299.000/bln</option>
- <option value="FTTH 500 Mbps — Rp399.000/bln">FTTH 500 Mbps — Rp399.000/bln</option>
- <option value="FTTH 1000 Mbps — Rp899.000/bln">FTTH 1 Gbps — Rp899.000/bln</option>
- <optgroup label="FMC (Internet + Kuota HP)"><option value="FMC Starter 20 Mbps — Rp209.000/bln">FMC Starter 20 Mbps — Rp209.000/bln</option><option value="FMC Smart 50 Mbps — Rp249.000/bln">FMC Smart 50 Mbps — Rp249.000/bln</option><option value="FMC Family 100 Mbps — Rp319.000/bln">FMC Family 100 Mbps — Rp319.000/bln</option><option value="FMC Superuser 150 Mbps — Rp369.000/bln">FMC Superuser 150 Mbps — Rp369.000/bln</option></optgroup>
- <optgroup label="Combo Internet + TV"><option value="Combo Joy Value 100 Mbps — Rp350.000/bln">Combo Joy Value 100 Mbps — Rp350.000/bln</option><option value="Combo Joy Pro 150 Mbps — Rp425.000/bln">Combo Joy Pro 150 Mbps — Rp425.000/bln</option><option value="Combo Joy Premium 200 Mbps — Rp675.000/bln">Combo Joy Premium 200 Mbps — Rp675.000/bln</option><option value="Combo Star Value 300 Mbps — Rp985.000/bln">Combo Star Value 300 Mbps — Rp985.000/bln</option><option value="Combo Star Pro 500 Mbps — Rp1.850.000/bln">Combo Star Pro 500 Mbps — Rp1.850.000/bln</option><option value="Combo Star Premium 1 Gbps — Rp4.500.000/bln">Combo Star Premium 1 Gbps — Rp4.500.000/bln</option></optgroup>
- <optgroup label="Promo Bayar di Muka"><option value="FTTH 50 Mbps — Rp650.000 (4 bln)">FTTH 50 Mbps — Rp650.000 (4 bln)</option><option value="FTTH 100 Mbps — Rp790.000 (4 bln)">FTTH 100 Mbps — Rp790.000 (4 bln)</option><option value="FTTH 100 Mbps — Rp650.000 (3 bln)">FTTH 100 Mbps — Rp650.000 (3 bln)</option></optgroup>
- <optgroup label="Promo Bayar X Dapat Y"><option value="Promo Bayar 10 Dapat 12 Basic Smart — Rp2.490.000">Promo Bayar 10 Dapat 12 Basic Smart — Rp2.490.000</option><option value="Promo Bayar 10 Dapat 12 Basic Family — Rp3.190.000">Promo Bayar 10 Dapat 12 Basic Family — Rp3.190.000</option><option value="Promo Bayar 10 Dapat 12 Basic Superuser — Rp3.690.000">Promo Bayar 10 Dapat 12 Basic Superuser — Rp3.690.000</option><option value="Promo Bayar 6 Dapat 8 Joy Value — Rp2.100.000">Promo Bayar 6 Dapat 8 Joy Value — Rp2.100.000</option><option value="Promo Bayar 6 Dapat 8 Joy Pro — Rp2.550.000">Promo Bayar 6 Dapat 8 Joy Pro — Rp2.550.000</option><option value="Promo Bayar 6 Dapat 8 Joy Premium — Rp4.050.000">Promo Bayar 6 Dapat 8 Joy Premium — Rp4.050.000</option><option value="Promo Bayar 9 Dapat 12 Joy Value — Rp3.150.000">Promo Bayar 9 Dapat 12 Joy Value — Rp3.150.000</option><option value="Promo Bayar 9 Dapat 12 Joy Pro — Rp3.850.000">Promo Bayar 9 Dapat 12 Joy Pro — Rp3.850.000</option><option value="Promo Bayar 9 Dapat 12 Joy Premium — Rp6.000.000">Promo Bayar 9 Dapat 12 Joy Premium — Rp6.000.000</option></optgroup>
- 
- </select>
+ <label id="paket-chosen-label">Paket yang Diminati (opsional)</label>
+ <input type="hidden" id="f-paket" value="">
+ <div id="paket-chosen-box" style="border:1.5px dashed var(--blue);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--sky);">
+ <span id="paket-chosen-text" style="font-size:14px;color:var(--gray-text);">Belum pilih paket? Tidak apa-apa, kamu tetap bisa lanjut ke WhatsApp dan tim kami bantu rekomendasikan. Atau klik salah satu paket di atas.</span>
+ <a href="#paket" onclick="goToSection('paket');return false;" style="font-size:13px;font-weight:700;color:var(--blue);white-space:nowrap;">Lihat &amp; Pilih Paket</a>
+ </div>
 
  <div style="position:absolute;left:-9999px;" aria-hidden="true"><label for="f-website">Website</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
  <label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13px;margin-top:14px;"><input type="checkbox" id="f-setuju" style="margin-top:3px;width:auto;"><span>Saya setuju dengan <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;">kebijakan privasi</a></span></label>
@@ -1660,16 +1647,17 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
   function pilihPaket(paketVal) {
     goToSection('daftar');
     setTimeout(function() {
-      const sel = document.getElementById('f-paket');
-      if (sel && paketVal) {
-        for (var i = 0; i < sel.options.length; i++) {
-          if (sel.options[i].value === paketVal) {
-            sel.selectedIndex = i;
-            sel.style.borderColor = 'var(--teal)';
-            sel.style.boxShadow   = '0 0 0 3px rgba(0,167,157,0.15)';
-            setTimeout(function() { sel.style.borderColor = ''; sel.style.boxShadow = ''; }, 2000);
-            break;
-          }
+      const hidden = document.getElementById('f-paket');
+      const box    = document.getElementById('paket-chosen-box');
+      const txt    = document.getElementById('paket-chosen-text');
+      if (hidden && paketVal) {
+        hidden.value = paketVal;
+        if (txt) txt.innerHTML = 'Paket dipilih: <strong>' + paketVal + '</strong>';
+        if (box) {
+          box.style.borderStyle = 'solid';
+          box.style.borderColor = 'var(--teal)';
+          box.style.boxShadow   = '0 0 0 3px rgba(0,167,157,0.15)';
+          setTimeout(function() { box.style.boxShadow = ''; }, 2000);
         }
       }
       var nama = document.getElementById('f-nama');
@@ -1879,12 +1867,10 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
   function setModeForm(mode) {
     const cek = (mode === 'cek');
     window.__modeForm = cek ? 'cek' : 'daftar';
-    ['paket'].forEach(function (k) {
-      const inp = document.getElementById('f-' + k);
-      const lbl = document.querySelector('label[for="f-' + k + '"]');
-      if (inp) { inp.style.display = cek ? 'none' : ''; inp.required = !cek; }
-      if (lbl) lbl.style.display = cek ? 'none' : '';
-    });
+    const paketLbl = document.getElementById('paket-chosen-label');
+    const paketBox = document.getElementById('paket-chosen-box');
+    if (paketLbl) paketLbl.style.display = cek ? 'none' : '';
+    if (paketBox) paketBox.style.display = cek ? 'none' : '';
     document.getElementById('mode-daftar').classList.toggle('active', !cek);
     document.getElementById('mode-cek').classList.toggle('active', cek);
     document.getElementById('mode-daftar').setAttribute('aria-pressed', String(!cek));
@@ -1941,11 +1927,13 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
     const wa     = document.getElementById('f-wa').value.trim();
     const alamat = document.getElementById('f-alamat').value.trim();
     const cekOnly = (window.__modeForm === 'cek');
-    const paket  = cekOnly ? 'Cek Coverage — belum tahu paketnya' : document.getElementById('f-paket').value;
+    const paketDipilih = document.getElementById('f-paket').value;
+    const belumPilih = !cekOnly && !paketDipilih;
+    const paket  = cekOnly ? 'Cek Coverage — belum tahu paketnya' : (paketDipilih || 'Belum memilih paket — mohon rekomendasi');
     const mapLink = document.getElementById('maps-link');
     const mapsHref = (mapLink && mapLink.href && !mapLink.href.endsWith('#')) ? mapLink.href : '';
 
-    if (!nama || !wa || !alamat || (!cekOnly && !paket)) {
+    if (!nama || !wa || !alamat) {
       alert('Mohon lengkapi semua field terlebih dahulu.');
       return;
     }
@@ -1986,13 +1974,13 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
 
     // 2. Buka WA DULU (harus dipanggil langsung dari user gesture, sebelum fetch async)
     //    Kalau dipanggil setelah fetch, browser menganggapnya bukan user gesture → popup diblokir.
-    const pesan = cekOnly ?
+    const pesan = (cekOnly || belumPilih) ?
       'Halo, saya ingin cek ketersediaan jaringan XL SATU (Fiber/FWA) di alamat saya:%0A%0A' +
       '*Nama:* '             + encodeURIComponent(nama)         + '%0A' +
       '*No. WA:* '           + encodeURIComponent(wa)           + '%0A' +
       '*Alamat:* '           + encodeURIComponent(alamat)       + '%0A' +
       (mapsHref ? '*Lokasi Maps:* ' + encodeURIComponent(mapsHref) + '%0A' : '') +
-      '%0AMohon dicek coverage-nya dan paket apa yang tersedia di alamat ini. Terima kasih!' :
+      (belumPilih ? '%0ASaya belum memilih paket. Mohon dicek coverage-nya dan dibantu rekomendasi paket yang sesuai di alamat ini. Terima kasih!' : '%0AMohon dicek coverage-nya dan paket apa yang tersedia di alamat ini. Terima kasih!') :
       'Halo, saya ingin mendaftar paket XL Home:%0A%0A' +
       '*Nama:* '             + encodeURIComponent(nama)         + '%0A' +
       '*No. WA:* '           + encodeURIComponent(wa)           + '%0A' +
@@ -2022,6 +2010,10 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
       document.getElementById('f-wa').value      = '';
       document.getElementById('f-alamat').value  = '';
       document.getElementById('f-paket').value   = '';
+      const paketTxt = document.getElementById('paket-chosen-text');
+      const paketBox2 = document.getElementById('paket-chosen-box');
+      if (paketTxt) paketTxt.textContent = 'Belum pilih paket? Tidak apa-apa, kamu tetap bisa lanjut ke WhatsApp dan tim kami bantu rekomendasikan. Atau klik salah satu paket di atas.';
+      if (paketBox2) { paketBox2.style.borderStyle = 'dashed'; paketBox2.style.borderColor = 'var(--blue)'; }
       setModeForm('daftar');
       document.getElementById('maps-link-wrap').style.display = 'none';
     }, 800);

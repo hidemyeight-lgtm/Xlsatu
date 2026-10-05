@@ -2077,5 +2077,26 @@ src="https://www.facebook.com/tr?id=1781157226219900&ev=PageView
   }
 })();
 </script>
+<script>
+// Deep-link dari sitelink Google Ads: ?s=promo|ftth|fwa|fmc|combo|cekarea|daftar|faq
+(function(){
+  var s = new URLSearchParams(location.search).get('s');
+  if (!s) return;
+  var tabs = {fwa:0, ftth:1, fmc:2, combo:3, promo:4};
+  window.addEventListener('load', function(){
+    if (s in tabs) {
+      var b = document.querySelectorAll('#tabsBar .tab')[tabs[s]];
+      if (b) switchTab(s, b);
+      goToSection('paket');
+    } else if (s === 'cekarea') {
+      setModeForm('cek'); goToSection('daftar');
+    } else if (s === 'daftar') {
+      goToSection('daftar');
+    } else if (s === 'faq') {
+      goToSection('faq');
+    }
+  });
+})();
+</script>
 </body>
 </html>
